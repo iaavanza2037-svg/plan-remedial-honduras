@@ -29,16 +29,19 @@ En el arreglo de "actividades" del bloque "desarrollo" de cada sesión, DEBES re
 Cada explicación matemática debe seguir este ordenDidáctico línea por línea:
 
 Concepto / Propiedad: [Nombre de la regla, propiedad o tema]
-Fórmula / Ecuación: [Fórmula con símbolos limpios sin signos $ ni código LaTeX]
+Fórmula / Ecuación: [Fórmula o ecuación explícita con símbolos limpios sin LaTeX]
 Variables:
-  • [Variable 1] = [Nombre/Significado]
-  • [Variable 2] = [Nombre/Significado]
+  • [Variable 1] = [Significado/Nombre]
+  • [Variable 2] = [Significado/Nombre]
 Problema Modelo: [Enunciado del ejercicio o situación cotidiana]
 Procedimiento paso a paso:
-  • Paso 1: [Sustitución de valores en la fórmula]
-  • Paso 2: [Despeje o desarrollo de la operación]
-  • Paso 3: [Cálculo final / simplificación]
-Respuesta (R): [Resultado final con sus unidades correspondientes]
+  • Paso 1: [Sustitución de valores usando OBLIGATORIAMENTE las variables declaradas arriba, ej: S = 4 + 7 + 5 + 2]
+  • Paso 2: [Despeje o desarrollo de la operación usando la variable, ej: S = 18]
+  • Paso 3: [Cálculo final o verificación con la variable, ej: S ÷ 9 = 18 ÷ 9 = 2]
+Respuesta (R): [Resultado final indicando explícitamente el valor de la variable con sus unidades]
+
+REGLA CRÍTICA DE COHERENCIA EN EL USO DE VARIABLES:
+Toda variable que declares en la sección "Variables" DEBE usarse de forma explícita en las ecuaciones de cada paso de "Procedimiento paso a paso". PROHIBIDO declarar variables (como C, S, x, A, etc.) y luego resolver el ejercicio con texto genérico sin incluir dichas variables en los pasos numéricos. La IA debe desarrollar completamente la actividad de enseñanza-aprendizaje de forma rigurosa y didáctica.
 
 PROHIBIDO USAR SINTAXIS LATEX DE $ O \\frac. Usa símbolos limpios y legibles en Word (×, ÷, =, ±, ², √, etc.).
 
@@ -109,18 +112,21 @@ Escribe el campo "acciones" separando CADA ELEMENTO PEDAGÓGICO en una línea in
 Usa la siguiente estructura estricta LÍNEA POR LÍNEA:
 
 Concepto o Regla: [Nombre del concepto o propiedad]
-Fórmula: [Fórmula o ecuación limpia]
+Fórmula: [Fórmula con simbología explícita]
 Desglose de Variables:
   • [Variable 1] = [Significado]
   • [Variable 2] = [Significado]
 Problema Modelo: [Enunciado del ejercicio]
 Resolución Paso a Paso:
-  • Paso 1: [Sustitución de datos]
-  • Paso 2: [Operación o desarrollo]
-  • Paso 3: [Simplificación]
-Respuesta (R): [Resultado final con unidades]
+  • Paso 1: [Sustitución de valores usando OBLIGATORIAMENTE las variables declaradas en el desglose]
+  • Paso 2: [Desarrollo o despeje matemático usando las variables]
+  • Paso 3: [Simplificación / cálculo final con las variables]
+Respuesta (R): [Resultado explícito especificando la variable y sus unidades]
 Actividad de Ejercitación:
-  • [Instrucciones del taller o guía práctica]
+  • [Instrucciones del taller o guía práctica donde el estudiante aplique las mismas variables]
+
+REGLA CRÍTICA DE COHERENCIA EN EL USO DE VARIABLES:
+Toda variable que declares en "Desglose de Variables" DEBE usarse de forma explícita en las operaciones numéricas de la "Resolución Paso a Paso" (por ejemplo, si declaras "S = Suma de dígitos", en el Paso 1 debes escribir "S = 4 + 7 + 5 + 2", en el Paso 2 "S = 18", etc.). PROHIBIDO declarar variables y omitirlas en los pasos de resolución.
 
 PROHIBIDO USAR CÓDIGO LATEX ($ o \\frac). Usa símbolos matemáticos estándar (×, ÷, =, ±, ², √).
 
