@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plan de Recuperación Académica — Secretaría de Educación de Honduras</title>
+  <title>Plataforma Docente — Secretaría de Educación de Honduras</title>
   
   <!-- Tipografías Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,9 +76,9 @@
     }
 
     .page {
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 40px 20px 72px;
+      padding: 36px 20px 72px;
     }
 
     /* ---------- Membrete Institucional ---------- */
@@ -86,8 +86,8 @@
       display: flex;
       align-items: center;
       gap: 18px;
-      padding-bottom: 22px;
-      margin-bottom: 30px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
       border-bottom: 3px solid var(--navy);
     }
 
@@ -114,13 +114,60 @@
     }
 
     .letterhead-text p {
-      margin: 5px 0 0;
+      margin: 4px 0 0;
       color: var(--ink-soft);
-      font-size: 14.5px;
-      max-width: 60ch;
+      font-size: 14.2px;
+      max-width: 65ch;
     }
 
-    /* ---------- Tarjetas ---------- */
+    /* ---------- Navegación Módulos (Tabs) ---------- */
+    .module-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 2px;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: none;
+      background: none;
+      font-family: "Spectral", Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      padding: 10px 18px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -4px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--navy);
+    }
+
+    .tab-btn.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+    }
+
+    .tab-badge {
+      font-family: "Public Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 12px;
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    /* ---------- Tarjetas y Paneles ---------- */
     .card {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -132,7 +179,7 @@
 
     .card h2 {
       margin: 0 0 4px;
-      font-size: 1.2rem;
+      font-size: 1.22rem;
       font-weight: 600;
       color: var(--ink);
     }
@@ -143,9 +190,15 @@
       font-size: 13.8px;
     }
 
-    /* ---------- Formulario ---------- */
-    form { display: block; }
+    .tab-content {
+      display: none;
+    }
 
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ---------- Formulario y Campos ---------- */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -175,9 +228,9 @@
       letter-spacing: normal;
     }
 
-    input[type="text"], textarea {
+    input[type="text"], select, textarea {
       font: inherit;
-      font-size: 15px;
+      font-size: 14.8px;
       color: var(--ink);
       background: var(--paper);
       border: 1px solid var(--line);
@@ -187,12 +240,12 @@
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    input[type="text"]::placeholder, textarea::placeholder {
-      color: var(--ink-soft);
-      opacity: 0.65;
+    select:disabled, input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
-    input[type="text"]:focus, textarea:focus {
+    input[type="text"]:focus, select:focus, textarea:focus {
       outline: none;
       border-color: var(--focus);
       box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
@@ -200,12 +253,11 @@
 
     textarea {
       resize: vertical;
-      min-height: 118px;
+      min-height: 110px;
       line-height: 1.5;
-      font-family: "Public Sans", "Segoe UI", Arial, sans-serif;
     }
 
-    .field.invalid input, .field.invalid textarea {
+    .field.invalid input, .field.invalid select, .field.invalid textarea {
       border-color: var(--danger);
     }
 
@@ -217,12 +269,34 @@
 
     .field.invalid .field-error { display: block; }
 
+    .cnb-info-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--navy);
+      border-radius: 7px;
+      padding: 14px 16px;
+      margin-top: 6px;
+      font-size: 13.8px;
+    }
+
+    .cnb-info-box h4 {
+      margin: 0 0 6px;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .cnb-info-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
     /* ---------- Botones ---------- */
     .actions {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 24px;
       flex-wrap: wrap;
     }
 
@@ -234,7 +308,7 @@
       color: #fdfbf6;
       font: inherit;
       font-weight: 600;
-      font-size: 15.5px;
+      font-size: 15px;
       padding: 13px 24px;
       border-radius: 8px;
       display: inline-flex;
@@ -247,17 +321,10 @@
     button.generate:hover:not(:disabled) { background: var(--navy-soft); }
     button.generate:active:not(:disabled) { transform: translateY(1px); }
 
-    button.generate:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 2px;
-    }
-
     button.generate:disabled {
       cursor: progress;
       opacity: 0.85;
     }
-
-    .btn-icon { flex: none; display: flex; }
 
     .spinner {
       width: 17px;
@@ -276,7 +343,7 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ---------- Alertas y Estado ---------- */
+    /* ---------- Alertas ---------- */
     .status {
       display: none;
       align-items: flex-start;
@@ -288,7 +355,7 @@
       margin-top: 18px;
     }
 
-    .status.visible { display: flex; }
+    .status.visible { display: flex; flex-direction: column; }
 
     .status.success {
       background: var(--success-bg);
@@ -309,45 +376,6 @@
     }
 
     .status strong { display: block; margin-bottom: 2px; }
-
-    /* ---------- Panel Informativo ---------- */
-    .legend h2 { margin-bottom: 18px; }
-
-    .legend-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px 22px;
-    }
-
-    .legend-item { display: flex; gap: 12px; }
-
-    .legend-num {
-      flex: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--gold-soft);
-      color: color-mix(in srgb, var(--gold) 65%, var(--ink) 35%);
-      font-family: "Spectral", Georgia, serif;
-      font-weight: 600;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .legend-item h3 {
-      margin: 0 0 3px;
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .legend-item p {
-      margin: 0;
-      font-size: 13.3px;
-      color: var(--ink-soft);
-    }
 
     footer.page-footer {
       margin-top: 34px;
@@ -386,12 +414,6 @@
       box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
       padding: 28px 24px;
       position: relative;
-      transform: translateY(12px);
-      transition: transform 0.25s ease;
-    }
-
-    .modal-overlay.active .modal-card {
-      transform: translateY(0);
     }
 
     .modal-header {
@@ -414,18 +436,9 @@
       font-size: 20px;
     }
 
-    .modal-header h2 {
-      margin: 0;
-      font-size: 1.28rem;
-      color: var(--ink);
-    }
+    .modal-header h2 { margin: 0; font-size: 1.28rem; }
 
-    .modal-body {
-      font-size: 14.5px;
-      line-height: 1.55;
-      color: var(--ink);
-    }
-
+    .modal-body { font-size: 14.5px; line-height: 1.55; }
     .modal-body p { margin: 0 0 12px; }
 
     .bank-box {
@@ -450,10 +463,7 @@
       justify-content: space-between;
       font-size: 13.8px;
       padding: 3px 0;
-      border-bottom: 1px stroke var(--line);
     }
-
-    .bank-row strong { color: var(--ink); }
 
     .modal-actions {
       display: flex;
@@ -475,7 +485,6 @@
       cursor: pointer;
       flex: 1;
       text-align: center;
-      transition: background 0.15s ease;
     }
 
     .btn-secondary:hover { background: var(--gold-soft); }
@@ -493,7 +502,6 @@
       cursor: pointer;
       flex: 1;
       text-align: center;
-      transition: background 0.15s ease;
     }
 
     .btn-primary-close:hover { background: var(--navy-soft); }
@@ -539,56 +547,67 @@
     </svg>
     <div class="letterhead-text">
       <p class="eyebrow">Secretaría de Educación de Honduras</p>
-      <h1>Generador de Plan de Recuperación Académica</h1>
-      <p>Complete los datos del centro educativo y los contenidos con rezago; la IA redactará el plan pedagógico completo y generará el documento oficial de Word listo para firmar.</p>
+      <h1>Generador Autónomo de Documentos Docentes</h1>
+      <p>Seleccione el módulo deseado para redactar automáticamente sus planes oficiales alineados al Currículo Nacional Básico (CNB) y descargarlos en formato Word (.docx).</p>
     </div>
   </header>
 
-  <section class="card">
-    <h2>Datos del plan</h2>
-    <p class="card-sub">Todos los campos son obligatorios. La redacción pedagógica (objetivos, justificación, metodología y matriz operativa) se procesará automáticamente.</p>
+  <!-- Navegación de Módulos (Tabs) -->
+  <nav class="module-nav" aria-label="Módulos pedagógicos">
+    <button class="tab-btn active" data-target="tab-mejora" type="button">
+      📝 Plan de Mejora
+    </button>
+    <button class="tab-btn" data-target="tab-semanal" type="button">
+      📅 Planificación Semanal <span class="tab-badge">III Ciclo</span>
+    </button>
+  </nav>
 
-    <form id="plan-form" novalidate>
+  <!-- MÓDULO 1: PLAN DE MEJORA -->
+  <section class="card tab-content active" id="tab-mejora">
+    <h2>Plan de Mejora y Nivelación Académica</h2>
+    <p class="card-sub">Complete los datos del centro y los temas reprobados. La IA generará el plan con objetivos de Bloom, justificación, metodología de 4 fases y la Matriz Operativa horizontal.</p>
+
+    <form id="form-mejora" novalidate>
       <div class="grid-2">
-        <div class="field" data-field="centro">
-          <label for="centro">Centro educativo</label>
-          <input type="text" id="centro" name="centro" placeholder="C.E.B. Policarpo Bonilla" value="C.E.B. Policarpo Bonilla" autocomplete="off">
-          <span class="field-error">Escriba el nombre del centro educativo.</span>
+        <div class="field" data-field="m-centro">
+          <label for="m-centro">Centro educativo</label>
+          <input type="text" id="m-centro" value="C.E.B. Policarpo Bonilla" autocomplete="off">
+          <span class="field-error">Escriba el centro educativo.</span>
         </div>
 
-        <div class="field" data-field="ubicacion">
-          <label for="ubicacion">Ubicación / aldea</label>
-          <input type="text" id="ubicacion" name="ubicacion" placeholder="El Hato, Langue, Valle" value="El Hato, Langue, Valle" autocomplete="off">
-          <span class="field-error">Escriba la ubicación o aldea.</span>
+        <div class="field" data-field="m-ubicacion">
+          <label for="m-ubicacion">Ubicación / aldea</label>
+          <input type="text" id="m-ubicacion" value="El Hato, Langue, Valle" autocomplete="off">
+          <span class="field-error">Escriba la ubicación.</span>
         </div>
 
-        <div class="field" data-field="docente">
-          <label for="docente">Docente titular</label>
-          <input type="text" id="docente" name="docente" placeholder="Kenfor Euceda" value="Kenfor Euceda" autocomplete="off">
-          <span class="field-error">Escriba el nombre del docente titular.</span>
+        <div class="field" data-field="m-docente">
+          <label for="m-docente">Docente titular</label>
+          <input type="text" id="m-docente" value="Kenfor Euceda" autocomplete="off">
+          <span class="field-error">Escriba el nombre del docente.</span>
         </div>
 
-        <div class="field" data-field="asignatura">
-          <label for="asignatura">Asignatura</label>
-          <input type="text" id="asignatura" name="asignatura" placeholder="Matemática" value="Matemática" autocomplete="off">
+        <div class="field" data-field="m-asignatura">
+          <label for="m-asignatura">Asignatura</label>
+          <input type="text" id="m-asignatura" value="Matemática" autocomplete="off">
           <span class="field-error">Escriba la asignatura.</span>
         </div>
 
-        <div class="field" data-field="gradoSeccion">
-          <label for="gradoSeccion">Grado y sección</label>
-          <input type="text" id="gradoSeccion" name="gradoSeccion" placeholder="Séptimo Grado 7° - Sección U" value="Séptimo Grado 7° - Sección U" autocomplete="off">
-          <span class="field-error">Escriba el grado y la sección.</span>
+        <div class="field" data-field="m-gradoSeccion">
+          <label for="m-gradoSeccion">Grado y sección</label>
+          <input type="text" id="m-gradoSeccion" value="Séptimo Grado 7° - Sección U" autocomplete="off">
+          <span class="field-error">Escriba el grado y sección.</span>
         </div>
 
-        <div class="field" data-field="nivel">
-          <label for="nivel">Nivel educativo</label>
-          <input type="text" id="nivel" name="nivel" placeholder="III Ciclo de Educación Básica" value="III Ciclo de Educación Básica" autocomplete="off">
+        <div class="field" data-field="m-nivel">
+          <label for="m-nivel">Nivel educativo</label>
+          <input type="text" id="m-nivel" value="III Ciclo de Educación Básica" autocomplete="off">
           <span class="field-error">Escriba el nivel educativo.</span>
         </div>
 
-        <div class="field full" data-field="temas">
-          <label for="temas">Temas / contenidos críticos con rezago <span class="hint">— uno por línea</span></label>
-          <textarea id="temas" name="temas" placeholder="Operaciones con números racionales&#10;Ecuaciones de primer grado&#10;Perímetro y área de figuras planas">Operaciones con números racionales
+        <div class="field full" data-field="m-temas">
+          <label for="m-temas">Temas / contenidos críticos con rezago <span class="hint">— uno por línea</span></label>
+          <textarea id="m-temas">Operaciones con números racionales
 Ecuaciones de primer grado
 Perímetro y área de figuras planas</textarea>
           <span class="field-error">Escriba al menos un contenido con rezago.</span>
@@ -596,65 +615,92 @@ Perímetro y área de figuras planas</textarea>
       </div>
 
       <div class="actions">
-        <button class="generate" type="submit" id="generate-btn">
-          <span class="btn-icon" aria-hidden="true">
-            <span class="spinner"></span>
-          </span>
-          <span class="btn-label-idle">Generar plan y descargar Word (.docx)</span>
-          <span class="btn-label-loading">Procesando con IA y generando documento…</span>
+        <button class="generate" type="submit" id="btn-mejora">
+          <span class="spinner"></span>
+          <span class="btn-label-idle">Generar Plan de Mejora (.docx)</span>
+          <span class="btn-label-loading">Procesando Plan de Mejora con IA…</span>
         </button>
       </div>
 
-      <div class="status" id="status-box" role="status" aria-live="polite"></div>
+      <div class="status" id="status-mejora" role="status" aria-live="polite"></div>
     </form>
   </section>
 
-  <section class="card legend">
-    <h2>Qué incluye el documento generado</h2>
-    <div class="legend-grid">
-      <div class="legend-item">
-        <span class="legend-num">1</span>
-        <div>
-          <h3>Objetivo general y específicos</h3>
-          <p>Redactados con verbos de la Taxonomía de Bloom, alineados al CNB y a los contenidos ingresados.</p>
+  <!-- MÓDULO 2: PLANIFICACIÓN SEMANAL -->
+  <section class="card tab-content" id="tab-semanal">
+    <h2>Planificación Semanal de Clases</h2>
+    <p class="card-sub">El sistema detecta automáticamente las asignaturas y grados disponibles en la base de datos oficial del CNB. Seleccione la unidad para estructurar la secuencia didáctica.</p>
+
+    <form id="form-semanal" novalidate>
+      <div class="grid-2">
+        <div class="field" data-field="s-centro">
+          <label for="s-centro">Centro educativo</label>
+          <input type="text" id="s-centro" value="C.E.B. Policarpo Bonilla" autocomplete="off">
+          <span class="field-error">Escriba el centro educativo.</span>
+        </div>
+
+        <div class="field" data-field="s-docente">
+          <label for="s-docente">Docente titular</label>
+          <input type="text" id="s-docente" value="Kenfor Euceda" autocomplete="off">
+          <span class="field-error">Escriba el nombre del docente.</span>
+        </div>
+
+        <div class="field" data-field="s-asignatura">
+          <label for="s-asignatura">Asignatura <span class="hint">— Detección CNB</span></label>
+          <select id="s-asignatura">
+            <option value="Matemática">Matemática (Disponible)</option>
+            <option value="Español" disabled>Español (Próximamente)</option>
+            <option value="Ciencias Naturales" disabled>Ciencias Naturales (Próximamente)</option>
+            <option value="Ciencias Sociales" disabled>Ciencias Sociales (Próximamente)</option>
+          </select>
+        </div>
+
+        <div class="field" data-field="s-grado">
+          <label for="s-grado">Grado <span class="hint">— III Ciclo Activo</span></label>
+          <select id="s-grado">
+            <option value="7° Grado">Séptimo Grado (7°)</option>
+            <option value="8° Grado">Octavo Grado (8°)</option>
+            <option value="9° Grado">Noveno Grado (9°)</option>
+            <option value="1° Grado" disabled>1° a 6° Grado (En integración)</option>
+          </select>
+        </div>
+
+        <div class="field" data-field="s-semana">
+          <label for="s-semana">Semana / Fechas de ejecución</label>
+          <input type="text" id="s-semana" value="Semana 4: Del 10 al 14 de marzo" autocomplete="off">
+          <span class="field-error">Escriba la semana o fechas.</span>
+        </div>
+
+        <div class="field" data-field="s-horas">
+          <label for="s-horas">Horas clase semanales</label>
+          <input type="text" id="s-horas" value="5 horas clase (45 min c/u)" autocomplete="off">
+        </div>
+
+        <div class="field full" data-field="s-unidad">
+          <label for="s-unidad">Unidad curricular oficial del CNB</label>
+          <select id="s-unidad">
+            <!-- Se carga dinámicamente según el grado -->
+          </select>
+        </div>
+
+        <div class="field full">
+          <div class="cnb-info-box" id="cnb-preview">
+            <h4>Contenidos y Expectativas del CNB</h4>
+            <div id="cnb-preview-content">Cargando datos oficiales…</div>
+          </div>
         </div>
       </div>
-      <div class="legend-item">
-        <span class="legend-num">2</span>
-        <div>
-          <h3>Justificación pedagógica</h3>
-          <p>Fundamenta el rezago detectado y la necesidad de recuperación conforme al Currículo Nacional Básico.</p>
-        </div>
+
+      <div class="actions">
+        <button class="generate" type="submit" id="btn-semanal">
+          <span class="spinner"></span>
+          <span class="btn-label-idle">Generar Planificación Semanal (.docx)</span>
+          <span class="btn-label-loading">Procesando Planificación Semanal con IA…</span>
+        </button>
       </div>
-      <div class="legend-item">
-        <span class="legend-num">3</span>
-        <div>
-          <h3>Metodología de 4 fases</h3>
-          <p>Diagnóstico, modelado y talleres, tutorías individualizadas, y evaluación formativa con rúbricas.</p>
-        </div>
-      </div>
-      <div class="legend-item">
-        <span class="legend-num">4</span>
-        <div>
-          <h3>Matriz operativa (horizontal)</h3>
-          <p>Una fila por cada tema crítico, con seis columnas: objetivos, acciones, estrategias, producto esperado, recursos y observaciones.</p>
-        </div>
-      </div>
-      <div class="legend-item">
-        <span class="legend-num">5</span>
-        <div>
-          <h3>Encabezado institucional</h3>
-          <p>Membrete oficial de la Secretaría de Educación y el centro educativo, repetido en cada página.</p>
-        </div>
-      </div>
-      <div class="legend-item">
-        <span class="legend-num">6</span>
-        <div>
-          <h3>Bloque de firmas</h3>
-          <p>Espacio formal para la firma del docente titular y la dirección o subdirección del centro educativo.</p>
-        </div>
-      </div>
-    </div>
+
+      <div class="status" id="status-semanal" role="status" aria-live="polite"></div>
+    </form>
   </section>
 
   <footer class="page-footer">Herramienta de apoyo técnico-pedagógico · Secretaría de Educación de Honduras</footer>
@@ -665,487 +711,507 @@ Perímetro y área de figuras planas</textarea>
   "use strict";
 
   /* ============================================================
-     LÓGICA DEL MODAL DE COLABORACIÓN
+     DATOS DEL CNB DE MATEMÁTICA (III CICLO: 7°, 8°, 9°)
+     ============================================================ */
+  var cnbDataMatematica = {
+    "7° Grado": [
+      {
+        unidad: "Unidad 1: Números positivos y negativos (29 hrs)",
+        expectativas: ["Comprenden el concepto de números positivos y negativos.", "Aplican las operaciones fundamentales (adición, sustracción, multiplicación, división) con números positivos y negativos."],
+        contenidos: ["Uso de números positivos y negativos", "Representación gráfica, orden y valor absoluto", "Adición, sustracción, multiplicación y división", "Propiedades conmutativa, asociativa y distributiva", "Conversión de fracciones a decimales, potencias y operaciones combinadas"]
+      },
+      {
+        unidad: "Unidad 2: Variables y expresiones (22 hrs)",
+        expectativas: ["Expresan cantidades utilizando variables y símbolos algebraicos.", "Efectúan operaciones de adición, sustracción, producto y división de expresiones algebraicas."],
+        contenidos: ["Expresión algebraica y reglas convencionales", "Valor numérico de expresiones algebraicas", "Términos y coeficientes", "Operaciones con expresiones algebraicas"]
+      },
+      {
+        unidad: "Unidad 3: Ecuaciones de primer grado en una variable (18 hrs)",
+        expectativas: ["Resuelven ecuaciones de primer grado en una variable aplicando propiedades de la igualdad.", "Aplican ecuaciones lineales en la solución de problemas cotidianos."],
+        contenidos: ["Definición de ecuación lineal", "Propiedades de la igualdad y transposición de términos", "Proceso de resolución de problemas con ecuaciones"]
+      },
+      {
+        unidad: "Unidad 4: Conjunto de puntos (5 hrs)",
+        expectativas: ["Identifican y definen los elementos fundamentales de la geometría."],
+        contenidos: ["Punto, recta, plano, rayo y segmento", "Distancia, punto medio y bisector de segmento", "Puntos colineales"]
+      },
+      {
+        unidad: "Unidad 5: Ángulos (8 hrs)",
+        expectativas: ["Construyen e identifican ángulos, su medida y relaciones entre rectas."],
+        contenidos: ["Definición de ángulo, medida y congruencia", "Clasificación de ángulos y construcción de la bisectriz", "Rectas perpendiculares y mediatriz de un segmento"]
+      },
+      {
+        unidad: "Unidad 6: Razón, proporcionalidad y porcentaje (23 hrs)",
+        expectativas: ["Resuelven problemas de la vida cotidiana aplicando proporcionalidad directa, inversa y porcentaje."],
+        contenidos: ["Razón, razones equivalentes y proporciones", "Proporcionalidad directa e inversa", "Porcentaje o tanto por ciento"]
+      },
+      {
+        unidad: "Unidad 7: Gráficas de faja y circulares (10 hrs)",
+        expectativas: ["Organizan e interpretan información estadística en gráficas de faja y circulares."],
+        contenidos: ["Elaboración e interpretación de gráficas de faja", "Elaboración e interpretación de gráficas circulares"]
+      }
+    ],
+    "8° Grado": [
+      {
+        unidad: "Unidad 1: Polinomios (10 hrs)",
+        expectativas: ["Efectúan operaciones de suma, resta, multiplicación y división con monomios y polinomios."],
+        contenidos: ["Monomios y polinomios", "Adición y sustracción de polinomios", "Multiplicación y división de polinomio por número", "Multiplicación y división de monomios"]
+      },
+      {
+        unidad: "Unidad 2: Sistema de dos ecuaciones de primer grado en dos variables (20 hrs)",
+        expectativas: ["Resuelven sistemas de dos ecuaciones lineales en dos variables y los aplican en problemas reales."],
+        contenidos: ["Despeje de variables", "Métodos de reducción y sustitución", "Aplicación de sistemas de ecuaciones en problemas del entorno"]
+      },
+      {
+        unidad: "Unidad 3: Paralelismo (8 hrs)",
+        expectativas: ["Identifican rectas paralelas, transversales y relaciones angulares."],
+        contenidos: ["Rectas paralelas y transversales", "Ángulos alternos internos, alternos externos y correspondientes", "Suma de ángulos de un triángulo y polígono"]
+      },
+      {
+        unidad: "Unidad 4: Congruencia de triángulos (21 hrs)",
+        expectativas: ["Demuestran la congruencia de triángulos aplicando criterios geométricos."],
+        contenidos: ["Criterios de congruencia de triángulos (LAL, ALA, LLL)", "Demostraciones geométricas", "Propiedades de triángulos isósceles y rectángulos"]
+      },
+      {
+        unidad: "Unidad 5: Cuadriláteros (10 hrs)",
+        expectativas: ["Clasifican y aplican las propiedades de los paralelogramos, rectángulos, rombos y trapecios."],
+        contenidos: ["Cuadriláteros y paralelogramos", "Condiciones para ser paralelogramo", "Propiedades de rectángulos, rombos y trapecios"]
+      },
+      {
+        unidad: "Unidad 6: Funciones de primer grado (28 hrs)",
+        expectativas: ["Modelan situaciones mediante funciones lineales y grafican en el plano cartesiano."],
+        contenidos: ["Concepto de función lineal y razón de cambio", "Gráfica de funciones lineales y forma y=ax+b", "Paralelismo y perpendicularidad", "Solución gráfica de sistemas de ecuaciones"]
+      },
+      {
+        unidad: "Unidad 7: Manera de contar (8 hrs)",
+        expectativas: ["Aplican técnicas de conteo para determinar posibilidades."],
+        contenidos: ["Principio de la suma", "Principio del producto"]
+      },
+      {
+        unidad: "Unidad 8: Probabilidad (13 hrs)",
+        expectativas: ["Calculan la probabilidad de eventos simples en situaciones de azar."],
+        contenidos: ["Relación entre razón y probabilidad", "Fórmula y propiedades de la probabilidad"]
+      }
+    ],
+    "9° Grado": [
+      {
+        unidad: "Unidad 1: Polinomios (19 hrs)",
+        expectativas: ["Aplican los productos notables y la factorización de polinomios en la resolución de problemas."],
+        contenidos: ["Multiplicación de polinomios", "Productos notables", "Factorización por factor común, tanteo, diferencia de cuadrados y trinomio cuadrado perfecto"]
+      },
+      {
+        unidad: "Unidad 2: Números reales (24 hrs)",
+        expectativas: ["Comprenden el concepto de raíz cuadrada y efectúan operaciones en el conjunto de los números reales."],
+        contenidos: ["Aproximación y definición de raíz cuadrada", "Números irracionales y reales", "Multiplicación, división, simplificación y racionalización de raíces cuadradas"]
+      },
+      {
+        unidad: "Unidad 3: Ecuaciones de segundo grado (13 hrs)",
+        expectativas: ["Resuelven ecuaciones cuadráticas por factorización, completación de cuadrado y fórmula cuadrática."],
+        contenidos: ["Definición de ecuación de segundo grado", "Métodos de resolución de ecuaciones cuadráticas", "Aplicaciones en problemas cotidianos"]
+      },
+      {
+        unidad: "Unidad 4: Semejanza de triángulos (18 hrs)",
+        expectativas: ["Aplican los criterios de semejanza de triángulos y el teorema de Thales en la resolución de problemas."],
+        contenidos: ["Figuras semejantes y criterios de semejanza", "Rectas paralelas y proporción", "Aplicaciones prácticas de la semejanza"]
+      },
+      {
+        unidad: "Unidad 5: Teorema de Pitágoras (13 hrs)",
+        expectativas: ["Demuestran y aplican el Teorema de Pitágoras en la solución de problemas geométricos de la vida real."],
+        contenidos: ["Teorema de Pitágoras", "Aplicaciones en cálculo de distancias e alturas"]
+      },
+      {
+        unidad: "Unidad 6: Polígonos regulares y el círculo (16 hrs)",
+        expectativas: ["Calculan elementos y propiedades de polígonos regulares y tangentes al círculo."],
+        contenidos: ["Polígonos regulares y ángulos internos/externos", "Propiedades del círculo y tangentes"]
+      },
+      {
+        unidad: "Unidad 7: Sólidos geométricos (11 hrs)",
+        expectativas: ["Calculan áreas laterales y volúmenes de prismas, pirámides, cilindros, conos y esferas."],
+        contenidos: ["Área superficial lateral y total de sólidos", "Cálculo de volumen de cilindros, conos, pirámides y esferas"]
+      },
+      {
+        unidad: "Unidad 8: Organización y presentación de datos (11 hrs)",
+        expectativas: ["Organizan datos en tablas de frecuencia, construyen histogramas y calculan medidas de tendencia central."],
+        contenidos: ["Tablas de frecuencia e histogramas", "Medidas de tendencia central: Media, Mediana y Moda"]
+      }
+    ]
+  };
+
+  /* ============================================================
+     GESTIÓN DE TABS Y MODAL
      ============================================================ */
   var modal = document.getElementById("collaboration-modal");
   var btnCloseModal = document.getElementById("btn-close-modal");
   var btnCopyBank = document.getElementById("btn-copy-bank");
 
-  btnCloseModal.addEventListener("click", function () {
-    modal.classList.remove("active");
-  });
-
+  btnCloseModal.addEventListener("click", function () { modal.classList.remove("active"); });
   btnCopyBank.addEventListener("click", function () {
     var textToCopy = "BANCO CUSCATLAN (Ahorros)\nCuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
     navigator.clipboard.writeText(textToCopy).then(function() {
       btnCopyBank.textContent = "¡Copiado con éxito!";
       setTimeout(function() { btnCopyBank.textContent = "Copiar datos de cuenta"; }, 2500);
-    }).catch(function() {
-      alert(textToCopy);
     });
   });
 
-  function splitTemas(raw) {
-    return raw
-      .split(/\r?\n/)
-      .map(function (s) { return s.replace(/^[\s\-•\*]+/, "").trim(); })
-      .filter(function (s) { return s.length > 0; });
-  }
+  // Cambio de pestañas
+  var tabBtns = document.querySelectorAll(".tab-btn");
+  var tabContents = document.querySelectorAll(".tab-content");
 
-  function listaConY(items) {
-    if (items.length === 0) return "";
-    if (items.length === 1) return items[0];
-    return items.slice(0, -1).join(", ") + " y " + items[items.length - 1];
-  }
-
-  function pick(bank, i) { return bank[i % bank.length]; }
-
-  function anioLectivoActual() { return new Date().getFullYear(); }
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var targetId = btn.getAttribute("data-target");
+      tabBtns.forEach(function (b) { b.classList.remove("active"); });
+      tabContents.forEach(function (c) { c.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById(targetId).classList.add("active");
+    });
+  });
 
   /* ============================================================
-     CONEXIÓN IA (GEMINI PROXY) Y MOTOR DE RESPALDO LOCAL
+     ACTUALIZACIÓN DINÁMICA DE UNIDADES DEL CNB EN PLANIFICACIÓN
      ============================================================ */
-  async function obtenerContenidoIA(data) {
-    const payload = {
-      contents: [{
-        parts: [{
-          text: `Genera un plan de nivelación pedagógica para:
-Centro Educativo: ${data.centro}
-Ubicación: ${data.ubicacion}
-Docente: ${data.docente}
-Asignatura: ${data.asignatura}
-Grado y Sección: ${data.gradoSeccion}
-Nivel Educativo: ${data.nivel}
-Temas reprobados / críticos con rezago:
-${data.temasLista.map(t => "- " + t).join("\n")}`
-        }]
-      }]
-    };
+  var selectGradoSemanal = document.getElementById("s-grado");
+  var selectUnidadSemanal = document.getElementById("s-unidad");
+  var cnbPreviewContent = document.getElementById("cnb-preview-content");
 
+  function actualizarUnidadesSemanal() {
+    var grado = selectGradoSemanal.value;
+    var unidades = cnbDataMatematica[grado] || [];
+    
+    selectUnidadSemanal.innerHTML = "";
+    unidades.forEach(function (u, idx) {
+      var opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = u.unidad;
+      selectUnidadSemanal.appendChild(opt);
+    });
+
+    actualizarPreviewCNB();
+  }
+
+  function actualizarPreviewCNB() {
+    var grado = selectGradoSemanal.value;
+    var idx = selectUnidadSemanal.value;
+    var unidades = cnbDataMatematica[grado] || [];
+    var seleccionada = unidades[idx];
+
+    if (!seleccionada) {
+      cnbPreviewContent.innerHTML = "<p>No hay información cargada para esta selección.</p>";
+      return;
+    }
+
+    var html = "<p><strong>Expectativas de Logro Oficiales:</strong></p><ul>";
+    seleccionada.expectativas.forEach(function (e) { html += "<li>" + e + "</li>"; });
+    html += "</ul><p style='margin-top:8px;'><strong>Contenidos Clave del CNB:</strong></p><ul>";
+    seleccionada.contenidos.forEach(function (c) { html += "<li>" + c + "</li>"; });
+    html += "</ul>";
+
+    cnbPreviewContent.innerHTML = html;
+  }
+
+  selectGradoSemanal.addEventListener("change", actualizarUnidadesSemanal);
+  selectUnidadSemanal.addEventListener("change", actualizarPreviewCNB);
+  actualizarUnidadesSemanal();
+
+  /* ============================================================
+     CONEXIÓN A API PROXY GEMINI CON FALLBACK LOCAL
+     ============================================================ */
+  async function pedirContenidoIA(payload) {
     try {
-      const response = await fetch('/api/generate', {
+      var response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error('Servidor proxy devolvió error ' + response.status);
+      if (!response.ok) throw new Error("Servidor proxy devolvió error " + response.status);
+      var resData = await response.json();
+      
+      // Si la API devolvió JSON envuelto en candidatos
+      if (resData.candidates && resData.candidates[0].content.parts[0].text) {
+        var rawText = resData.candidates[0].content.parts[0].text;
+        return JSON.parse(rawText);
       }
-
-      const resData = await response.json();
-      const rawText = resData.candidates[0].content.parts[0].text;
-      return JSON.parse(rawText);
-
-    } catch (error) {
-      console.warn("Fallo la llamada a la IA de Gemini Proxy. Usando motor algorítmico local de contingencia.", error);
-      return generarContenidoLocal(data);
+      return resData; // Si devolvió directo el objeto
+    } catch (err) {
+      console.warn("Llamada IA falló. Usando generador local de contingencia.", err);
+      return payload.type === "plan_mejora" 
+        ? generarPlanMejoraLocal(payload.data) 
+        : generarPlanSemanalLocal(payload.data);
     }
   }
 
-  function generarContenidoLocal(data) {
+  /* ============================================================
+     GENERADORES LOCALES DE CONTINGENCIA
+     ============================================================ */
+  function generarPlanMejoraLocal(data) {
     var temas = data.temasLista;
-    var temasTexto = listaConY(temas);
+    var temasTexto = temas.join(", ");
 
-    var objetivoGeneral =
-      "Fortalecer y nivelar los aprendizajes de las y los estudiantes de " + data.gradoSeccion +
-      ", correspondientes al " + data.nivel + ", en la asignatura de " + data.asignatura +
-      ", mediante un proceso formal y sistemático de recuperación pedagógica alineado al Currículo " +
-      "Nacional Básico (CNB), orientado a superar el rezago académico identificado en los siguientes " +
-      "contenidos críticos: " + temasTexto + ".";
+    var objetivoGeneral = "Fortalecer y nivelar los aprendizajes de las y los estudiantes de " + data.gradoSeccion +
+      " del " + data.centro + " en la asignatura de " + data.asignatura +
+      ", mediante un plan sistemático de recuperación pedagógica alineado al Currículo Nacional Básico (CNB) para superar el rezago en: " + temasTexto + ".";
 
-    var bloomBank = [
-      function (t) { return "Identificar los procedimientos y conceptos fundamentales relacionados con " + t + ", como base para su aplicación práctica."; },
-      function (t) { return "Aplicar estrategias de resolución de problemas vinculadas a " + t + " mediante ejercicios guiados y progresivos."; },
-      function (t) { return "Analizar situaciones y ejercicios relacionados con " + t + " para fortalecer el pensamiento lógico y la toma de decisiones."; },
-      function (t) { return "Consolidar el dominio de " + t + " a través de la práctica sistemática y la retroalimentación formativa continua."; },
-      function (t) { return "Ejecutar con precisión y autonomía los procedimientos correspondientes a " + t + "."; }
-    ];
+    var objetivosEspecificos = temas.map(function (t) {
+      return "Consolidar el dominio técnico y la resolución de ejercicios prácticos correspondientes a " + t + " mediante talleres guiados.";
+    });
 
-    var objetivosEspecificos = temas.map(function (t, i) { return pick(bloomBank, i)(t); });
-
-    var relleno = [
-      "Fomentar hábitos de estudio y disciplina académica que contribuyan a la superación del rezago en " + data.asignatura + ".",
-      "Fortalecer la autoestima académica y la motivación de los y las estudiantes durante el proceso de nivelación.",
-      "Verificar el logro de las competencias mínimas establecidas en el CNB para " + data.asignatura + " correspondientes a " + data.gradoSeccion + "."
-    ];
-    var idxRelleno = 0;
-    while (objetivosEspecificos.length < 3 && idxRelleno < relleno.length) {
-      objetivosEspecificos.push(relleno[idxRelleno]);
-      idxRelleno++;
-    }
-
-    var justificacion =
-      "El presente Plan de Recuperación Académica responde a la necesidad institucional de atender " +
-      "oportunamente el rezago académico detectado en las y los estudiantes de " + data.gradoSeccion +
-      " del " + data.centro + ", ubicado en " + data.ubicacion + ", en la asignatura de " + data.asignatura +
-      ". De conformidad con el Currículo Nacional Básico (CNB) y los lineamientos técnico-pedagógicos de la " +
-      "Secretaría de Educación de Honduras, todo estudiante tiene derecho a procesos de nivelación que " +
-      "garanticen el logro de las competencias mínimas esperadas para su grado y nivel educativo. Los " +
-      "contenidos críticos identificados —" + temasTexto + "— evidencian vacíos de aprendizaje que, de no " +
-      "atenderse de manera sistemática, incidirán negativamente en el desempeño académico posterior del " +
-      "estudiantado. Por ello, se implementa la presente estrategia remedial, fundamentada en la atención " +
-      "diferenciada, el refuerzo pedagógico continuo y la evaluación formativa, con el propósito de " +
-      "garantizar la equidad educativa y el derecho a una educación de calidad.";
+    var justificacion = "El presente Plan de Mejora responde a la necesidad institucional de atender oportunamente el rezago académico detectado en " + data.asignatura +
+      " para " + data.gradoSeccion + " en " + data.centro + ". De conformidad con los lineamientos del CNB de Honduras, se implementa esta nivelación para garantizar el logro de competencias fundamentales.";
 
     var metodologia = [
-      {
-        titulo: "Fase 1: Diagnóstico y Retroalimentación",
-        texto: "Aplicación de instrumentos diagnósticos para identificar con precisión el nivel de dominio individual de cada estudiante sobre los contenidos críticos, seguida de retroalimentación inmediata y personalizada."
-      },
-      {
-        titulo: "Fase 2: Modelado Directo y Talleres Prácticos",
-        texto: "Desarrollo de sesiones de enseñanza directa con ejemplos resueltos paso a paso, seguidas de talleres prácticos supervisados que permitan la apropiación progresiva de los contenidos."
-      },
-      {
-        titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio",
-        texto: "Organización de espacios de tutoría personalizada y círculos de estudio entre pares, orientados a la atención diferenciada según el ritmo de aprendizaje de cada estudiante."
-      },
-      {
-        titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos",
-        texto: "Verificación continua del progreso mediante rúbricas de desempeño y establecimiento de compromisos académicos entre docente, estudiante y familia, con miras a alcanzar la meta de logro del 99%-100%."
-      }
+      { titulo: "Fase 1: Diagnóstico", texto: "Evaluación inicial para identificar los errores recurrentes en " + temasTexto + "." },
+      { titulo: "Fase 2: Ejercitación Guiada", texto: "Desarrollo de guías de trabajo y talleres prácticos en el aula." },
+      { titulo: "Fase 3: Tutoría Diferenciada", texto: "Atención individualizada a estudiantes con mayor dificultad." },
+      { titulo: "Fase 4: Evaluación de Dominio", texto: "Prueba formativa de desempeño para verificar la meta de logro." }
     ];
 
-    var col1Bank = [
-      function (t) { return "Identificar y aplicar los conceptos fundamentales de " + t + "."; },
-      function (t) { return "Analizar y resolver ejercicios y problemas relacionados con " + t + "."; },
-      function (t) { return "Comprender y ejecutar los procedimientos propios de " + t + "."; },
-      function (t) { return "Aplicar y verificar los procesos correspondientes a " + t + "."; }
-    ];
-    var col2Bank = [
-      function (t) { return "Taller práctico guiado sobre " + t + ", con ejercicios de menor a mayor complejidad y retroalimentación inmediata."; },
-      function (t) { return "Clase modelada con resolución de ejemplos de " + t + " paso a paso, seguida de práctica supervisada."; },
-      function (t) { return "Guía de ejercicios progresivos y corrección inmediata sobre " + t + "."; }
-    ];
-    var col3Bank = [
-      function (t) { return "Trabajo colaborativo en parejas y atención diferenciada según el ritmo de aprendizaje de cada estudiante en " + t + "."; },
-      function (t) { return "Círculos de estudio entre pares con acompañamiento docente directo sobre " + t + "."; },
-      function (t) { return "Tutoría individualizada para estudiantes con mayor rezago en " + t + "."; }
-    ];
-    var col4Bank = [
-      function (t) { return "Cuaderno de ejercicios resueltos y prueba corta de dominio sobre " + t + " (meta de logro: 99%-100%)."; },
-      function (t) { return "Guía de trabajo completada y rúbrica de desempeño aprobada sobre " + t + " (meta de logro: 99%-100%)."; }
-    ];
-    var col5Bank = [
-      "Guías impresas, pizarra, cuaderno de trabajo y material didáctico elaborado por el docente.",
-      "Material manipulativo, fichas de refuerzo y recursos audiovisuales de apoyo.",
-      "Cuaderno de trabajo, pizarra, láminas ilustrativas y ejercicios fotocopiados."
-    ];
-    var col6Bank = [
-      function (t) { return "Se solicita acompañamiento técnico-pedagógico y dotación de material de apoyo para el fortalecimiento de " + t + "."; },
-      function (t) { return "Se solicita seguimiento técnico y provisión de recursos didácticos para reforzar " + t + "."; }
-    ];
-
-    var matriz = temas.map(function (t, i) {
+    var matriz = temas.map(function (t) {
       return {
         tema: t,
-        objetivos: pick(col1Bank, i)(t),
-        acciones: pick(col2Bank, i)(t),
-        estrategias: pick(col3Bank, i)(t),
-        producto: pick(col4Bank, i)(t),
-        recursos: pick(col5Bank, i),
-        observaciones: pick(col6Bank, i)(t)
+        objetivos: "Aplicar los procedimientos matemáticos correspondientes a " + t + ".",
+        acciones: "Taller práctico presencial con resolución de problemas paso a paso sobre " + t + ".",
+        estrategias: "Trabajo en parejas y tutoría entre pares supervisada por el docente.",
+        producto: "Guía de ejercicios resuelta y prueba corta aprobada (Meta: 99%-100%).",
+        recursos: "Cuaderno de trabajo, pizarra, guías impresas.",
+        observaciones: "Acompañamiento pedagógico continúo por la dirección del centro."
       };
     });
 
+    return { objetivoGeneral: objetivoGeneral, objetivosEspecificos: objetivosEspecificos, justificacion: justificacion, metodologia: metodologia, matriz: matriz };
+  }
+
+  function generarPlanSemanalLocal(data) {
     return {
-      objetivoGeneral: objetivoGeneral,
-      objetivosEspecificos: objetivosEspecificos,
-      justificacion: justificacion,
-      metodologia: metodologia,
-      matriz: matriz
+      expectativasLogro: data.expectativas,
+      contenidos: data.contenidos,
+      secuenciaDidactica: [
+        { dia: "Clase 1 / Lunes", inicio: "Motivación y exploración de conocimientos previos sobre " + data.unidadNombre + ".", desarrollo: "Presentación del concepto fundamental con ejemplos resueltos paso a paso en la pizarra.", cierre: "Resolución individual de 2 ejercicios de fijación y aclaración de dudas." },
+        { dia: "Clase 2 / Martes", inicio: "Repaso breve de la clase anterior mediante preguntas orales rápidas.", desarrollo: "Modelado de ejercicios de mayor complejidad vinculados a " + data.contenidos[0] + ".", cierre: "Trabajo en parejas resolviendo guía práctica en el cuaderno." },
+        { dia: "Clase 3 / Miércoles", inicio: "Presentación de una situación problema de la vida cotidiana de Honduras.", desarrollo: "Planteamiento cooperativo de la solución utilizando los procedimientos del CNB.", cierre: "Puesta en común de las estrategias utilizadas por los estudiantes." },
+        { dia: "Clase 4 / Jueves", inicio: "Instrucciones para el taller de ejercitación en equipos.", desarrollo: "Desarrollo de la guía de trabajo práctico con monitoreo diferenciado del docente.", cierre: "Revisión en la pizarra de los ejercicios con mayor margen de error." },
+        { dia: "Clase 5 / Viernes", inicio: "Realimentación sintética de los contenidos vistos en la semana.", desarrollo: "Aplicación de evaluación formativa corta para verificar el nivel de logro.", cierre: "Asignación de compromisos de repaso y reflexión sobre lo aprendido." }
+      ],
+      evaluacionFormativa: "Evaluación mediante observación directa, revisión de guías de trabajo en cuaderno y prueba corta escrita.",
+      recursos: "Texto del estudiante, Guía del Docente, pizarra, cuadernos y guías de ejercicios.",
+      observaciones: "Se brindará atención individualizada a los alumnos que muestren mayor dificultad."
     };
   }
 
   /* ============================================================
-     CONSTRUCCIÓN DEL DOCUMENTO WORD (.docx)
+     CONSTRUCCIÓN DE DOCUMENTOS WORD (.docx)
      ============================================================ */
-  function construirDocx(data, contenido) {
+  function construirDocxMejora(data, contenido) {
     var D = window.docx;
     var NAVY = "0C2340";
     var ZEBRA = "EAEFF5";
     var GOLD = "A8781F";
     var LABEL_BG = "F1EEE3";
 
-    function headerFooter(centro, ubicacion) {
+    function headerFooter() {
       return {
         default: new D.Header({
           children: [
-            new D.Paragraph({
-              alignment: D.AlignmentType.CENTER,
-              spacing: { after: 20 },
-              children: [
-                new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 20, color: NAVY, font: "Calibri" })
-              ]
-            }),
-            new D.Paragraph({
-              alignment: D.AlignmentType.CENTER,
-              border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: NAVY, space: 4 } },
-              children: [
-                new D.TextRun({ text: centro + " — " + ubicacion, size: 18, color: "44506B", font: "Calibri" })
-              ]
-            })
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 20, color: NAVY, font: "Calibri" })] }),
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: NAVY, space: 4 } }, children: [new D.TextRun({ text: data.centro + " — " + data.ubicacion, size: 18, color: "44506B", font: "Calibri" })] })
           ]
-        })
-      };
-    }
-
-    function footerBlock() {
-      return {
-        default: new D.Footer({
-          children: [
-            new D.Paragraph({
-              alignment: D.AlignmentType.CENTER,
-              children: [
-                new D.TextRun({ text: "Plan de Recuperación Académica — Generado electrónicamente · Página ", size: 16, color: "6B7686", font: "Calibri" }),
-                new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, color: "6B7686", font: "Calibri" })
-              ]
-            })
-          ]
-        })
+        }),
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Plan de Mejora Académica · Página ", size: 16, color: "6B7686", font: "Calibri" }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, color: "6B7686", font: "Calibri" })] })]
+          })
+        }
       };
     }
 
     function h(text) {
-      return new D.Paragraph({
-        heading: D.HeadingLevel.HEADING_1,
-        spacing: { before: 280, after: 140 },
-        border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: GOLD, space: 3 } },
-        children: [new D.TextRun({ text: text, bold: true, color: NAVY, size: 26, font: "Calibri" })]
-      });
+      return new D.Paragraph({ heading: D.HeadingLevel.HEADING_1, spacing: { before: 260, after: 120 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: GOLD, space: 3 } }, children: [new D.TextRun({ text: text, bold: true, color: NAVY, size: 24, font: "Calibri" })] });
     }
 
-    function p(text, opts) {
-      opts = opts || {};
-      return new D.Paragraph({
-        spacing: { after: opts.after || 160 },
-        alignment: D.AlignmentType.JUSTIFIED,
-        children: [new D.TextRun({ text: text, size: 22, font: "Calibri", bold: !!opts.bold })]
-      });
+    function p(text) {
+      return new D.Paragraph({ spacing: { after: 140 }, alignment: D.AlignmentType.JUSTIFIED, children: [new D.TextRun({ text: text, size: 21, font: "Calibri" })] });
     }
 
     function datoRow(label, value) {
       return new D.TableRow({
         children: [
-          new D.TableCell({
-            width: { size: 30, type: D.WidthType.PERCENTAGE },
-            shading: { fill: LABEL_BG },
-            verticalAlign: D.VerticalAlign.CENTER,
-            margins: { top: 90, bottom: 90, left: 120, right: 120 },
-            children: [new D.Paragraph({ children: [new D.TextRun({ text: label, bold: true, size: 20, color: NAVY, font: "Calibri" })] })]
-          }),
-          new D.TableCell({
-            width: { size: 70, type: D.WidthType.PERCENTAGE },
-            verticalAlign: D.VerticalAlign.CENTER,
-            margins: { top: 90, bottom: 90, left: 120, right: 120 },
-            children: [new D.Paragraph({ children: [new D.TextRun({ text: value, size: 20, font: "Calibri" })] })]
-          })
+          new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, shading: { fill: LABEL_BG }, margins: { top: 80, bottom: 80, left: 100, right: 100 }, children: [new D.Paragraph({ children: [new D.TextRun({ text: label, bold: true, size: 19, color: NAVY, font: "Calibri" })] })] }),
+          new D.TableCell({ width: { size: 70, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 100, right: 100 }, children: [new D.Paragraph({ children: [new D.TextRun({ text: value, size: 19, font: "Calibri" })] })] })
         ]
       });
     }
 
     var datosGenerales = new D.Table({
       width: { size: 100, type: D.WidthType.PERCENTAGE },
-      borders: {
-        top: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" },
-        bottom: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" },
-        left: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" },
-        right: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" },
-        insideHorizontal: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" },
-        insideVertical: { style: D.BorderStyle.SINGLE, size: 4, color: "C9C1AC" }
-      },
       rows: [
         datoRow("Docente titular", data.docente),
         datoRow("Centro educativo", data.centro),
-        datoRow("Ubicación / aldea", data.ubicacion),
+        datoRow("Ubicación", data.ubicacion),
         datoRow("Asignatura", data.asignatura),
         datoRow("Grado y sección", data.gradoSeccion),
-        datoRow("Nivel educativo", data.nivel),
-        datoRow("Año lectivo", String(anioLectivoActual()))
+        datoRow("Nivel educativo", data.nivel)
       ]
     });
 
-    var objetivosEspecificosParas = contenido.objetivosEspecificos.map(function (texto, i) {
-      return new D.Paragraph({
-        spacing: { after: 110 },
-        alignment: D.AlignmentType.JUSTIFIED,
-        indent: { left: 260, hanging: 260 },
-        children: [
-          new D.TextRun({ text: (i + 1) + ". ", bold: true, size: 22, font: "Calibri", color: NAVY }),
-          new D.TextRun({ text: texto, size: 22, font: "Calibri" })
-        ]
-      });
+    var objEsp = contenido.objetivosEspecificos.map(function (texto, i) {
+      return new D.Paragraph({ spacing: { after: 100 }, indent: { left: 240, hanging: 240 }, children: [new D.TextRun({ text: (i + 1) + ". ", bold: true, size: 21, color: NAVY }), new D.TextRun({ text: texto, size: 21 })] });
     });
 
-    var metodologiaParas = [];
-    contenido.metodologia.forEach(function (fase) {
-      metodologiaParas.push(new D.Paragraph({
-        spacing: { before: 120, after: 60 },
-        children: [new D.TextRun({ text: fase.titulo, bold: true, size: 22, color: NAVY, font: "Calibri" })]
-      }));
-      metodologiaParas.push(p(fase.texto, { after: 100 }));
+    var metParas = [];
+    contenido.metodologia.forEach(function (f) {
+      metParas.push(new D.Paragraph({ spacing: { before: 100, after: 40 }, children: [new D.TextRun({ text: f.titulo, bold: true, size: 21, color: NAVY })] }));
+      metParas.push(p(f.texto));
     });
 
-    var section1Children = [
-      new D.Paragraph({
-        alignment: D.AlignmentType.CENTER,
-        spacing: { after: 240 },
-        children: [new D.TextRun({ text: "PLAN DE RECUPERACIÓN Y NIVELACIÓN ACADÉMICA", bold: true, size: 30, color: NAVY, font: "Calibri" })]
-      }),
+    var sec1 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 200 }, children: [new D.TextRun({ text: "PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA", bold: true, size: 28, color: NAVY })] }),
       datosGenerales,
-      h("1. Objetivo General"),
-      p(contenido.objetivoGeneral),
+      h("1. Objetivo General"), p(contenido.objetivoGeneral),
       h("2. Objetivos Específicos")
-    ].concat(objetivosEspecificosParas, [
-      h("3. Justificación Pedagógica"),
-      p(contenido.justificacion),
-      h("4. Estrategia Metodológica")
-    ], metodologiaParas);
+    ].concat(objEsp, [h("3. Justificación Pedagógica"), p(contenido.justificacion), h("4. Estrategia Metodológica")], metParas);
 
-    function matrizHeaderCell(text) {
-      return new D.TableCell({
-        shading: { fill: NAVY },
-        verticalAlign: D.VerticalAlign.CENTER,
-        margins: { top: 100, bottom: 100, left: 90, right: 90 },
-        children: [new D.Paragraph({
-          alignment: D.AlignmentType.CENTER,
-          children: [new D.TextRun({ text: text, bold: true, color: "FFFFFF", size: 19, font: "Calibri" })]
-        })]
-      });
+    function mCellHeader(text) {
+      return new D.TableCell({ shading: { fill: NAVY }, margins: { top: 90, bottom: 90, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: text, bold: true, color: "FFFFFF", size: 18 })] })] });
     }
 
-    function matrizCell(text, shaded) {
-      return new D.TableCell({
-        shading: shaded ? { fill: ZEBRA } : undefined,
-        verticalAlign: D.VerticalAlign.CENTER,
-        margins: { top: 90, bottom: 90, left: 90, right: 90 },
-        children: [new D.Paragraph({
-          alignment: D.AlignmentType.JUSTIFIED,
-          children: [new D.TextRun({ text: text, size: 18, font: "Calibri" })]
-        })]
-      });
+    function mCell(text, shaded) {
+      return new D.TableCell({ shading: shaded ? { fill: ZEBRA } : undefined, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.JUSTIFIED, children: [new D.TextRun({ text: text, size: 17 })] })] });
     }
 
-    var matrizHeaderRow = new D.TableRow({
-      tableHeader: true,
-      children: [
-        matrizHeaderCell("Objetivos de Aprendizaje (Bloom)"),
-        matrizHeaderCell("Acciones Didácticas y Talleres Prácticos"),
-        matrizHeaderCell("Estrategias Metodológicas y Atención Diferenciada"),
-        matrizHeaderCell("Producto Esperado y Criterio de Evaluación (Meta 99%-100%)"),
-        matrizHeaderCell("Recursos Humanos y Didácticos"),
-        matrizHeaderCell("Observaciones y Solicitudes a la Secretaría de Educación")
-      ]
+    var matrizRows = [new D.TableRow({ tableHeader: true, children: [mCellHeader("Objetivos (Bloom)"), mCellHeader("Acciones Didácticas"), mCellHeader("Estrategias / Atención"), mCellHeader("Producto / Criterio"), mCellHeader("Recursos"), mCellHeader("Observaciones")] })];
+    contenido.matriz.forEach(function (f, i) {
+      var s = i % 2 === 1;
+      matrizRows.push(new D.TableRow({ children: [mCell(f.objetivos, s), mCell(f.acciones, s), mCell(f.estrategias, s), mCell(f.producto, s), mCell(f.recursos, s), mCell(f.observaciones, s)] }));
     });
 
-    var matrizDataRows = contenido.matriz.map(function (fila, i) {
-      var shaded = i % 2 === 1;
-      return new D.TableRow({
-        children: [
-          matrizCell(fila.objetivos, shaded),
-          matrizCell(fila.acciones, shaded),
-          matrizCell(fila.estrategias, shaded),
-          matrizCell(fila.producto, shaded),
-          matrizCell(fila.recursos, shaded),
-          matrizCell(fila.observaciones, shaded)
-        ]
-      });
-    });
-
-    var matrizTable = new D.Table({
-      width: { size: 100, type: D.WidthType.PERCENTAGE },
-      columnWidths: [1700, 1900, 1900, 1900, 1500, 1700],
-      borders: {
-        top: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" },
-        bottom: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" },
-        left: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" },
-        right: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" },
-        insideHorizontal: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" },
-        insideVertical: { style: D.BorderStyle.SINGLE, size: 4, color: "9AA3B2" }
-      },
-      rows: [matrizHeaderRow].concat(matrizDataRows)
-    });
-
-    function firmaCell(rol, nombre) {
-      return new D.TableCell({
-        borders: {
-          top: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-          bottom: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-          left: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-          right: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" }
-        },
-        margins: { top: 200, left: 200, right: 200 },
-        children: [
-          new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 60 }, border: { top: { style: D.BorderStyle.SINGLE, size: 5, color: "44506B", space: 1 } }, children: [new D.TextRun({ text: " ", size: 22 })] }),
-          new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: rol, bold: true, size: 19, color: NAVY, font: "Calibri" })] }),
-          new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: nombre, size: 18, font: "Calibri" })] })
-        ]
-      });
-    }
+    var matrizTable = new D.Table({ width: { size: 100, type: D.WidthType.PERCENTAGE }, columnWidths: [1700, 1900, 1900, 1900, 1500, 1700], rows: matrizRows });
 
     var firmasTable = new D.Table({
       width: { size: 100, type: D.WidthType.PERCENTAGE },
-      borders: {
-        top: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-        bottom: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-        left: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-        right: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-        insideHorizontal: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" },
-        insideVertical: { style: D.BorderStyle.NONE, size: 0, color: "FFFFFF" }
-      },
+      borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
       rows: [new D.TableRow({
         children: [
-          firmaCell("Firma del Docente Titular", data.docente),
-          firmaCell("Firma de Dirección / Subdirección", data.centro)
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma del Docente Titular\n" + data.docente, bold: true, size: 18, color: NAVY })] })] }),
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma de Dirección / Subdirección\n" + data.centro, bold: true, size: 18, color: NAVY })] })] })
         ]
       })]
     });
 
-    var section2Children = [
-      new D.Paragraph({
-        alignment: D.AlignmentType.CENTER,
-        spacing: { after: 220 },
-        children: [new D.TextRun({
-          text: "MATRIZ OPERATIVA DE ACTIVIDADES REMEDIALES — " + data.asignatura.toUpperCase() + " " + data.gradoSeccion.toUpperCase(),
-          bold: true, size: 26, color: NAVY, font: "Calibri"
-        })]
-      }),
-      matrizTable,
-      new D.Paragraph({ spacing: { before: 500, after: 0 }, children: [] }),
-      firmasTable
+    var sec2 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 200 }, children: [new D.TextRun({ text: "MATRIZ OPERATIVA DE PLAN DE MEJORA — " + data.asignatura.toUpperCase() + " " + data.gradoSeccion.toUpperCase(), bold: true, size: 24, color: NAVY })] }),
+      matrizTable, new D.Paragraph({ spacing: { before: 400 }, children: [] }), firmasTable
     ];
 
     var doc = new D.Document({
-      styles: {
-        default: {
-          document: { run: { font: "Calibri", size: 22 } }
-        }
-      },
       sections: [
-        {
-          properties: {
-            page: {
-              size: { orientation: D.PageOrientation.PORTRAIT, width: D.convertInchesToTwip(8.5), height: D.convertInchesToTwip(11) },
-              margin: { top: D.convertInchesToTwip(0.9), bottom: D.convertInchesToTwip(0.9), left: D.convertInchesToTwip(1), right: D.convertInchesToTwip(1) }
-            }
-          },
-          headers: headerFooter(data.centro, data.ubicacion),
-          footers: footerBlock(),
-          children: section1Children
-        },
-        {
-          properties: {
-            type: D.SectionType.NEXT_PAGE,
-            page: {
-              size: { orientation: D.PageOrientation.LANDSCAPE, width: D.convertInchesToTwip(8.5), height: D.convertInchesToTwip(11) },
-              margin: { top: D.convertInchesToTwip(0.6), bottom: D.convertInchesToTwip(0.6), left: D.convertInchesToTwip(0.7), right: D.convertInchesToTwip(0.7) }
-            }
-          },
-          headers: headerFooter(data.centro, data.ubicacion),
-          footers: footerBlock(),
-          children: section2Children
+        { properties: { page: { size: { orientation: D.PageOrientation.PORTRAIT } } }, headers: headerFooter(), children: sec1 },
+        { properties: { type: D.SectionType.NEXT_PAGE, page: { size: { orientation: D.PageOrientation.LANDSCAPE } } }, headers: headerFooter(), children: sec2 }
+      ]
+    });
+
+    return D.Packer.toBlob(doc);
+  }
+
+  function construirDocxSemanal(data, contenido) {
+    var D = window.docx;
+    var NAVY = "0C2340";
+    var ZEBRA = "EAEFF5";
+    var GOLD = "A8781F";
+    var LABEL_BG = "F1EEE3";
+
+    function headerFooter() {
+      return {
+        default: new D.Header({
+          children: [
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 20, color: NAVY, font: "Calibri" })] }),
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: NAVY, space: 4 } }, children: [new D.TextRun({ text: data.centro + " — PLANIFICACIÓN DE CLASES", size: 18, color: "44506B", font: "Calibri" })] })
+          ]
+        }),
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Planificación Semanal · " + data.asignatura + " " + data.grado + " · Página ", size: 16, color: "6B7686", font: "Calibri" }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 16, color: "6B7686", font: "Calibri" })] })]
+          })
         }
+      };
+    }
+
+    function h(text) {
+      return new D.Paragraph({ heading: D.HeadingLevel.HEADING_1, spacing: { before: 240, after: 120 }, border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: GOLD, space: 3 } }, children: [new D.TextRun({ text: text, bold: true, color: NAVY, size: 24, font: "Calibri" })] });
+    }
+
+    function datoRow(label, value) {
+      return new D.TableRow({
+        children: [
+          new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, shading: { fill: LABEL_BG }, margins: { top: 80, bottom: 80, left: 100, right: 100 }, children: [new D.Paragraph({ children: [new D.TextRun({ text: label, bold: true, size: 19, color: NAVY, font: "Calibri" })] })] }),
+          new D.TableCell({ width: { size: 70, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 100, right: 100 }, children: [new D.Paragraph({ children: [new D.TextRun({ text: value, size: 19, font: "Calibri" })] })] })
+        ]
+      });
+    }
+
+    var datosGenerales = new D.Table({
+      width: { size: 100, type: D.WidthType.PERCENTAGE },
+      rows: [
+        datoRow("Docente titular", data.docente),
+        datoRow("Centro educativo", data.centro),
+        datoRow("Asignatura / Grado", data.asignatura + " — " + data.grado),
+        datoRow("Ejecución / Horas", data.semana + " (" + data.horas + ")"),
+        datoRow("Unidad curricular CNB", data.unidadNombre)
+      ]
+    });
+
+    var expParas = contenido.expectativasLogro.map(function (e) {
+      return new D.Paragraph({ spacing: { after: 80 }, indent: { left: 200, hanging: 200 }, children: [new D.TextRun({ text: "• ", bold: true, color: NAVY, size: 21 }), new D.TextRun({ text: e, size: 21 })] });
+    });
+
+    var contParas = contenido.contenidos.map(function (c) {
+      return new D.Paragraph({ spacing: { after: 80 }, indent: { left: 200, hanging: 200 }, children: [new D.TextRun({ text: "✔ ", bold: true, color: GOLD, size: 21 }), new D.TextRun({ text: c, size: 21 })] });
+    });
+
+    function secCellHeader(text) {
+      return new D.TableCell({ shading: { fill: NAVY }, margins: { top: 90, bottom: 90, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: text, bold: true, color: "FFFFFF", size: 18 })] })] });
+    }
+
+    function secCell(text, shaded) {
+      return new D.TableCell({ shading: shaded ? { fill: ZEBRA } : undefined, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.JUSTIFIED, children: [new D.TextRun({ text: text, size: 17 })] })] });
+    }
+
+    var secRows = [new D.TableRow({ tableHeader: true, children: [secCellHeader("Sesión / Día"), secCellHeader("Fase de Inicio (Exploración)"), secCellHeader("Fase de Desarrollo (Construcción)"), secCellHeader("Fase de Cierre (Consolidación)")] })];
+    contenido.secuenciaDidactica.forEach(function (s, i) {
+      var sh = i % 2 === 1;
+      secRows.push(new D.TableRow({ children: [secCell(s.dia, sh), secCell(s.inicio, sh), secCell(s.desarrollo, sh), secCell(s.cierre, sh)] }));
+    });
+
+    var secTable = new D.Table({ width: { size: 100, type: D.WidthType.PERCENTAGE }, columnWidths: [1800, 2800, 3600, 2800], rows: secRows });
+
+    var firmasTable = new D.Table({
+      width: { size: 100, type: D.WidthType.PERCENTAGE },
+      borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+      rows: [new D.TableRow({
+        children: [
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma del Docente Titular\n" + data.docente, bold: true, size: 18, color: NAVY })] })] }),
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma de Dirección / Subdirección\n" + data.centro, bold: true, size: 18, color: NAVY })] })] })
+        ]
+      })]
+    });
+
+    var sec1 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 180 }, children: [new D.TextRun({ text: "PLANIFICACIÓN SEMANAL DE CLASES (CNB)", bold: true, size: 28, color: NAVY })] }),
+      datosGenerales,
+      h("1. Expectativas de Logro Oficiales del CNB")
+    ].concat(expParas, [h("2. Contenidos Programáticos Seleccionados")], contParas);
+
+    var sec2 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 180 }, children: [new D.TextRun({ text: "SECUENCIA DIDÁCTICA Y EVALUACIÓN FORMATIVA", bold: true, size: 24, color: NAVY })] }),
+      secTable,
+      h("3. Evaluación Formativa"), new D.Paragraph({ children: [new D.TextRun({ text: contenido.evaluacionFormativa, size: 20 })] }),
+      h("4. Recursos Didácticos y Observaciones"), new D.Paragraph({ children: [new D.TextRun({ text: "• Recursos: " + contenido.recursos + "\n• Observaciones: " + contenido.observaciones, size: 20 })] }),
+      new D.Paragraph({ spacing: { before: 350 }, children: [] }), firmasTable
+    ];
+
+    var doc = new D.Document({
+      sections: [
+        { properties: { page: { size: { orientation: D.PageOrientation.PORTRAIT } } }, headers: headerFooter(), children: sec1 },
+        { properties: { type: D.SectionType.NEXT_PAGE, page: { size: { orientation: D.PageOrientation.LANDSCAPE } } }, headers: headerFooter(), children: sec2 }
       ]
     });
 
@@ -1153,91 +1219,49 @@ ${data.temasLista.map(t => "- " + t).join("\n")}`
   }
 
   /* ============================================================
-     UI: VALIDACIÓN Y EVENTOS
+     ENVÍO DE FORMULARIOS Y DESCARGA
      ============================================================ */
-  var form = document.getElementById("plan-form");
-  var btn = document.getElementById("generate-btn");
-  var statusBox = document.getElementById("status-box");
-
-  var fieldIds = ["centro", "ubicacion", "docente", "asignatura", "gradoSeccion", "nivel", "temas"];
-
-  function setStatus(kind, title, detail) {
-    statusBox.className = "status visible " + kind;
-    statusBox.innerHTML = "";
-    var strong = document.createElement("strong");
-    strong.textContent = title;
-    statusBox.appendChild(strong);
-    if (detail) {
-      var span = document.createElement("span");
-      span.textContent = detail;
-      statusBox.appendChild(span);
-    }
+  function setStatus(box, kind, title, detail) {
+    box.className = "status visible " + kind;
+    box.innerHTML = "<strong>" + title + "</strong><span>" + (detail || "") + "</span>";
   }
 
-  function clearStatus() {
-    statusBox.className = "status";
-    statusBox.innerHTML = "";
+  function clearStatus(box) {
+    box.className = "status";
+    box.innerHTML = "";
   }
 
-  function validar() {
-    var ok = true;
-    var data = {};
-
-    fieldIds.forEach(function (id) {
-      var el = document.getElementById(id);
-      var wrapper = el.closest(".field");
-      var value = el.value.trim();
-      var valido = id === "temas" ? splitTemas(value).length > 0 : value.length > 0;
-      wrapper.classList.toggle("invalid", !valido);
-      if (!valido) ok = false;
-      data[id] = value;
-    });
-
-    return ok ? data : null;
-  }
-
-  form.addEventListener("input", function (evt) {
-    var wrapper = evt.target.closest(".field");
-    if (wrapper) wrapper.classList.remove("invalid");
-  });
-
-  function setLoading(loading) {
-    btn.disabled = loading;
-    btn.setAttribute("data-loading", loading ? "true" : "false");
-  }
-
-  form.addEventListener("submit", async function (evt) {
+  // Submit Plan de Mejora
+  document.getElementById("form-mejora").addEventListener("submit", async function (evt) {
     evt.preventDefault();
-    clearStatus();
+    var statusBox = document.getElementById("status-mejora");
+    var btn = document.getElementById("btn-mejora");
+    clearStatus(statusBox);
 
-    var raw = validar();
-    if (!raw) {
-      setStatus("error", "Faltan datos por completar.", "Revise los campos marcados en rojo antes de generar el documento.");
+    var data = {
+      centro: document.getElementById("m-centro").value.trim(),
+      ubicacion: document.getElementById("m-ubicacion").value.trim(),
+      docente: document.getElementById("m-docente").value.trim(),
+      asignatura: document.getElementById("m-asignatura").value.trim(),
+      gradoSeccion: document.getElementById("m-gradoSeccion").value.trim(),
+      nivel: document.getElementById("m-nivel").value.trim(),
+      temasLista: document.getElementById("m-temas").value.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean)
+    };
+
+    if (!data.centro || !data.docente || data.temasLista.length === 0) {
+      setStatus(statusBox, "error", "Complete los campos obligatorios.", "Asegúrese de ingresar el centro, docente y al menos un tema.");
       return;
     }
 
-    var data = {
-      centro: raw.centro,
-      ubicacion: raw.ubicacion,
-      docente: raw.docente,
-      asignatura: raw.asignatura,
-      gradoSeccion: raw.gradoSeccion,
-      nivel: raw.nivel,
-      temasLista: splitTemas(raw.temas)
-    };
-
-    setLoading(true);
-    setStatus("info", "Redactando el plan pedagógico con IA…", "Generando objetivos, justificación, metodología y matriz operativa.");
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+    setStatus(statusBox, "info", "Redactando el Plan de Mejora con IA…", "Generando objetivos de Bloom, justificación y Matriz Operativa.");
 
     try {
-      var contenido = await obtenerContenidoIA(data);
-      var blob = await construirDocx(data, contenido);
+      var contenido = await pedirContenidoIA({ type: "plan_mejora", data: data });
+      var blob = await construirDocxMejora(data, contenido);
       
-      var slug = function(s) {
-        return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "");
-      };
-      var filename = "Plan_Recuperacion_" + slug(data.asignatura) + "_" + slug(data.gradoSeccion) + ".docx";
-
+      var filename = "Plan_Mejora_" + data.asignatura.replace(/\s+/g, "_") + "_" + data.gradoSeccion.replace(/\s+/g, "_") + ".docx";
       var url = URL.createObjectURL(blob);
       var link = document.createElement("a");
       link.href = url;
@@ -1245,16 +1269,73 @@ ${data.temasLista.map(t => "- " + t).join("\n")}`
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
 
-      setLoading(false);
-      setStatus("success", "Documento generado con éxito.", "Se descargó como " + filename + ". Revíselo, fírmelo y preséntelo según los procedimientos de su centro educativo.");
-
+      btn.disabled = false;
+      btn.setAttribute("data-loading", "false");
+      setStatus(statusBox, "success", "Documento descargado con éxito.", "Guardado como " + filename + ". Revíselo y firme.");
     } catch (err) {
       console.error(err);
-      setLoading(false);
-      setStatus("error", "No se pudo generar el documento.", "Ocurrió un error al procesar el archivo. Intente nuevamente.");
+      btn.disabled = false;
+      btn.setAttribute("data-loading", "false");
+      setStatus(statusBox, "error", "Error al generar el archivo.", "Ocurrió un inconveniente durante la generación.");
+    }
+  });
+
+  // Submit Planificación Semanal
+  document.getElementById("form-semanal").addEventListener("submit", async function (evt) {
+    evt.preventDefault();
+    var statusBox = document.getElementById("status-semanal");
+    var btn = document.getElementById("btn-semanal");
+    clearStatus(statusBox);
+
+    var grado = selectGradoSemanal.value;
+    var idx = selectUnidadSemanal.value;
+    var cnbUnidad = (cnbDataMatematica[grado] || [])[idx];
+
+    var data = {
+      centro: document.getElementById("s-centro").value.trim(),
+      docente: document.getElementById("s-docente").value.trim(),
+      asignatura: document.getElementById("s-asignatura").value,
+      grado: grado,
+      semana: document.getElementById("s-semana").value.trim(),
+      horas: document.getElementById("s-horas").value.trim(),
+      unidadNombre: cnbUnidad.unidad,
+      expectativas: cnbUnidad.expectativas,
+      contenidos: cnbUnidad.contenidos
+    };
+
+    if (!data.centro || !data.docente || !data.semana) {
+      setStatus(statusBox, "error", "Complete los campos obligatorios.", "Escriba el centro educativo, docente y la semana de ejecución.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+    setStatus(statusBox, "info", "Redactando la Planificación Semanal con IA…", "Estructurando la secuencia didáctica por fases y la evaluación formativa.");
+
+    try {
+      var contenido = await pedirContenidoIA({ type: "plan_semanal", data: data });
+      var blob = await construirDocxSemanal(data, contenido);
+
+      var filename = "Planificacion_Semanal_" + data.asignatura.replace(/\s+/g, "_") + "_" + data.grado.replace(/\s+/g, "_") + ".docx";
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+
+      btn.disabled = false;
+      btn.setAttribute("data-loading", "false");
+      setStatus(statusBox, "success", "Planificación descargada con éxito.", "Guardado como " + filename + ".");
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.setAttribute("data-loading", "false");
+      setStatus(statusBox, "error", "Error al generar la planificación.", "Revise los datos e intente nuevamente.");
     }
   });
 
