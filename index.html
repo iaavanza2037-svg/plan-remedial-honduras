@@ -627,9 +627,9 @@ Perímetro y área de figuras planas</textarea>
         <div class="field">
           <label for="s-ciclo">Ciclo Educativo <span class="hint">— Selección CNB</span></label>
           <select id="s-ciclo">
-            <option value="I Ciclo de Educación Básica">I Ciclo de Educación Básica (1° a 3°)</option>
-            <option value="II Ciclo de Educación Básica">II Ciclo de Educación Básica (4° a 6°)</option>
-            <option value="III Ciclo de Educación Básica" selected>III Ciclo de Educación Básica (7° a 9°)</option>
+            <option value="I_CICLO">I Ciclo de Educación Básica (1° a 3°)</option>
+            <option value="II_CICLO">II Ciclo de Educación Básica (4° a 6°)</option>
+            <option value="III_CICLO" selected>III Ciclo de Educación Básica (7° a 9°)</option>
           </select>
         </div>
 
@@ -784,12 +784,12 @@ Perímetro y área de figuras planas</textarea>
     selectGradoSemanal.innerHTML = "";
 
     var gradosOptions = [];
-    if (ciclo.includes("I Ciclo")) {
-      gradosOptions = ["1° Grado", "2° Grado", "3° Grado"];
-    } else if (ciclo.includes("II Ciclo")) {
+    if (ciclo === "III_CICLO") {
+      gradosOptions = ["7° Grado", "8° Grado", "9° Grado"];
+    } else if (ciclo === "II_CICLO") {
       gradosOptions = ["4° Grado", "5° Grado", "6° Grado"];
     } else {
-      gradosOptions = ["7° Grado", "8° Grado", "9° Grado"];
+      gradosOptions = ["1° Grado", "2° Grado", "3° Grado"];
     }
 
     gradosOptions.forEach(function (g) {
@@ -1439,7 +1439,7 @@ Perímetro y área de figuras planas</textarea>
     var data = {
       centro: document.getElementById("s-centro").value.trim(),
       docente: document.getElementById("s-docente").value.trim(),
-      ciclo: selectCicloSemanal.value,
+      ciclo: selectCicloSemanal.options[selectCicloSemanal.selectedIndex].text,
       grado: grado,
       asignatura: document.getElementById("s-asignatura").value,
       semana: document.getElementById("s-semana").value.trim(),
