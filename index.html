@@ -135,12 +135,10 @@
       padding-bottom: 4px;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
     }
 
-    .module-nav::-webkit-scrollbar {
-      display: none; /* Chrome / Safari / Edge */
-    }
+    .module-nav::-webkit-scrollbar { display: none; }
 
     .tab-btn {
       appearance: none;
@@ -192,9 +190,7 @@
     }
 
     @media (max-width: 640px) {
-      .page {
-        padding: 18px 12px 48px;
-      }
+      .page { padding: 18px 12px 48px; }
 
       .letterhead {
         flex-direction: column;
@@ -202,24 +198,10 @@
         gap: 12px;
       }
 
-      .seal {
-        width: 46px;
-        height: 46px;
-      }
-
-      .card {
-        padding: 20px 16px;
-      }
-
-      button.generate {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .btn-donate-link {
-        width: 100%;
-        justify-content: center;
-      }
+      .seal { width: 46px; height: 46px; }
+      .card { padding: 20px 16px; }
+      button.generate { width: 100%; justify-content: center; }
+      .btn-donate-link { width: 100%; justify-content: center; }
     }
 
     .card h2 {
@@ -348,11 +330,7 @@
 
     button.generate:hover:not(:disabled) { background: var(--navy-soft); }
     button.generate:active:not(:disabled) { transform: translateY(1px); }
-
-    button.generate:disabled {
-      cursor: progress;
-      opacity: 0.85;
-    }
+    button.generate:disabled { cursor: progress; opacity: 0.85; }
 
     .spinner {
       width: 17px;
@@ -447,17 +425,9 @@
     }
 
     @media (max-width: 480px) {
-      .modal-card {
-        padding: 20px 16px;
-      }
-
-      .modal-actions {
-        flex-direction: column;
-      }
-
-      .modal-actions button {
-        width: 100%;
-      }
+      .modal-card { padding: 20px 16px; }
+      .modal-actions { flex-direction: column; }
+      .modal-actions button { width: 100%; }
     }
 
     .modal-header {
@@ -571,7 +541,6 @@
 
     .btn-primary-close:hover { background: var(--navy-soft); }
 
-    /* ---------- Estilos Módulo Secuencia Completa Bloqueado ---------- */
     .locked-badge {
       background: #ae2b1e !important;
       color: #ffffff !important;
@@ -661,7 +630,6 @@
 </head>
 <body>
 
-<!-- Modal Flotante de Colaboración (Visible automáticamente al cargar) -->
 <div class="modal-overlay active" id="collaboration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-card">
     <div class="modal-header">
@@ -720,7 +688,6 @@
     </button>
   </nav>
 
-  <!-- MÓDULO 1: PLAN DE MEJORA -->
   <section class="card tab-content active" id="tab-mejora">
     <h2>Plan de Mejora y Nivelación Académica</h2>
     <p class="card-sub">Complete los datos del centro y los temas reprobados. La IA generará el plan con objetivos de Bloom, justificación, metodología de 4 fases y la Matriz Operativa horizontal.</p>
@@ -777,7 +744,6 @@ Perímetro y área de figuras planas</textarea>
     </form>
   </section>
 
-  <!-- MÓDULO 2: PLANIFICACIÓN SEMANAL -->
   <section class="card tab-content" id="tab-semanal">
     <h2>Planificación Semanal de Clases</h2>
     <p class="card-sub">Estructura completa de competencias, capacidades, indicadores, evaluación, adaptaciones y tabla por sesiones con momentos (Inicio, Desarrollo y Cierre), recursos y tiempos.</p>
@@ -862,7 +828,6 @@ Perímetro y área de figuras planas</textarea>
     </form>
   </section>
 
-  <!-- MÓDULO 3: GENERADOR INTELIGENTE DE SECUENCIA COMPLETA (BLOQUEADO) -->
   <section class="card tab-content" id="tab-secuencia">
     <div class="locked-banner">
       <div class="locked-banner-icon">🔒</div>
@@ -875,7 +840,7 @@ Perímetro y área de figuras planas</textarea>
     <h2>🤖 Generador Inteligente de Secuencia Completa</h2>
     <p class="card-sub">A partir de datos mínimos, el motor EduPlan AI HN construirá en cadena toda la secuencia curricular de 360° para la unidad seleccionada.</p>
 
-    <!-- Visualización del Flujo de Trabajo (Pipeline) -->
+    <!-- Visualización del Flujo de Trabajo -->
     <div class="pipeline-container">
       <div class="pipeline-title">Cadena Pedagógica Automatizada EduPlan AI HN</div>
       
@@ -1200,8 +1165,108 @@ Perímetro y área de figuras planas</textarea>
   if (selectGrado) selectGrado.addEventListener("change", actualizarUnidadesPorGrado);
   if (selectUnidad) selectUnidad.addEventListener("change", actualizarPreviewCNB);
 
-  // Inicializar selectores en pantalla
+  // Inicializar selectores
   actualizarGradosPorCiclo();
+
+  // Genera UNA fila de la matriz de Plan de Mejora para un tema puntual.
+  // Se extrajo como función independiente (antes vivía dentro de un
+  // .map() anónimo) para poder reutilizarla también como respaldo cuando
+  // la IA devuelve menos filas de las solicitadas (ver alinearMatrizConTemas).
+  //
+  // CORRECCIÓN IMPORTANTE: antes, la condición de "ecuación cuadrática"
+  // comprobaba la palabra genérica "ecuacio", igual que la condición de
+  // "ecuación de primer grado". Como esa rama se evaluaba PRIMERO, CUALQUIER
+  // tema que contuviera la palabra "ecuación" (incluyendo "Ecuaciones de
+  // primer grado") caía en la rama de cuadráticas por error, generando el
+  // tema equivocado en el documento. Ahora la rama de cuadráticas solo se
+  // activa con palabras específicas de segundo grado / cuadrática.
+  function generarFilaMejoraLocal(t) {
+    var tMin = t.toLowerCase();
+    var accionesTexto = "";
+
+    if (tMin.includes("racional") || tMin.includes("fraccion") || tMin.includes("decimal")) {
+      accionesTexto = "Concepto / Propiedad: Operaciones con Números Racionales (Fracciones Heterogéneas)\n" +
+                     "Fórmula / Ecuación: a/b + c/d = (a × d + b × c) ÷ (b × d)\n" +
+                     "Desglose de Variables:\n" +
+                     "  • a, c = Numeradores de las fracciones\n" +
+                     "  • b, d = Denominadores de las fracciones\n" +
+                     "Problema Modelo: Resolver la suma de 3/4 + 1/2.\n" +
+                     "Resolución Paso a Paso:\n" +
+                     "  • Paso 1: Obtener el mínimo común denominador entre b = 4 y d = 2 => mcm(4, 2) = 4\n" +
+                     "  • Paso 2: Homogeneizar la segunda fracción => 1/2 = 2/4\n" +
+                     "  • Paso 3: Sumar numeradores a + c => (3 + 2) ÷ 4 = 5/4\n" +
+                     "Respuesta (R): Resultado = 5/4 = 1 1/4\n" +
+                     "Actividad de Ejercitación:\n" +
+                     "  • Guía práctica de 5 ejercicios de adición y sustracción de fracciones en el cuaderno.";
+    } else if (tMin.includes("segundo grado") || tMin.includes("cuadratic") || tMin.includes("cuadrática") || tMin.includes("cuadrada")) {
+      accionesTexto = "Concepto / Propiedad: Ecuación de Segundo Grado / Cuadrática\n" +
+                     "Fórmula / Ecuación: a × x² + b × x + c = 0 ; x = (-b ± √(b² - 4 × a × c)) ÷ (2 × a)\n" +
+                     "Desglose de Variables:\n" +
+                     "  • a = Coeficiente cuadrático (a = 1)\n" +
+                     "  • b = Coeficiente lineal (b = -5)\n" +
+                     "  • c = Término independiente (c = 6)\n" +
+                     "  • x = Incógnita a calcular\n" +
+                     "Problema Modelo: Hallar las soluciones de la ecuación x² - 5 × x + 6 = 0.\n" +
+                     "Resolución Paso a Paso:\n" +
+                     "  • Paso 1: Calcular el discriminante Δ = b² - 4 × a × c = (-5)² - 4(1)(6) = 25 - 24 = 1\n" +
+                     "  • Paso 2: Sustituir en la fórmula general => x = (5 ± √1) ÷ 2 = (5 ± 1) ÷ 2\n" +
+                     "  • Paso 3: Calcular las dos raíces => x1 = (5 + 1) ÷ 2 = 3 ; x2 = (5 - 1) ÷ 2 = 2\n" +
+                     "Respuesta (R): Las soluciones son x1 = 3 y x2 = 2\n" +
+                     "Actividad de Ejercitación:\n" +
+                     "  • Resolver taller de 4 ecuaciones cuadráticas identificando coeficientes a, b y c.";
+    } else if (tMin.includes("ecuacio") || tMin.includes("lineal") || tMin.includes("primer grado")) {
+      accionesTexto = "Concepto / Propiedad: Ecuación Lineal de Primer Grado\n" +
+                     "Fórmula / Ecuación: a × x + b = c\n" +
+                     "Desglose de Variables:\n" +
+                     "  • a = Coeficiente de la incógnita (a = 3)\n" +
+                     "  • x = Incógnita a despejar\n" +
+                     "  • b = Término constante del primer miembro (+ 6)\n" +
+                     "  • c = Término del segundo miembro (21)\n" +
+                     "Problema Modelo: Resolver la ecuación 3 × x + 6 = 21.\n" +
+                     "Resolución Paso a Paso:\n" +
+                     "  • Paso 1: Transposición del término b al segundo miembro => 3 × x = 21 - 6\n" +
+                     "  • Paso 2: Restar constantes => 3 × x = 15\n" +
+                     "  • Paso 3: Despejar x dividiendo entre a => x = 15 ÷ 3 = 5\n" +
+                     "Respuesta (R): x = 5\n" +
+                     "Actividad de Ejercitación:\n" +
+                     "  • Resolver guía de 5 ecuaciones de primer grado verificando el resultado en el cuaderno.";
+    } else if (tMin.includes("perimetro") || tMin.includes("área") || tMin.includes("area")) {
+      accionesTexto = "Concepto / Propiedad: Área y Perímetro de Triángulos\n" +
+                     "Fórmula / Ecuación: A = (b × h) ÷ 2 ; P = L1 + L2 + L3\n" +
+                     "Desglose de Variables:\n" +
+                     "  • b = Base del triángulo (b = 10 cm)\n" +
+                     "  • h = Altura del triángulo (h = 8 cm)\n" +
+                     "  • A = Área en unidades cuadradas (cm²)\n" +
+                     "Problema Modelo: Calcular el área de un triángulo con base b = 10 cm y altura h = 8 cm.\n" +
+                     "Resolución Paso a Paso:\n" +
+                     "  • Paso 1: Sustitución de variables b y h => A = (10 cm × 8 cm) ÷ 2\n" +
+                     "  • Paso 2: Multiplicación de la base por la altura => A = 80 cm² ÷ 2\n" +
+                     "  • Paso 3: División entre 2 => A = 40 cm²\n" +
+                     "Respuesta (R): El área calculada es A = 40 cm²\n" +
+                     "Actividad de Ejercitación:\n" +
+                     "  • Resolver ejercicios de área y perímetro para 3 figuras planas trazadas en el cuaderno.";
+    } else {
+      accionesTexto = "Concepto / Propiedad: Fundamentos pedagógicos de " + t + "\n" +
+                     "Problema Modelo: Aplicación de los contenidos de " + t + " en problemas del entorno.\n" +
+                     "Resolución Paso a Paso:\n" +
+                     "  • Paso 1: Identificación explícita de datos e incógnitas.\n" +
+                     "  • Paso 2: Aplicación del algoritmo correspondiente.\n" +
+                     "  • Paso 3: Verificación del resultado final.\n" +
+                     "Respuesta (R): Solución comprobada.\n" +
+                     "Actividad de Ejercitación:\n" +
+                     "  • Taller individual de ejercicios en el cuaderno de trabajo.";
+    }
+
+    return {
+      tema: t,
+      objetivos: "Demostrar dominio en el contenido de " + t + " aplicando fórmulas, algoritmos y procedimientos corregidos.",
+      acciones: accionesTexto,
+      estrategias: "Modelado directo del docente en la pizarra con atención individualizada y retroalimentación en la libreta.",
+      producto: "Taller práctico resuelto paso a paso con verificación de la respuesta.",
+      recursos: "Cuaderno de trabajo, pizarra, marcadores, calculadora y regla.",
+      observaciones: "Acompañamiento personalizado para asegurar la superación de la dificultad."
+    };
+  }
 
   function generarPlanMejoraLocal(data) {
     var centro = data.centro || "Centro Educativo";
@@ -1210,97 +1275,45 @@ Perímetro y área de figuras planas</textarea>
     var gradoSeccion = data.gradoSeccion || "Grado y Sección";
     var temas = data.temasLista || ["Contenido Curricular"];
 
-    var objetivoGeneral = "Fortalecer las competencias y aprendizajes no alcanzados en la asignatura de " + asignatura + " en el grado " + gradoSeccion + " del centro " + centro + ", mediante un plan remedial estructurado.";
-    
+    var objetivoGeneral = "Fortalecer los aprendizajes no alcanzados en la asignatura de " + asignatura + " en el grado " + gradoSeccion + " del centro " + centro + ", mediante acciones remediales estructuradas y contextualizadas.";
+
     var objetivosEspecificos = [
-      "Diagnosticar los vacíos conceptuales en los temas reprobados.",
-      "Desarrollar actividades de modelado directo y ejercitación guiada paso a paso.",
-      "Evaluar de forma formativa los avances alcanzados por los estudiantes."
+      "Diagnosticar las dificultades conceptuales y procedimentales de los estudiantes en los contenidos no alcanzados.",
+      "Desarrollar acciones didácticas de modelado directo y resolución de problemas modelo paso a paso.",
+      "Evaluar formativamente la nivelación mediante guías prácticas y tareas de aplicación real."
     ];
 
-    var justificacion = "Atendiendo a los resultados de evaluación y en cumplimiento con la normativa de la Secretaría de Educación de Honduras, se implementa el presente Plan de Mejora Académica para brindar acompañamiento técnico-pedagógico oportuno a los estudiantes con rezago.";
+    var justificacion = "Atendiendo a los resultados de evaluación y en cumplimiento con la normativa de la Secretaría de Educación de Honduras, se implementa el presente Plan de Mejora y Nivelación Académica para brindar acompañamiento pedagógico oportuno y recuperatorio a los estudiantes con rezago.";
 
     var metodologia = [
-      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Revisión de evaluaciones anteriores e identificación de errores comunes en los temas reprobados." },
-      { titulo: "Fase 2: Modelado Directo y Talleres Prácticos", texto: "Explicación de conceptos, fórmulas y resolución de ejercicios modelo en la pizarra paso a paso." },
-      { titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio", texto: "Atención diferenciada según las necesidades de los estudiantes con apoyo de guías didácticas." },
-      { titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos", texto: "Verificación de avances a través de listas de cotejo, actividades de salida y cuadernos de trabajo." }
+      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Revisión de instrumentos de evaluación anteriores e identificación de errores frecuentes en las tareas o exámenes." },
+      { titulo: "Fase 2: Modelado Directo y Talleres Prácticos", texto: "Explicación directa de conceptos, fórmulas y resolución guiada de problemas modelo paso a paso operando con las variables." },
+      { titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio", texto: "Atención diferenciada según las necesidades de aprendizaje con apoyo de guías de trabajo adaptadas." },
+      { titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos", texto: "Verificación del dominio del contenido mediante guías calificadas, listas de cotejo y cuadernos de trabajo." }
     ];
 
     var matriz = temas.map(function (t) {
-      var tMin = t.toLowerCase();
-      var accionesTexto = "";
-
-      if (tMin.includes("racional") || tMin.includes("fraccion") || tMin.includes("decimal")) {
-        accionesTexto = "Concepto / Propiedad: Operaciones con Números Racionales (Fracciones Heterogéneas)\n" +
-                       "Fórmula / Ecuación: a/b + c/d = (a × d + b × c) ÷ (b × d)\n" +
-                       "Variables:\n" +
-                       "  • a, c = Numeradores de las fracciones\n" +
-                       "  • b, d = Denominadores (b ≠ 0, d ≠ 0)\n" +
-                       "Problema Modelo: Resolver la suma de 3/4 + 1/2.\n" +
-                       "Resolución Paso a Paso:\n" +
-                       "  • Paso 1: Mínimo común denominador => mcm(4, 2) = 4\n" +
-                       "  • Paso 2: Homogeneizar fracciones => 3/4 + 2/4\n" +
-                       "  • Paso 3: Sumar numeradores conservando el denominador => (3 + 2) ÷ 4 = 5/4\n" +
-                       "Respuesta (R): Resultado = 5/4 = 1 1/4\n" +
-                       "Actividad de Ejercitación:\n" +
-                       "  • Resolver guía de 5 ejercicios de adición de fracciones heterogéneas en el cuaderno.";
-      } else if (tMin.includes("ecuacio") || tMin.includes("lineal") || tMin.includes("primer grado")) {
-        accionesTexto = "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
-                       "Fórmula / Ecuación: a × x + b = c\n" +
-                       "Variables:\n" +
-                       "  • a = Coeficiente de la incógnita (a = 3)\n" +
-                       "  • x = Incógnita a despejar\n" +
-                       "  • b = Término independiente (+ 6)\n" +
-                       "  • c = Término constante del segundo miembro (21)\n" +
-                       "Problema Modelo: Resolver la ecuación 3 × x + 6 = 21.\n" +
-                       "Resolución Paso a Paso:\n" +
-                       "  • Paso 1: Transposición del término constante b => 3 × x = 21 - 6\n" +
-                       "  • Paso 2: Simplificar el segundo miembro => 3 × x = 15\n" +
-                       "  • Paso 3: Despejar la variable x dividiendo entre a => x = 15 ÷ 3\n" +
-                       "  • Paso 4: Calcular el resultado final => x = 5\n" +
-                       "Respuesta (R): x = 5\n" +
-                       "Actividad de Ejercitación:\n" +
-                       "  • Resolver taller de 4 ecuaciones de primer grado verificando el despeje de la variable.";
-      } else if (tMin.includes("perimetro") || tMin.includes("área") || tMin.includes("area") || tMin.includes("figuras")) {
-        accionesTexto = "Concepto / Propiedad: Perímetro y Área de Figuras Planas (Triángulo)\n" +
-                       "Fórmula / Ecuación: A = (b × h) ÷ 2 ; P = a + b + c\n" +
-                       "Variables:\n" +
-                       "  • b = Base del triángulo (b = 10 cm)\n" +
-                       "  • h = Altura del triángulo (h = 8 cm)\n" +
-                       "  • A = Área calculada en unidades cuadradas (cm²)\n" +
-                       "Problema Modelo: Calcular el área de un triángulo con base b = 10 cm y altura h = 8 cm.\n" +
-                       "Resolución Paso a Paso:\n" +
-                       "  • Paso 1: Sustitución de variables en la fórmula => A = (10 cm × 8 cm) ÷ 2\n" +
-                       "  • Paso 2: Multiplicación de base por altura => A = 80 cm² ÷ 2\n" +
-                       "  • Paso 3: División entre 2 => A = 40 cm²\n" +
-                       "Respuesta (R): El área del triángulo es A = 40 cm²\n" +
-                       "Actividad de Ejercitación:\n" +
-                       "  • Calcular el área y perímetro de 3 figuras geométricas planas dibujadas en el cuaderno.";
-      } else {
-        accionesTexto = "Concepto / Propiedad: Fundamentos y algoritmo de " + t + "\n" +
-                       "Problema Modelo: Resolver el ejercicio modelo sobre " + t + ".\n" +
-                       "Resolución Paso a Paso:\n" +
-                       "  • Paso 1: Identificación de datos e incógnitas.\n" +
-                       "  • Paso 2: Aplicación del procedimiento y cálculo preciso.\n" +
-                       "  • Paso 3: Verificación del resultado.\n" +
-                       "Respuesta (R): Solución justificada y verificada.\n" +
-                       "Actividad de Ejercitación:\n" +
-                       "  • Guía práctica individual en el cuaderno.";
-      }
-
-      return {
-        tema: t,
-        objetivos: "Aplicar de forma rigurosa los procedimientos, algoritmos y fórmulas de " + t + " en la resolución de problemas.",
-        acciones: accionesTexto,
-        estrategias: "Demostración guiada en la pizarra con resolución de problemas modelo y práctica individual supervisada.",
-        producto: "Guía de ejercicios resueltos paso a paso con justificación procedimental.",
-        recursos: "Cuaderno, pizarra, marcadores, libro de texto de " + asignatura + ".",
-        observaciones: "Monitoreo pedagógico continuo y acompañamiento en dudas frecuentes."
-      };
+      return generarFilaMejoraLocal(t);
     });
 
     return { objetivoGeneral: objetivoGeneral, objetivosEspecificos: objetivosEspecificos, justificacion: justificacion, metodologia: metodologia, matriz: matriz };
+  }
+
+  // BLINDAJE ANTI-DESAJUSTE DE TEMA: sin importar lo que haya respondido la
+  // IA (o la plantilla local), esta función garantiza que cada fila de la
+  // matriz quede etiquetada EXACTAMENTE con el tema que el docente escribió
+  // en el formulario, en el mismo orden. Si a la IA le faltó una fila,
+  // se completa con la plantilla local para ese tema puntual.
+  function alinearMatrizConTemas(parsedJSON, temasLista) {
+    var matrizOriginal = (parsedJSON && Array.isArray(parsedJSON.matriz)) ? parsedJSON.matriz : [];
+    var matrizAlineada = temasLista.map(function (tema, i) {
+      var fila = matrizOriginal[i] || generarFilaMejoraLocal(tema);
+      fila.tema = tema;
+      return fila;
+    });
+    parsedJSON = parsedJSON || {};
+    parsedJSON.matriz = matrizAlineada;
+    return parsedJSON;
   }
 
   function generarPlanSemanalLocal(data) {
@@ -1311,152 +1324,94 @@ Perímetro y área de figuras planas</textarea>
     var desarrolloSesion1 = "";
     var desarrolloSesion2 = "";
 
-    // Detección por grado y unidad para evitar desajustes de nivel cognitivo
-    if (grado.includes("1°") || grado.includes("2°") || grado.includes("3°")) {
-      // I CICLO DE EDUCACIÓN BÁSICA (Ejemplo: Decimales en 3° Grado)
-      if (uMin.includes("decimal")) {
-        desarrolloSesion1 = "Concepto o Regla: Concepto de Número Decimal (Las Décimas)\n" +
-                           "Fórmula o Propiedad: 1 unidad = 10 décimas (0.1 = 1/10)\n" +
-                           "Desglose de Variables:\n" +
-                           "  • U = Unidad entera (1)\n" +
-                           "  • d = Décima (0.1)\n" +
-                           "Problema Modelo: Un listón mide 1 unidad entera y 3 décimas. ¿Cómo se expresa su longitud en número decimal?\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Identificación de unidades enteras => U = 1\n" +
-                           "  • Paso 2: Identificación de las décimas => d = 3 décimas = 0.3\n" +
-                           "  • Paso 3: Suma de la parte entera y decimal => 1 + 0.3 = 1.3\n" +
-                           "Respuesta (R): La longitud total es de 1.3 unidades.";
+    if (uMin.includes("puntos") || uMin.includes("recta") || uMin.includes("geomet")) {
+      desarrolloSesion1 = "Concepto / Propiedad: Conceptos Fundamentales de Geometría (Punto, Recta, Plano y Segmento)\n" +
+                         "Fórmula / Ecuación: Distancia en el segmento AB = |xB - xA|\n" +
+                         "Desglose de Variables:\n" +
+                         "  • A, B = Puntos extremos del segmento\n" +
+                         "  • xA, xB = Coordenadas de los puntos en la recta\n" +
+                         "Problema Modelo: Dados los puntos A en xA = 2 y B en xB = 8 en la recta numérica, calcular la longitud del segmento AB.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Identificar las coordenadas xA = 2 y xB = 8.\n" +
+                         "  • Paso 2: Aplicar la fórmula de distancia => d = |8 - 2|\n" +
+                         "  • Paso 3: Calcular la diferencia => d = 6 cm\n" +
+                         "Respuesta (R): La longitud del segmento AB es 6 cm.";
 
-        desarrolloSesion2 = "Concepto o Regla: Suma de Números Decimales hasta las Décimas\n" +
-                           "Fórmula o Propiedad: Alineación del punto decimal (Décimas con Décimas, Unidades con Unidades)\n" +
-                           "Problema Modelo: María tiene 0.4 metros de cinta y su hermano le regala 0.5 metros. ¿Cuántos metros tiene en total?\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Alineación vertical respetando el punto decimal => 0.4 + 0.5\n" +
-                           "  • Paso 2: Suma de las décimas (4 + 5) => 9 décimas (0.9)\n" +
-                           "  • Paso 3: Colocar el punto decimal en la misma posición => 0.9\n" +
-                           "Respuesta (R): María tiene en total 0.9 metros de cinta.";
-      } else if (uMin.includes("punto") || uMin.includes("recta") || uMin.includes("linea")) {
-        desarrolloSesion1 = "Concepto o Regla: Elementos de la Geometría (Punto, Recta y Segmento)\n" +
-                           "Problema Modelo: Identificar y dibujar los puntos A y B y trazar el segmento de recta que los une.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Ubicación del punto inicial A y punto final B en el plano.\n" +
-                           "  • Paso 2: Trazo con regla de la línea recta entre A y B.\n" +
-                           "  • Paso 3: Nombrar la figura resultante como Segmento AB.\n" +
-                           "Respuesta (R): Se ha representado el segmento de recta AB.";
+      desarrolloSesion2 = "Concepto / Propiedad: Punto Medio de un Segmento de Recta\n" +
+                         "Fórmula / Ecuación: M = (xA + xB) ÷ 2\n" +
+                         "Desglose de Variables:\n" +
+                         "  • M = Coordenada del punto medio\n" +
+                         "  • xA, xB = Coordenadas de los puntos extremos\n" +
+                         "Problema Modelo: Encontrar el punto medio M del segmento cuyos extremos son xA = 4 cm y xB = 12 cm.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Sustituir xA y xB en la fórmula => M = (4 + 12) ÷ 2\n" +
+                         "  • Paso 2: Sumar los extremos => M = 16 ÷ 2\n" +
+                         "  • Paso 3: Dividir entre 2 => M = 8 cm\n" +
+                         "Respuesta (R): El punto medio se ubica en M = 8 cm.";
+    } else if (uMin.includes("decimal")) {
+      desarrolloSesion1 = "Concepto / Propiedad: Concepto de Número Decimal y Valor Posicional (Décimas)\n" +
+                         "Fórmula / Ecuación: N = U + (d ÷ 10)\n" +
+                         "Desglose de Variables:\n" +
+                         "  • U = Unidades enteras\n" +
+                         "  • d = Décimas (0.1)\n" +
+                         "Problema Modelo: Expresar en número decimal una longitud que contiene U = 3 unidades y d = 4 décimas.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Convertir las décimas a valor posicional => 4 ÷ 10 = 0.4\n" +
+                         "  • Paso 2: Sumar la parte entera U y la decimal => N = 3 + 0.4\n" +
+                         "  • Paso 3: Obtener el resultado final => N = 3.4\n" +
+                         "Respuesta (R): La cantidad expresada en número decimal es N = 3.4";
 
-        desarrolloSesion2 = "Concepto o Regla: Medición de Segmentos\n" +
-                           "Problema Modelo: Calcular la distancia entre los puntos X e Y medidos con la regla en centímetros.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Colocar el cero de la regla sobre el punto X.\n" +
-                           "  • Paso 2: Leer el número marcado en el punto Y => 6 cm.\n" +
-                           "Respuesta (R): La distancia del segmento XY es 6 cm.";
-      } else {
-        desarrolloSesion1 = "Concepto o Regla: Propiedades y Algoritmo de " + uNombre + " (" + grado + ")\n" +
-                           "Problema Modelo: Aplicación de los contenidos clave del CNB para " + uNombre + ".\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Identificación de los datos del problema.\n" +
-                           "  • Paso 2: Aplicación del algoritmo correspondiente al nivel de " + grado + ".\n" +
-                           "  • Paso 3: Obtención del resultado.\n" +
-                           "Respuesta (R): Solución calculada correctamente.";
-
-        desarrolloSesion2 = "Concepto o Regla: Ejercitación y Aplicación Didáctica de " + uNombre + "\n" +
-                           "Problema Modelo: Práctica guiada resolviendo situaciones problema en el cuaderno.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Lectura del enunciado e identificación de la operación.\n" +
-                           "  • Paso 2: Desarrollo del cálculo en la pizarra y cuaderno.\n" +
-                           "Respuesta (R): Resultado comprobado.";
-      }
+      desarrolloSesion2 = "Concepto / Propiedad: Adición de Números Decimales\n" +
+                         "Fórmula / Ecuación: Total = N1 + N2 (Alineando la coma/punto decimal)\n" +
+                         "Problema Modelo: Calcular la suma de N1 = 2.5 metros y N2 = 1.75 metros de cinta.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Homogeneizar posiciones agregando cero => N1 = 2.50\n" +
+                         "  • Paso 2: Sumar verticalmente respetando la coma decimal => 2.50 + 1.75\n" +
+                         "  • Paso 3: Calcular el resultado => Total = 4.25\n" +
+                         "Respuesta (R): La longitud total de la cinta es 4.25 metros.";
     } else {
-      // II y III CICLO (4° a 9° Grado)
-      if (uMin.includes("racional") || uMin.includes("fraccion")) {
-        desarrolloSesion1 = "Concepto o Regla: Operaciones con Números Racionales (Fracciones Heterogéneas)\n" +
-                           "Fórmula o Propiedad: a/b + c/d = (a × d + b × c) ÷ (b × d)\n" +
-                           "Desglose de Variables:\n" +
-                           "  • a, c = Numeradores\n" +
-                           "  • b, d = Denominadores\n" +
-                           "Problema Modelo: Calcular la suma de 3/4 + 1/2 representando el procedimiento paso a paso.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Cálculo del mínimo común denominador => mcm(4, 2) = 4\n" +
-                           "  • Paso 2: Homogeneización de fracciones => 3/4 + (1 × 2)/(2 × 2) = 3/4 + 2/4\n" +
-                           "  • Paso 3: Suma de numeradores => (3 + 2) ÷ 4 = 5/4 = 1 1/4\n" +
-                           "Respuesta (R): Resultado = 5/4 (o 1 1/4)";
+      desarrolloSesion1 = "Concepto / Propiedad: Algoritmo y Propiedades de " + uNombre + "\n" +
+                         "Problema Modelo: Aplicación de los contenidos clave del CNB para " + uNombre + ".\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Planteamiento inicial del ejercicio en la pizarra.\n" +
+                         "  • Paso 2: Desarrollo del cálculo aplicando el procedimiento adecuado a " + grado + ".\n" +
+                         "  • Paso 3: Verificación del resultado.\n" +
+                         "Respuesta (R): Solución verificada correctamente.";
 
-        desarrolloSesion2 = "Problema Aplicado: Un recipiente contiene 2.5 litros de leche y se le agregan 1.75 litros. ¿Cuántos litros contiene en total?\n" +
-                           "Fórmula o Propiedad: Total = V1 + V2\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Alineación de comas decimales => 2.50 + 1.75\n" +
-                           "  • Paso 2: Suma de centésimos => 0 + 5 = 5\n" +
-                           "  • Paso 3: Suma de décimos con llevada => 5 + 7 = 12 (se escribe 2 y se lleva 1)\n" +
-                           "  • Paso 4: Suma de unidades => 1 + 2 + 1 = 4\n" +
-                           "Respuesta (R): El volumen total es V = 4.25 litros.";
-      } else if (uMin.includes("ecuacio") || uMin.includes("lineal")) {
-        desarrolloSesion1 = "Concepto o Regla: Ecuación Lineal de Primer Grado en una Variable\n" +
-                           "Fórmula o Propiedad: a × x + b = c\n" +
-                           "Desglose de Variables:\n" +
-                           "  • a = Coeficiente multiplicador (3)\n" +
-                           "  • x = Incógnita / Variable desconocida\n" +
-                           "  • b = Término independiente (+ 6)\n" +
-                           "  • c = Término constante (21)\n" +
-                           "Problema Modelo: Hallar el valor de x en la ecuación 3 × x + 6 = 21.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Transposición del término b => 3 × x = 21 - 6\n" +
-                           "  • Paso 2: Resta de constantes => 3 × x = 15\n" +
-                           "  • Paso 3: Despeje del coeficiente a => x = 15 ÷ 3\n" +
-                           "  • Paso 4: Cálculo final de la variable => x = 5\n" +
-                           "Respuesta (R): x = 5";
-
-        desarrolloSesion2 = "Problema Aplicado: El doble de un número x más 8 es igual a 24. ¿Cuál es el número?\n" +
-                           "Fórmula o Propiedad: 2 × x + 8 = 24\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Transposición de la constante 8 => 2 × x = 24 - 8\n" +
-                           "  • Paso 2: Simplificación de constantes => 2 × x = 16\n" +
-                           "  • Paso 3: Despeje de la variable x => x = 16 ÷ 2\n" +
-                           "  • Paso 4: Resultado final => x = 8\n" +
-                           "Respuesta (R): El número es x = 8.";
-      } else {
-        desarrolloSesion1 = "Concepto o Regla: Propiedades y Algoritmo de " + uNombre + "\n" +
-                           "Problema Modelo: Aplicación de los contenidos clave de " + uNombre + " en un problema de la vida cotidiana.\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Identificación de datos e incógnita inicial.\n" +
-                           "  • Paso 2: Aplicación del algoritmo matemático correspondiente.\n" +
-                           "  • Paso 3: Verificación del resultado final.\n" +
-                           "Respuesta (R): Resultado verificado y justificado.";
-
-        desarrolloSesion2 = "Problema Aplicado: Resolución de ejercicios integradores sobre " + uNombre + ".\n" +
-                           "Procedimiento paso a paso:\n" +
-                           "  • Paso 1: Planteamiento procedimental en el cuaderno.\n" +
-                           "  • Paso 2: Desarrollo del cálculo numérico o algebraico.\n" +
-                           "  • Paso 3: Comprobación de la solución.\n" +
-                           "Respuesta (R): Solución comprobada.";
-      }
+      desarrolloSesion2 = "Concepto / Propiedad: Ejercitación Integradora de " + uNombre + "\n" +
+                         "Problema Modelo: Resolución de problemas aplicados del cuaderno de trabajo.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Lectura del problema e identificación de variables.\n" +
+                         "  • Paso 2: Ejecución de las operaciones en el cuaderno.\n" +
+                         "Respuesta (R): Resultado comprobado.";
     }
 
     return {
-      competencia: "Resuelve problemas que involucran los contenidos de " + uNombre + " (" + grado + "), utilizando algoritmos y estrategias matemáticas acordes al CNB.",
+      competencia: "Resuelve problemas acordes a " + uNombre + " (" + grado + "), aplicando rigurosamente los conceptos, fórmulas y estrategias del CNB de Honduras.",
       capacidades: [
         "Traduce datos y condiciones a expresiones numéricas u operacionales de " + uNombre + ".",
-        "Comunica su comprensión sobre los conceptos clave de " + uNombre + ".",
-        "Usa estrategias y procedimientos de cálculo adecuado para " + grado + ".",
-        "Argumenta afirmaciones sobre relaciones matemáticas y justifica sus procedimientos."
+        "Comunica su comprensión sobre las propiedades y algoritmos clave de " + uNombre + ".",
+        "Usa estrategias y procedimientos de cálculo adecuados para " + grado + ".",
+        "Argumenta afirmaciones sobre relaciones matemáticas y justifica sus soluciones."
       ],
       desempenos: [
-        "Establece relaciones entre datos e integra los contenidos de " + uNombre + ".",
-        "Expresa con lenguaje claro su comprensión sobre los contenidos clave.",
-        "Selecciona y emplea procedimientos de cálculo adecuados para " + grado + ".",
-        "Justifica sus respuestas mediante ejercicios modelo resueltos paso a paso."
+        "Establece relaciones entre datos y los transforma en expresiones matemáticas.",
+        "Expresa con lenguaje formal su comprensión sobre los contenidos de " + uNombre + ".",
+        "Aplica procedimientos de cálculo para resolver problemas modelo paso a paso.",
+        "Justifica sus procedimientos mediante ejercicios resueltos en el cuaderno."
       ],
       evaluacion: {
-        tecnica: "Observación sistemática y revisión de cuadernos.",
-        instrumento: "Lista de cotejo y ejercicios de comprobación.",
-        evidencia: "Resolución paso a paso en el cuaderno con fundamentación."
+        tecnica: "Observación sistemática y revisión de producciones escritas.",
+        instrumento: "Lista de cotejo y guía de ejercicios calificada.",
+        evidencia: "Resolución de problemas en el cuaderno con procedimientos explicados paso a paso."
       },
       adaptaciones: {
         dificultades: [
-          "Uso de material concreto y guías estructuradas paso a paso.",
-          "Resolución guiada con acompañamiento del docente."
+          "Uso de material concreto y guías estructuradas con apoyos visuales.",
+          "Resolución de ejercicios con acompañamiento cercano del docente."
         ],
         avanzado: [
-          "Desafíos numéricos de mayor razonamiento aplicados al entorno."
+          "Problemas de razonamiento de mayor complejidad aplicados a la comunidad."
         ]
       },
       referenciasDocente: [
@@ -1465,44 +1420,44 @@ Perímetro y área de figuras planas</textarea>
       ],
       referenciasEstudiante: [
         "Secretaría de Educación. Cuaderno de Trabajo de " + data.asignatura + " " + data.grado + ".",
-        "Ejercicios y guías de trabajo en clase."
+        "Fichas de ejercicios elaboradas por el docente."
       ],
       sesiones: [
         {
           numero: 1,
-          titulo: "Exploración y representación de " + uNombre,
+          titulo: "Exploración y modelado de " + uNombre,
           inicio: { 
             actividades: [
-              "Presentación de una situación problema cotidiana correspondiente a " + uNombre + ".", 
-              "Lluvia de ideas para rescatar conocimientos previos en la pizarra."
+              "Presentación de una situación problema motivadora vinculada a " + uNombre + ".", 
+              "Lluvia de ideas y recuperación de conocimientos previos en la pizarra."
             ], 
-            recursos: ["Pizarra, marcadores de colores"], 
+            recursos: ["Pizarra, marcadores"], 
             tiempo: "8 min" 
           },
           desarrollo: { 
             actividades: [
               desarrolloSesion1,
-              "Práctica guiada en parejas resolviendo ejercicios aplicando el procedimiento modelado."
+              "Práctica guiada en parejas resolviendo ejercicios modelo en la libreta."
             ], 
             recursos: ["Cuaderno, guías de trabajo"], 
             tiempo: "28 min" 
           },
           cierre: { 
             actividades: [
-              "Verificación colectiva del procedimiento en la pizarra.", 
+              "Verificación de procedimientos en la pizarra.", 
               "Pregunta de salida para evaluar la comprensión del tema."
             ], 
-            recursos: ["Ficha de salida"], 
+            recursos: ["Boleto de salida"], 
             tiempo: "9 min" 
           }
         },
         {
           numero: 2,
-          titulo: "Profundización y resolución de problemas de " + uNombre,
+          titulo: "Profundización y práctica guiada de " + uNombre,
           inicio: { 
             actividades: [
               "Repaso del concepto visto en la sesión anterior.", 
-              "Planteamiento del ejercicio del día."
+              "Planteamiento del problema central de la clase."
             ], 
             recursos: ["Pizarra"], 
             tiempo: "8 min" 
@@ -1510,14 +1465,14 @@ Perímetro y área de figuras planas</textarea>
           desarrollo: { 
             actividades: [
               desarrolloSesion2,
-              "Trabajo individual en guía de problemas contextualizados."
+              "Trabajo individual en guía práctica supervisada."
             ], 
             recursos: ["Cuaderno de trabajo"], 
             tiempo: "28 min" 
           },
           cierre: { 
             actividades: [
-              "Aclaración de dudas y cierre pedagógico."
+              "Aclaración de dudas y síntesis pedagógica."
             ], 
             recursos: ["Pizarra"], 
             tiempo: "9 min" 
@@ -1625,7 +1580,7 @@ Perímetro y área de figuras planas</textarea>
       });
     }
 
-    var matrizRows = [new D.TableRow({ tableHeader: true, children: [mCellHeader("Objetivos (Bloom)"), mCellHeader("Acciones Didácticas"), mCellHeader("Estrategias / Atención"), mCellHeader("Producto / Criterio"), mCellHeader("Recursos"), mCellHeader("Observaciones")] })];
+    var matrizRows = [new D.TableRow({ tableHeader: true, children: [mCellHeader("Objetivos de Mejora"), mCellHeader("Acciones Didácticas (Línea por línea)"), mCellHeader("Estrategias / Atención"), mCellHeader("Producto / Evidencia"), mCellHeader("Recursos"), mCellHeader("Observaciones / Seguimiento")] })];
     contenido.matriz.forEach(function (f, i) {
       var s = i % 2 === 1;
       matrizRows.push(new D.TableRow({ children: [mCell(f.objetivos, s), mCell(f.acciones, s), mCell(f.estrategias, s), mCell(f.producto, s), mCell(f.recursos, s), mCell(f.observaciones, s)] }));
@@ -1878,7 +1833,6 @@ Perímetro y área de figuras planas</textarea>
     }, 100);
   }
 
-  // --- SUBMIT FORM 1: PLAN DE MEJORA ---
   document.getElementById("form-mejora").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -1913,23 +1867,53 @@ Perímetro y área de figuras planas</textarea>
       });
 
       var parsedJSON = null;
+      var fuenteContenido = "ia";
+
       if (response.ok) {
         var resData = await response.json();
-        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-        parsedJSON = JSON.parse(rawText);
+
+        if (resData && resData._temaNoVerificado) {
+          // El backend ya reintentó una vez y la IA siguió sin confirmar
+          // exactamente los temas solicitados: se usa la plantilla local
+          // (verificada) en vez de arriesgarnos a mostrar el tema equivocado.
+          console.warn("La IA no confirmó los temas exactos solicitados. Se usará la plantilla local verificada.");
+          parsedJSON = generarPlanMejoraLocal(formData);
+          fuenteContenido = "local";
+        } else {
+          var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+          try {
+            parsedJSON = JSON.parse(rawText);
+          } catch (parseErr) {
+            parsedJSON = null;
+          }
+          if (!parsedJSON) {
+            console.warn("La IA no devolvió un JSON válido. Generando plan de contingencia pedagógico...");
+            parsedJSON = generarPlanMejoraLocal(formData);
+            fuenteContenido = "local";
+          }
+        }
       } else {
         console.warn("Servidor respondió con error. Generando plan de contingencia pedagógico...");
         parsedJSON = generarPlanMejoraLocal(formData);
+        fuenteContenido = "local";
       }
+
+      // Blindaje: cada fila de la matriz queda etiquetada EXACTAMENTE con
+      // el tema escrito en el formulario, sin importar lo que haya
+      // respondido la IA (evita el "me mete otro tema en el plan").
+      parsedJSON = alinearMatrizConTemas(parsedJSON, temasLista);
 
       var blob = await construirDocxMejora(formData, parsedJSON);
       descargarBlob(blob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
 
-      setStatus(statusEl, "<strong>¡Plan de Mejora generado con éxito!</strong> El archivo Word (.docx) se ha descargado a su dispositivo.", "success");
+      var mensajeExitoMejora = fuenteContenido === "ia"
+        ? "<strong>¡Plan de Mejora generado con éxito!</strong> El archivo Word (.docx) se ha descargado a su dispositivo."
+        : "<strong>¡Documento generado correctamente!</strong> Se usó la plantilla oficial verificada del CNB, alineada exactamente con los temas indicados.";
+      setStatus(statusEl, mensajeExitoMejora, "success");
     } catch (err) {
       console.error("Error al procesar:", err);
       try {
-        var fallbackJSON = generarPlanMejoraLocal(formData);
+        var fallbackJSON = alinearMatrizConTemas(generarPlanMejoraLocal(formData), temasLista);
         var fallbackBlob = await construirDocxMejora(formData, fallbackJSON);
         descargarBlob(fallbackBlob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
         setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión estructurada con el formato oficial del CNB.", "success");
@@ -1942,7 +1926,6 @@ Perímetro y área de figuras planas</textarea>
     }
   });
 
-  // --- SUBMIT FORM 2: PLANIFICACIÓN SEMANAL ---
   document.getElementById("form-semanal").addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -1985,19 +1968,45 @@ Perímetro y área de figuras planas</textarea>
       });
 
       var parsedJSON = null;
+      var fuenteContenidoSemanal = "ia";
+
       if (response.ok) {
         var resData = await response.json();
-        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-        parsedJSON = JSON.parse(rawText);
+
+        if (resData && resData._temaNoVerificado) {
+          // El backend reintentó una vez y la IA siguió sin confirmar
+          // exactamente la unidad curricular solicitada: se usa la
+          // plantilla local (verificada) en vez de arriesgar mostrar
+          // contenido de otra unidad.
+          console.warn("La IA no confirmó la unidad exacta solicitada. Se usará la plantilla local verificada.");
+          parsedJSON = generarPlanSemanalLocal(formData);
+          fuenteContenidoSemanal = "local";
+        } else {
+          var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+          try {
+            parsedJSON = JSON.parse(rawText);
+          } catch (parseErr) {
+            parsedJSON = null;
+          }
+          if (!parsedJSON) {
+            console.warn("La IA no devolvió un JSON válido. Generando planificación con contingencia oficial...");
+            parsedJSON = generarPlanSemanalLocal(formData);
+            fuenteContenidoSemanal = "local";
+          }
+        }
       } else {
         console.warn("Servidor no disponible. Generando planificación con contingencia oficial...");
         parsedJSON = generarPlanSemanalLocal(formData);
+        fuenteContenidoSemanal = "local";
       }
 
       var blob = await construirDocxSemanal(formData, parsedJSON);
       descargarBlob(blob, "Plan_Semanal_" + asignatura + "_" + grado.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
 
-      setStatus(statusEl, "<strong>¡Planificación Semanal generada con éxito!</strong> El archivo Word (.docx) está listo para imprimir y firmar.", "success");
+      var mensajeExitoSemanal = fuenteContenidoSemanal === "ia"
+        ? "<strong>¡Planificación Semanal generada con éxito!</strong> El archivo Word (.docx) está listo para imprimir y firmar."
+        : "<strong>¡Documento generado correctamente!</strong> Se usó la plantilla oficial verificada del CNB para la unidad \"" + unidadNombre + "\".";
+      setStatus(statusEl, mensajeExitoSemanal, "success");
     } catch (err) {
       console.error("Error al procesar planificación:", err);
       try {
