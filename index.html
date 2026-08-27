@@ -1106,15 +1106,22 @@ Perímetro y área de figuras planas</textarea>
   var btnCloseModal = document.getElementById("btn-close-modal");
   var btnCopyBank = document.getElementById("btn-copy-bank");
 
+  // Activar modal automáticamente al cargar la página
+  if (modal) {
+    modal.classList.add("active");
+  }
+
   if (btnOpenModal) {
     btnOpenModal.addEventListener("click", function () {
       modal.classList.add("active");
     });
   }
 
-  btnCloseModal.addEventListener("click", function () {
-    modal.classList.remove("active");
-  });
+  if (btnCloseModal) {
+    btnCloseModal.addEventListener("click", function () {
+      modal.classList.remove("active");
+    });
+  }
 
   btnCopyBank.addEventListener("click", function () {
     var textToCopy = "Banco: CUSCATLAN (Ahorros)\nCuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
