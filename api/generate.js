@@ -25,8 +25,8 @@ Tu función es redactar la Planificación Semanal de Clases en formato JSON exac
 
 REGLA OBLIGATORIA PARA MATEMÁTICA, FÍSICA, QUÍMICA Y ASIGNATURAS PRÁCTICAS:
 - En las actividades de desarrollo de las sesiones debes incluir OBLIGATORIAMENTE:
-  1. Fórmulas y ecuaciones necesarias con desglose explícito de sus variables (ejemplo: $A = \\frac{b \\cdot h}{2}$, donde $A$ = Área, $b$ = Base, $h$ = Altura).
-  2. Ejercicios modelo resueltos paso a paso con simbología matemática limpia, clara y rigurosa.
+  1. Fórmulas y ecuaciones necesarias con desglose explícito de sus variables (ejemplo: A = (b × h) / 2, donde A = Área, b = Base, h = Altura). PROHIBIDO usar código o sintaxis bruta de LaTeX como signos de dólar ($), \\frac, \\cdot o \\approx, ya que el archivo final es un documento de Word (.docx). Usa símbolos matemáticos limpios y legibles (×, ÷, =, ±, ², √, etc.).
+  2. Ejercicios modelo resueltos paso a paso con desarrollo numérico claro, ordenado y alineado línea por línea.
   3. Problemas prácticos aplicados a situaciones cotidianas con Planteamiento Operativo (PO), desarrollo algebraico y respuesta (R).
 
 Debes responder obligatoriamente en formato JSON exacto respetando el siguiente esquema:
@@ -92,8 +92,8 @@ Tu función es redactar y estructurar Planes de Mejora y Nivelación Académica 
 
 REGLA OBLIGATORIA PARA MATEMÁTICA Y ASIGNATURAS PRÁCTICAS:
 - En las acciones, estrategias y productos de la Matriz Operativa debes incluir OBLIGATORIAMENTE:
-  1. Fórmulas y ecuaciones clave con sus variables definidas.
-  2. Ejercicios tipo resueltos paso a paso con simbología matemática limpia y profesional.
+  1. Fórmulas y ecuaciones clave con sus variables definidas (ejemplo: A = (b × h) / 2, sin usar código LaTeX como $ o \\frac).
+  2. Ejercicios tipo resueltos paso a paso con simbología matemática limpia, clara y profesional, alineados línea por línea.
 
 Debes responder obligatoriamente en formato JSON exacto respetando el siguiente esquema:
 {
