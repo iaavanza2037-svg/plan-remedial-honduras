@@ -28,11 +28,92 @@ export default async function handler(req, res) {
       .trim();
   }
 
+  // -----------------------------------------------------------------------
+  // ¿La asignatura es "práctica" (requiere resolver problemas con números,
+  // fórmulas y procedimientos paso a paso: Matemática, Física, Química,
+  // Biología con cálculos, Estadística) o "teórica/comunicativa" (Español,
+  // Estudios Sociales, Historia, Cívica, etc., donde NO tiene sentido
+  // inventar fórmulas ni "problemas numéricos")?
+  // -----------------------------------------------------------------------
+  function esAsignaturaPractica(asignatura) {
+    const a = normalizar(asignatura);
+    const clavesPracticas = [
+      "matemat", "fisica", "quimic", "biolog", "ciencias naturales", "estadistic"
+    ];
+    return clavesPracticas.some((k) => a.includes(k));
+  }
+
+  const practica = esAsignaturaPractica(data.asignatura);
+
+  // -----------------------------------------------------------------------
+  // Verificación de que el contenido "práctico" realmente resuelve un
+  // problema paso a paso (y no se queda solo en la explicación teórica).
+  // Se usa para invalidar y forzar un reintento cuando la IA "se relaja"
+  // y no cumple con lo pedido, que era justamente la queja reportada.
+  // -----------------------------------------------------------------------
+  function tieneResolucionPasoAPaso(texto) {
+    if (typeof texto !== "string") return false;
+    const t = normalizar(texto);
+    const tienePaso = /paso\s*1/.test(t) || /procedimiento paso a paso/.test(t) || /resolucion paso a paso/.test(t);
+    const tieneProblema = /problema modelo/.test(t);
+    const tieneRespuesta = /respuesta \(r\)/.test(t) || /respuesta:/.test(t);
+    return tienePaso && tieneProblema && tieneRespuesta;
+  }
+
   let systemPrompt = "";
   let userMessage = "";
   let validate = () => true;
 
   if (taskType === "plan_semanal") {
+
+    const bloqueEstructuraPractica = `
+ESTRUCUTRA DE CADA SESIÓN (INICIO, DESARROLLO Y CIERRE):
+En el arreglo de "sesiones", cada objeto representa una sesión diaria:
+1. INICIO: Recuperar conocimientos previos del tema específico, presentar situación introductoria motivadora relacionada directamente con el contenido. NO introducir temas ajenos.
+2. DESARROLLO: Explicación del contenido, presentación de la regla/propiedad, fórmula (si aplica), desglose de variables (si la fórmula lo requiere), Problema Modelo contextualizado con resolución paso a paso (operando explícitamente con las variables declaradas), práctica guiada y práctica individual/en parejas.
+3. CIERRE: Síntesis del aprendizaje de la sesión, comprobación de comprensión (pregunta de salida o ejercicio breve) y retroalimentación final.
+
+ERES UN EXPERTO EN LA ENSEÑANZA DE ${String(data.asignatura || "esta asignatura").toUpperCase()}. Esta es una asignatura PRÁCTICA: la sesión NO puede quedarse en pura teoría.
+FORMATO Y SINTAXIS EN EL DESARROLLO DE CADA SESIÓN (OBLIGATORIO, EN LA PRIMERA POSICIÓN DEL ARREGLO "actividades" DEL BLOQUE "desarrollo", LÍNEA POR LÍNEA usando saltos de línea \\n):
+
+Concepto / Propiedad: [Nombre preciso del tema de la sesión]
+Fórmula / Ecuación: [Fórmula explícita alineada al tema, si aplica]
+Desglose de Variables: (INCLUIR SOLO SI LA FÓRMULA O ECUACIÓN LO REQUIERE)
+  • [Variable 1] = [Significado]
+Problema Modelo: [Enunciado contextualizado auténtico al tema, CON NÚMEROS REALES, no genérico]
+Procedimiento paso a paso:
+  • Paso 1: [Sustitución explícita en las variables o planteamiento inicial, con los números del problema]
+  • Paso 2: [Operación o desarrollo matemático con las variables, mostrando el cálculo]
+  • Paso 3: [Cálculo final]
+Respuesta (R): [Resultado final explícito con sus unidades correspondientes]
+
+PROHIBIDO ABSOLUTAMENTE:
+- Quedarte solo en la definición teórica del concepto sin resolver el Problema Modelo con números reales.
+- Escribir "Fórmula / Ecuación" y dejar el Problema Modelo sin resolver o con pasos vagos como "se aplica la fórmula" sin mostrar la sustitución y el cálculo real.
+- Omitir cualquiera de los rótulos anteriores (Concepto, Problema Modelo, Procedimiento paso a paso con al menos Paso 1, Respuesta (R)).
+
+PROHIBIDO USAR SINTAXIS LATEX DE $ O \\frac. Usa símbolos limpios y legibles en Word (×, ÷, =, ±, ², √, etc.).`;
+
+    const bloqueEstructuraTeorica = `
+ESTRUCUTRA DE CADA SESIÓN (INICIO, DESARROLLO Y CIERRE):
+En el arreglo de "sesiones", cada objeto representa una sesión diaria:
+1. INICIO: Recuperar conocimientos previos del tema específico, presentar una situación comunicativa o social introductoria motivadora relacionada directamente con el contenido. NO introducir temas ajenos.
+2. DESARROLLO: Explicación del contenido, presentación de un texto o situación modelo auténtica, guía de análisis o comprensión, práctica guiada y actividad de producción oral/escrita individual o en parejas.
+3. CIERRE: Síntesis del aprendizaje de la sesión, comprobación de comprensión (pregunta de salida o actividad breve) y retroalimentación final.
+
+ERES UN EXPERTO EN LA ENSEÑANZA DE ${String(data.asignatura || "esta asignatura").toUpperCase()}. Esta es una asignatura de naturaleza TEÓRICA / COMUNICATIVA (NO matemática): está TERMINANTEMENTE PROHIBIDO inventar fórmulas, ecuaciones o "problemas numéricos" que no tienen sentido para este contenido.
+FORMATO Y SINTAXIS EN EL DESARROLLO DE CADA SESIÓN (OBLIGATORIO, EN LA PRIMERA POSICIÓN DEL ARREGLO "actividades" DEL BLOQUE "desarrollo", LÍNEA POR LÍNEA usando saltos de línea \\n):
+
+Concepto o Contenido: [Nombre preciso del contenido de la sesión]
+Texto o Situación Modelo: [Fragmento de texto, ejemplo auténtico o situación comunicativa/social real relacionada al contenido]
+Guía de Análisis:
+  • Pregunta 1: [pregunta de comprensión, análisis o reflexión sobre el texto/situación]
+  • Pregunta 2: [pregunta de comprensión, análisis o reflexión sobre el texto/situación]
+Actividad de Producción (oral o escrita): [Consigna clara de lo que el estudiante debe producir, redactar o exponer]
+Retroalimentación: [Criterio breve de cómo se corrige o retroalimenta la actividad]
+
+PROHIBIDO ABSOLUTAMENTE inventar "Fórmula / Ecuación", "Desglose de Variables" o resolver "problemas" numéricos: no aplica a este contenido.`;
+
     systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior especialista en Didáctica y Diseño Curricular de la Secretaría de Educación de Honduras.
 Tu función es redactar la PLANIFICACIÓN SEMANAL DE CLASES en formato JSON exacto, respetando la estructura, tablas y distribución requeridas.
 
@@ -51,34 +132,12 @@ UNIDAD CURRICULAR → TEMA ESPECÍFICO DE LA SESIÓN → SUBTEMA → APRENDIZAJE
 VALIDACIÓN OBLIGATORIA DE LA UNIDAD SELECCIONADA:
 - Toda la planificación DEBE TRATAR ÚNICA Y EXCLUSIVAMENTE sobre la unidad solicitada ("${data.unidadNombre}") y sus contenidos oficiales (${JSON.stringify(data.contenidos)}).
 - PROHIBIDO ABSOLUTAMENTE generar o insertar temas o ejemplos de otras unidades ajenas.
-- Ejemplo: Si la unidad es "Gráficas lineales" o "Geometría", QUEDA RIGUROSA Y ESTRICTAMENTE PROHIBIDO insertar ecuaciones como 3x + 6 = 21 o suma de fracciones heterogéneas salvo si pertenecen explícitamente a dicha unidad.
 - Adáptate al nivel cognitivo exacto del Grado (${data.grado}). Para I Ciclo (1° a 3°), usa contenidos concretos y representativos; para II Ciclo (4° a 6°), nivel intermedio; para III Ciclo (7° a 9°), rigor formal.
 
 CAMPO OBLIGATORIO DE VERIFICACIÓN "temaConfirmado":
 - El primer campo del JSON de respuesta DEBE llamarse "temaConfirmado" y debe contener EXACTAMENTE, sin traducir, resumir, acortar ni modificar ni una sola letra, el siguiente texto: "${data.unidadNombre}".
 - Este campo se usa para verificar automáticamente que no cambiaste de tema. Si no coincide EXACTAMENTE, tu respuesta será rechazada y se te pedirá que la corrijas.
-
-ESTRUCUTRA DE CADA SESIÓN (INICIO, DESARROLLO Y CIERRE):
-En el arreglo de "sesiones", cada objeto representa una sesión diaria:
-1. INICIO: Recuperar conocimientos previos del tema específico, presentar situación introductoria motivadora relacionada directamente con el contenido. NO introducir temas ajenos.
-2. DESARROLLO: Explicación del contenido, presentación de la regla/propiedad, fórmula (si aplica), desglose de variables (si la fórmula lo requiere), Problema Modelo contextualizado con resolución paso a paso (operando explícitamente con las variables declaradas), práctica guiada y práctica individual/en parejas.
-3. CIERRE: Síntesis del aprendizaje de la sesión, comprobación de comprensión (pregunta de salida o ejercicio breve) y retroalimentación final.
-
-FORMATO Y SINTAXIS EN EL DESARROLLO DE CADA SESIÓN:
-En la primera posición del arreglo "actividades" del bloque "desarrollo", redacta la explicación estructurada ESTRICTAMENTE LÍNEA POR LÍNEA usando saltos de línea (\\n):
-
-Concepto / Propiedad: [Nombre preciso del tema de la sesión]
-Fórmula / Ecuación: [Fórmula explícita alineada al tema, si aplica]
-Desglose de Variables: (INCLUIR SOLO SI LA FÓRMULA O ECUACIÓN LO REQUIERE)
-  • [Variable 1] = [Significado]
-Problema Modelo: [Enunciado contextualizado auténtico al tema]
-Procedimiento paso a paso:
-  • Paso 1: [Sustitución explícita en las variables o planteamiento inicial]
-  • Paso 2: [Operación o desarrollo matemático con las variables]
-  • Paso 3: [Cálculo final]
-Respuesta (R): [Resultado final explícito con sus unidades correspondientes]
-
-PROHIBIDO USAR SINTAXIS LATEX DE $ O \\frac. Usa símbolos limpios y legibles en Word (×, ÷, =, ±, ², √, etc.).
+${practica ? bloqueEstructuraPractica : bloqueEstructuraTeorica}
 
 Debes responder obligatoriamente en formato JSON exacto respetando este esquema (el orden de las llaves debe iniciar con "temaConfirmado"):
 {
@@ -108,7 +167,10 @@ Debes responder obligatoriamente en formato JSON exacto respetando este esquema 
       },
       "desarrollo": {
         "actividades": [
-          "Concepto / Propiedad: ...\\nFórmula: ...\\nProblema Modelo: ...\\nProcedimiento paso a paso:\\n  • Paso 1: ...\\n  • Paso 2: ...\\nRespuesta (R): ...",
+          "${practica
+            ? "Concepto / Propiedad: ...\\nFórmula: ...\\nProblema Modelo: ...\\nProcedimiento paso a paso:\\n  • Paso 1: ...\\n  • Paso 2: ...\\nRespuesta (R): ..."
+            : "Concepto o Contenido: ...\\nTexto o Situación Modelo: ...\\nGuía de Análisis:\\n  • Pregunta 1: ...\\n  • Pregunta 2: ...\\nActividad de Producción (oral o escrita): ...\\nRetroalimentación: ..."
+          }",
           "Práctica guiada en parejas..."
         ],
         "recursos": ["string", "string"],
@@ -136,18 +198,68 @@ Unidad Curricular CNB Obligatoria: ${data.unidadNombre}
 Expectativas de Logro Oficiales: ${JSON.stringify(data.expectativas)}
 Contenidos Clave del CNB a Desarrollar: ${JSON.stringify(data.contenidos)}
 
-Recuerda: el campo "temaConfirmado" debe ser EXACTAMENTE igual, letra por letra, a: "${data.unidadNombre}"`;
+Recuerda: el campo "temaConfirmado" debe ser EXACTAMENTE igual, letra por letra, a: "${data.unidadNombre}"
+${practica ? 'Recuerda también: DEBES resolver el "Problema Modelo" con números reales, paso a paso (Paso 1, Paso 2, ...) hasta llegar a la "Respuesta (R)". No basta con explicar la teoría.' : 'Recuerda también: NO inventes fórmulas ni problemas numéricos, esta asignatura es teórica/comunicativa.'}`;
 
-    // La respuesta se considera válida solo si "temaConfirmado" coincide
-    // (de forma normalizada, ignorando tildes/mayúsculas/espacios extra)
-    // con la unidad realmente solicitada por el docente.
     validate = (parsed) => {
       if (!parsed || typeof parsed.temaConfirmado !== "string") return false;
-      return normalizar(parsed.temaConfirmado) === normalizar(data.unidadNombre);
+      if (normalizar(parsed.temaConfirmado) !== normalizar(data.unidadNombre)) return false;
+
+      if (practica) {
+        const sesiones = Array.isArray(parsed.sesiones) ? parsed.sesiones : [];
+        if (sesiones.length === 0) return false;
+        const todasResuelven = sesiones.every((s) =>
+          tieneResolucionPasoAPaso(s?.desarrollo?.actividades?.[0])
+        );
+        if (!todasResuelven) return false;
+      }
+
+      return true;
     };
 
   } else {
-    systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior especialista en Didáctica de las Matemáticas y Recuperación Académica de la Secretaría de Educación de Honduras.
+
+    const bloqueMatrizPractica = `
+ERES UN EXPERTO EN LA ENSEÑANZA DE ${String(data.asignatura || "esta asignatura").toUpperCase()}. Esta es una asignatura PRÁCTICA: cada fila de la matriz DEBE resolver un problema con números reales, paso a paso, no solo explicar la teoría.
+
+ESTRUCTURA LÍNEA POR LÍNEA EN LA CASILLA "acciones" (OBLIGATORIA, con saltos de línea \\n estrictos):
+
+Concepto o Regla: [Nombre exacto del tema]
+Fórmula o Propiedad: [Fórmula o definición precisa alineada al tema]
+Desglose de Variables: (INCLUIR ÚNICAMENTE SI LA FÓRMULA O ECUACIÓN LO REQUIERE)
+  • [Variable 1] = [Significado]
+Problema Modelo: [Enunciado del ejercicio auténtico alineado al tema, CON NÚMEROS REALES]
+Resolución Paso a Paso:
+  • Paso 1: [Sustitución explícita en las variables declaradas o planteamiento inicial, con los números del problema]
+  • Paso 2: [Operación o desarrollo matemático usando las variables, mostrando el cálculo]
+  • Paso 3: [Cálculo final]
+Respuesta (R): [Resultado explícito con sus unidades]
+Actividad de Ejercitación:
+  • [Instrucciones del taller o guía de reforzamiento donde el estudiante aplique lo aprendido]
+
+PROHIBIDO ABSOLUTAMENTE:
+- Dejar el Problema Modelo sin resolver, o resolverlo de forma vaga ("se sustituye y se calcula") sin mostrar los números y operaciones reales.
+- Omitir el Problema Modelo, la Resolución Paso a Paso (con al menos Paso 1) o la Respuesta (R).
+- Usar ejercicios genéricos o incoherentes con el tema de la fila (ver regla de correspondencia arriba).
+
+PROHIBIDO USAR CÓDIGO LATEX ($ o \\frac). Usa símbolos matemáticos estándar (×, ÷, =, ±, ², √, etc.).`;
+
+    const bloqueMatrizTeorica = `
+ERES UN EXPERTO EN LA ENSEÑANZA DE ${String(data.asignatura || "esta asignatura").toUpperCase()}. Esta es una asignatura de naturaleza TEÓRICA / COMUNICATIVA (NO matemática): está TERMINANTEMENTE PROHIBIDO inventar fórmulas, ecuaciones o "problemas numéricos" que no tienen sentido para este contenido.
+
+ESTRUCTURA LÍNEA POR LÍNEA EN LA CASILLA "acciones" (OBLIGATORIA, con saltos de línea \\n estrictos):
+
+Concepto o Contenido: [Nombre exacto del tema]
+Texto o Situación Modelo: [Fragmento de texto, ejemplo auténtico o situación comunicativa/social real alineada al tema]
+Guía de Análisis / Preguntas Orientadoras:
+  • Pregunta 1: [pregunta de comprensión, análisis o reflexión]
+  • Pregunta 2: [pregunta de comprensión, análisis o reflexión]
+Actividad de Producción (oral o escrita): [Consigna clara de lo que el estudiante debe producir, redactar o exponer sobre el tema]
+Retroalimentación: [Criterio breve de cómo se corrige o retroalimenta la actividad]
+
+PROHIBIDO ABSOLUTAMENTE inventar "Fórmula o Propiedad", "Desglose de Variables" o resolver "problemas" numéricos: no aplica a este contenido.`;
+
+    systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior especialista en Didáctica y Recuperación Académica de la Secretaría de Educación de Honduras, experto en la asignatura de ${data.asignatura || "la asignatura indicada"}.
 Tu función es redactar un PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA remedial especializado.
 
 PRINCIPIO PEDAGÓGICO DEL PLAN DE MEJORA:
@@ -158,31 +270,13 @@ REGLA CRÍTICA Y MANDATORIA DE CORRESPONDENCIA POR FILA EN LA MATRIZ:
 Cada fila de la matriz representa UN TEMA REPROBADO específico de la lista, EN ESTE ORDEN EXACTO: ${JSON.stringify(data.temasLista)}.
 - El campo "tema" de cada fila DEBE copiarse EXACTAMENTE, sin modificar ni una letra, del elemento correspondiente de esa lista, en el mismo orden.
 - El arreglo "matriz" DEBE tener EXACTAMENTE ${(data.temasLista || []).length} filas, ni una más ni una menos.
-- Las Acciones Didácticas, fórmulas, ejemplos y ejercicios de CADA FILA deben responder ÚNICA Y EXCLUSIVAMENTE al tema de esa fila.
-- PROHIBIDO ABSOLUTAMENTE usar ejercicios genéricos o incoherentes. Si el tema es "Ecuaciones cuadráticas", la Acción Didáctica DEBE tratar sobre ax² + bx + c = 0, discriminante o fórmula general (PROHIBIDO poner ecuaciones de primer grado ax + b = c). Si el tema es "Operaciones con números racionales", DEBE tratar sobre fracciones o decimales. Si es "Perímetro y área", DEBE tratar sobre fórmulas geométricas con unidades cuadradas.
+- Las Acciones Didácticas, ejemplos y ejercicios de CADA FILA deben responder ÚNICA Y EXCLUSIVAMENTE al tema de esa fila.
 - CONTROL DE REPETICIÓN: Cada fila debe tener su propio contenido, ejemplo, estrategia y producto. PROHIBIDO repetir la misma Acción Didáctica en diferentes temas.
 
 CAMPO OBLIGATORIO DE VERIFICACIÓN "temasConfirmados":
 - El primer campo del JSON de respuesta DEBE llamarse "temasConfirmados" y debe ser un arreglo con EXACTAMENTE los mismos textos y el mismo orden que: ${JSON.stringify(data.temasLista)}.
 - Este campo se usa para verificar automáticamente que no cambiaste ni el orden ni el contenido de los temas. Si no coincide EXACTAMENTE, tu respuesta será rechazada y se te pedirá que la corrijas.
-
-ESTRUCTURA LÍNEA POR LÍNEA EN LA CASILLA "acciones":
-Escribe la casilla "acciones" separando CADA ELEMENTO PEDAGÓGICO con saltos de línea (\\n) estrictos:
-
-Concepto o Regla: [Nombre exacto del tema]
-Fórmula o Propiedad: [Fórmula o definición precisa alineada al tema]
-Desglose de Variables: (INCLUIR ÚNICAMENTE SI LA FÓRMULA O ECUACIÓN LO REQUIERE)
-  • [Variable 1] = [Significado]
-Problema Modelo: [Enunciado del ejercicio auténtico alineado al tema]
-Resolución Paso a Paso:
-  • Paso 1: [Sustitución explícita en las variables declaradas o planteamiento inicial]
-  • Paso 2: [Operación o desarrollo matemático usando las variables]
-  • Paso 3: [Cálculo final]
-Respuesta (R): [Resultado explícito con sus unidades]
-Actividad de Ejercitación:
-  • [Instrucciones del taller o guía de reforzamiento donde el estudiante aplique lo aprendido]
-
-PROHIBIDO USAR CÓDIGO LATEX ($ o \\frac). Usa símbolos matemáticos estándar (×, ÷, =, ±, ², √, etc.).
+${practica ? bloqueMatrizPractica : bloqueMatrizTeorica}
 
 Debes responder obligatoriamente en formato JSON exacto respetando el siguiente esquema (el orden de las llaves debe iniciar con "temasConfirmados"):
 {
@@ -200,7 +294,7 @@ Debes responder obligatoriamente en formato JSON exacto respetando el siguiente 
     {
       "tema": "string (copiado EXACTO del tema correspondiente)",
       "objetivos": "string",
-      "acciones": "string con saltos de línea \\n estrictos para concepto, fórmula, variables (si aplica), problema modelo, resolución paso a paso operando con las variables, respuesta y ejercitación",
+      "acciones": "string con saltos de línea \\n estrictos, siguiendo EXACTAMENTE la estructura obligatoria indicada arriba para esta asignatura",
       "estrategias": "string",
       "producto": "string",
       "recursos": "string",
@@ -219,17 +313,26 @@ Nivel Educativo: ${data.nivel}
 Temas reprobados / críticos a desarrollar en la matriz, EN ESTE ORDEN EXACTO:
 ${(data.temasLista || []).map((t, i) => (i + 1) + ". " + t).join("\n")}
 
-Recuerda: "temasConfirmados" debe ser exactamente ${JSON.stringify(data.temasLista || [])}`;
+Recuerda: "temasConfirmados" debe ser exactamente ${JSON.stringify(data.temasLista || [])}
+${practica ? 'Recuerda también: en CADA fila DEBES resolver el "Problema Modelo" con números reales, paso a paso (Paso 1, Paso 2, ...) hasta llegar a la "Respuesta (R)". No basta con explicar la teoría.' : 'Recuerda también: NO inventes fórmulas ni problemas numéricos, esta asignatura es teórica/comunicativa.'}`;
 
-    // Válido si el arreglo de temas confirmados coincide 1 a 1 (en el mismo
-    // orden) con lo que el docente realmente escribió en el formulario.
     validate = (parsed) => {
       if (!parsed || !Array.isArray(parsed.temasConfirmados)) return false;
       const esperado = data.temasLista || [];
       if (parsed.temasConfirmados.length !== esperado.length) return false;
-      return parsed.temasConfirmados.every(
+      const temasOk = parsed.temasConfirmados.every(
         (t, i) => normalizar(t) === normalizar(esperado[i])
       );
+      if (!temasOk) return false;
+
+      if (practica) {
+        const matriz = Array.isArray(parsed.matriz) ? parsed.matriz : [];
+        if (matriz.length !== esperado.length) return false;
+        const todasResuelven = matriz.every((f) => tieneResolucionPasoAPaso(f?.acciones));
+        if (!todasResuelven) return false;
+      }
+
+      return true;
     };
   }
 
@@ -240,7 +343,7 @@ Recuerda: "temasConfirmados" debe ser exactamente ${JSON.stringify(data.temasLis
       generationConfig: {
         responseMimeType: "application/json",
         // Temperatura y topP bajos: reduce la probabilidad de que el modelo
-        // "improvise" o mezcle temas distintos a los solicitados.
+        // "improvise" o mezcle temas distintos, u omita pasos pedidos.
         temperature: 0.25,
         topP: 0.85
       }
@@ -276,15 +379,20 @@ Recuerda: "temasConfirmados" debe ser exactamente ${JSON.stringify(data.temasLis
     let resData = await llamarGemini(systemPrompt, userMessage);
     let { parsed, rawText } = extraerYParsear(resData);
 
-    // Si el modelo no respetó el tema solicitado (o el JSON vino corrupto),
-    // se hace UN reintento con una advertencia explícita antes de rendirse.
+    // Si el modelo no respetó el tema solicitado, o (siendo una asignatura
+    // práctica) no resolvió el problema paso a paso, se hace UN reintento
+    // con una advertencia explícita antes de rendirse.
     if (!validate(parsed)) {
-      console.warn('La respuesta de Gemini no coincidió con el tema solicitado. Reintentando una vez...');
+      console.warn('La respuesta de Gemini no cumplió la validación (tema y/o resolución paso a paso). Reintentando una vez...');
+
+      const advertenciaEstructura = practica
+        ? 'Además, revisa que CADA fila/sesión resuelva realmente el "Problema Modelo" con números concretos, mostrando Paso 1, Paso 2, etc. hasta la "Respuesta (R)". No te quedes en la teoría ni dejes el problema sin resolver.'
+        : 'Recuerda que esta asignatura es teórica/comunicativa: no inventes fórmulas ni "problemas" numéricos.';
 
       const mensajeReforzado = userMessage + `
 
-ADVERTENCIA IMPORTANTE: tu respuesta anterior NO respetó exactamente el tema solicitado (el campo de verificación no coincidió).
-Corrige tu respuesta ahora: revisa cuidadosamente el tema exacto indicado arriba y asegúrate de que absolutamente TODO el contenido (ejemplos, fórmulas, actividades, y el campo de verificación) trate ÚNICAMENTE sobre ese tema, copiado sin alterar ni una letra.`;
+ADVERTENCIA IMPORTANTE: tu respuesta anterior NO cumplió con lo solicitado (el tema no coincidió exactamente, o faltó la resolución paso a paso donde correspondía).
+Corrige tu respuesta ahora: revisa cuidadosamente el tema exacto indicado arriba y asegúrate de que absolutamente TODO el contenido trate ÚNICAMENTE sobre ese tema, copiado sin alterar ni una letra en el campo de verificación. ${advertenciaEstructura}`;
 
       resData = await llamarGemini(systemPrompt, mensajeReforzado);
       ({ parsed, rawText } = extraerYParsear(resData));
@@ -300,7 +408,8 @@ Corrige tu respuesta ahora: revisa cuidadosamente el tema exacto indicado arriba
     if (!validate(parsed)) {
       // Devolvemos igualmente el contenido (con una bandera de advertencia)
       // para que el frontend pueda decidir usar su plantilla local en su
-      // lugar, en vez de descargar un documento con el tema incorrecto.
+      // lugar, en vez de descargar un documento incompleto o con el tema
+      // incorrecto.
       return res.status(200).json({
         ...resData,
         _temaNoVerificado: true
