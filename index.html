@@ -983,13 +983,112 @@ Perímetro y área de figuras planas</textarea>
     });
   }
 
+  var tabButtons = document.querySelectorAll(".tab-btn");
+  tabButtons.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var targetId = btn.getAttribute("data-target");
+      if (!targetId) return;
+      tabButtons.forEach(function(b) { b.classList.remove("active"); });
+      document.querySelectorAll(".tab-content").forEach(function(tc) { tc.classList.remove("active"); });
+      btn.classList.add("active");
+      var targetEl = document.getElementById(targetId);
+      if (targetEl) targetEl.classList.add("active");
+    });
+  });
+
+  function generarPlanMejoraLocal(data) {
+    var centro = data.centro || "Centro Educativo";
+    var docente = data.docente || "Docente Titular";
+    var asignatura = data.asignatura || "Asignatura";
+    var gradoSeccion = data.gradoSeccion || "Grado y Sección";
+    var temas = data.temasLista || ["Contenido Curricular"];
+
+    var objetivoGeneral = "Fortalecer las competencias y aprendizajes no alcanzados en la asignatura de " + asignatura + " en el grado " + gradoSeccion + " del centro " + centro + ", mediante un plan remedial estructurado.";
+    
+    var objetivosEspecificos = [
+      "Diagnosticar los vacíos conceptuales en los temas reprobados.",
+      "Desarrollar actividades de modelado directo y ejercitación guiada paso a paso.",
+      "Evaluar de forma formativa los avances alcanzados por los estudiantes."
+    ];
+
+    var justificacion = "Atendiendo a los resultados de evaluación y en cumplimiento con la normativa de la Secretaría de Educación de Honduras, se implementa el presente Plan de Mejora Académica para brindar acompañamiento técnico-pedagógico oportuno a los estudiantes con rezago.";
+
+    var metodologia = [
+      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Revisión de evaluaciones anteriores e identificación de errores comunes en los temas reprobados." },
+      { titulo: "Fase 2: Modelado Directo y Talleres Prácticos", texto: "Explicación de conceptos, fórmulas y resolución de ejercicios modelo en la pizarra paso a paso." },
+      { titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio", texto: "Atención diferenciada según las necesidades de los estudiantes con apoyo de guías didácticas." },
+      { titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos", texto: "Verificación de avances a través de listas de cotejo, actividades de salida y cuadernos de trabajo." }
+    ];
+
+    var matriz = temas.map(function (t) {
+      var tMin = t.toLowerCase();
+      var accionesTexto = "";
+
+      if (tMin.includes("racional") || tMin.includes("fraccion") || tMin.includes("decimal")) {
+        accionesTexto = "Concepto / Propiedad: Operaciones con Números Racionales (Fracciones Heterogéneas)\n" +
+                       "Fórmula / Ecuación: a/b + c/d = (a × d + b × c) ÷ (b × d)\n" +
+                       "Variables:\n" +
+                       "  • a, c = Numeradores de las fracciones\n" +
+                       "  • b, d = Denominadores (b ≠ 0, d ≠ 0)\n" +
+                       "Problema Modelo: Resolver la suma de 3/4 + 1/2.\n" +
+                       "Resolución Paso a Paso:\n" +
+                       "  • Paso 1: Mínimo común denominador => mcm(4, 2) = 4\n" +
+                       "  • Paso 2: Homogeneizar fracciones => 3/4 + 2/4\n" +
+                       "  • Paso 3: Sumar numeradores conservando el denominador => (3 + 2) ÷ 4 = 5/4\n" +
+                       "Respuesta (R): Resultado = 5/4 = 1 1/4\n" +
+                       "Actividad de Ejercitación:\n" +
+                       "  • Resolver guía de 5 ejercicios de adición de fracciones heterogéneas en el cuaderno.";
+      } else if (tMin.includes("ecuacio") || tMin.includes("lineal") || tMin.includes("primer grado")) {
+        accionesTexto = "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
+                       "Fórmula / Ecuación: a × x + b = c\n" +
+                       "Variables:\n" +
+                       "  • a = Coeficiente de la incógnita (a = 3)\n" +
+                       "  • x = Incógnita a despejar\n" +
+                       "  • b = Término independiente (+ 6)\n" +
+                       "  • c = Término constante del segundo miembro (21)\n" +
+                       "Problema Modelo: Resolver la ecuación 3 × x + 6 = 21.\n" +
+                       "Resolución Paso a Paso:\n" +
+                       "  • Paso 1: Transposición del término constante b => 3 × x = 21 - 6\n" +
+                       "  • Paso 2: Simplificar el segundo miembro => 3 × x = 15\n" +
+                       "  • Paso 3: Despejar la variable x dividiendo entre a => x = 15 ÷ 3\n" +
+                       "  • Paso 4: Calcular el resultado final => x = 5\n" +
+                       "Respuesta (R): x = 5\n" +
+                       "Actividad de Ejercitación:\n" +
+                       "  • Resolver taller de 4 ecuaciones de primer grado verificando el despeje de la variable.";
+      } else if (tMin.includes("perimetro") || tMin.includes("área") || tMin.includes("area") || tMin.includes("figuras")) {
+        accionesTexto = "Concepto / Propiedad: Perímetro y Área de Figuras Planas (Triángulo)\n" +
+                       "Fórmula / Ecuación: A = (b × h) ÷ 2 ; P = a + b + c\n" +
+                       "Variables:\n" +
+                       "  • b = Base del triángulo (b = 10 cm)\n" +
+                       "  • h = Altura del triángulo (h = 8 cm)\n" +
+                       "  • A = Área calculada en unidades cuadradas (cm²)\n" +
+                       "Problema Modelo: Calcular el área de un triángulo con base b = 10 cm y altura h = 8 cm.\n" +
+                       "Resolución Paso a Paso:\n" +
+                       "  • Paso 1: Sustitución de variables en la fórmula => A = (10 cm × 8 cm) ÷ 2\n" +
+                       "  • Paso 2: Multiplicación de base por altura => A = 80 cm² ÷ 2\n" +
+                       "  • Paso 3: División entre 2 => A = 40 cm²\n" +
+                       "Respuesta (R): El área del triángulo es A = 40 cm²\n" +
+                       "Actividad de Ejercitación:\n" +
+                       "  • Calcular el área y perímetro de 3 figuras geométricas planas dibujadas en el cuaderno.";
+      } else {
+        accionesTexto = "Concepto / Propiedad: Fundamentos y algoritmo de " + t + "\n" +
+                       "Problema Modelo: Resolver el ejercicio modelo sobre " + t + ".\n" +
+                       "Resolución Paso a Paso:\n" +
+                       "  • Paso 1: Identificación de datos e incógnitas.\n" +
+                       "  • Paso 2: Aplicación del procedimiento y cálculo preciso.\n" +
+                       "  • Paso 3: Verificación del resultado.\n" +
+                       "Respuesta (R): Solución justificada y verificada.\n" +
+                       "Actividad de Ejercitación:\n" +
+                       "  • Guía práctica individual en el cuaderno.";
+      }
+
       return {
         tema: t,
         objetivos: "Aplicar de forma rigurosa los procedimientos, algoritmos y fórmulas de " + t + " en la resolución de problemas.",
         acciones: accionesTexto,
         estrategias: "Demostración guiada en la pizarra con resolución de problemas modelo y práctica individual supervisada.",
         producto: "Guía de ejercicios resueltos paso a paso con justificación procedimental.",
-        recursos: "Cuaderno, pizarra, marcadores, libro de texto de " + data.asignatura + ".",
+        recursos: "Cuaderno, pizarra, marcadores, libro de texto de " + asignatura + ".",
         observaciones: "Monitoreo pedagógico continuo y acompañamiento en dudas frecuentes."
       };
     });
@@ -1160,9 +1259,6 @@ Perímetro y área de figuras planas</textarea>
     };
   }
 
-  /* ============================================================
-     CONSTRUCTORES DE DOCUMENTOS WORD (.DOCX)
-     ============================================================ */
   function construirDocxMejora(data, contenido) {
     var D = window.docx;
     var NAVY = "0C2340";
