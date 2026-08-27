@@ -643,7 +643,7 @@ Perímetro y área de figuras planas</textarea>
         <div class="field">
           <label for="s-asignatura">Asignatura</label>
           <select id="s-asignatura">
-            <option value="Matemática">Matemática (Disponible)</option>
+            <option value="Matemática">Matemática (Disponible 1° a 9°)</option>
             <option value="Español" disabled>Español (Próximamente)</option>
             <option value="Ciencias Naturales" disabled>Ciencias Naturales (Próximamente)</option>
             <option value="Ciencias Sociales" disabled>Ciencias Sociales (Próximamente)</option>
@@ -700,49 +700,242 @@ Perímetro y área de figuras planas</textarea>
   "use strict";
 
   /* ============================================================
-     BASE DE DATOS COMPLETA DEL CNB DE MATEMÁTICA (1° A 9° GRADO)
+     BASE DE DATOS COMPLETA 100% DEL CNB DE MATEMÁTICA (1° A 9° GRADO)
      ============================================================ */
   var cnbDataMatematica = {
     "1° Grado": [
-      { unidad: "Unidad 1: Relación de objetos (10 hrs)", expectativas: ["Identifican la característica común de objetos de su entorno."], contenidos: ["Tamaños (grande, pequeño)", "Espesores", "Colores", "Distancias", "Formas y posiciones", "El tiempo"] },
-      { unidad: "Unidad 2: Conjunto (4 hrs)", expectativas: ["Identifican objetos de igual característica como conjunto.", "Establecen la correspondencia uno a uno entre dos conjuntos."], contenidos: ["Identificación de características comunes", "Formación del conjunto", "Comparación de tamaños"] },
-      { unidad: "Unidad 3: Números hasta 9 (11 hrs)", expectativas: ["Desarrollan el concepto de número.", "Componen y descomponen números para preparar la suma y resta."], contenidos: ["Conteo del 1 al 9", "El número cero", "Orden ascendente/descendente", "Composición y descomposición"] },
+      { unidad: "Unidad 1: Relación de objetos (10 hrs)", expectativas: ["Identifican la característica común de objetos de su entorno."], contenidos: ["Tamaños (grande, pequeño)", "Espesores (grueso, delgado, gordo, flaco)", "Colores (rojo, azul, claro, oscuro)", "Distancias (cerca, lejos)", "Formas (cuadrangular, rectangular, triangular, redonda)", "Posiciones (izquierda, derecha, dentro, fuera)", "El tiempo (día, noche, antes, ahora, después)"] },
+      { unidad: "Unidad 2: Conjunto (4 hrs)", expectativas: ["Identifican objetos de igual característica como conjunto.", "Establecen la correspondencia uno a uno entre los elementos de dos conjuntos.", "Comparan el tamaño de conjuntos."], contenidos: ["Identificación de características comunes", "Formación del conjunto", "Relación entre dos objetos", "Comparación del tamaño mediante la correspondencia uno a uno"] },
+      { unidad: "Unidad 3: Números hasta 9 (11 hrs)", expectativas: ["Desarrollan el concepto de número.", "Componen y descomponen números para preparar el aprendizaje de la suma y sustracción."], contenidos: ["Conteo del 1 al 9", "El número cero", "Orden ascendente/descendente", "Composición y descomposición"] },
+      { unidad: "Unidad 4: Números ordinales (1) (2 hrs)", expectativas: ["Usan números ordinales para describir situaciones de su vida cotidiana."], contenidos: ["Los números ordinales del primero al noveno (1° al 9°)", "Diferencia entre número ordinal y número cardinal"] },
+      { unidad: "Unidad 5: Líneas (4 hrs)", expectativas: ["Reconocen y nombran los distintos tipos de líneas: abiertas, cerradas, rectas, curvas, mixtas.", "Aplican líneas verticales, horizontales e inclinadas."], contenidos: ["Líneas abiertas y cerradas", "Líneas rectas, curvas, mixtas y quebradas", "Líneas horizontales, verticales e inclinadas"] },
       { unidad: "Unidad 6: Suma (1) (10 hrs)", expectativas: ["Construyen el concepto de agrupación y agregación.", "Resuelven problemas de su entorno."], contenidos: ["Sentidos de la suma", "Planteamiento PO y Respuesta R", "Suma con cero", "Propiedad conmutativa"] },
-      { unidad: "Unidad 7: Resta (1) (7 hrs)", expectativas: ["Construyen el concepto de quitar y diferencia."], contenidos: ["Sentido de quita o sobrante", "Diferencia entre dos grupos", "Resta con cero"] }
+      { unidad: "Unidad 7: Resta (1) (7 hrs)", expectativas: ["Construyen el concepto de quitar y diferencia."], contenidos: ["Sentido de quita o sobrante", "Diferencia entre dos grupos", "Resta con cero"] },
+      { unidad: "Unidad 8: Formas de objetos (6 hrs)", expectativas: ["Identifican y aplican las características de los objetos.", "Clasifican sólidos geométricos."], contenidos: ["Familiarización con objetos", "Clasificación por forma (caja, lata, pelota)", "Superficies planas y curvas", "Largo, ancho y altura"] },
+      { unidad: "Unidad 9: Números hasta 19 (6 hrs)", expectativas: ["Desarrollan el concepto de unidades y decenas.", "Desarrollan el valor posicional."], contenidos: ["Conteo y escritura del 10", "Construcción del 10 (1 decena)", "Números del 11 al 19", "Tabla de valores y recta numérica"] },
+      { unidad: "Unidad 10: Suma (2) (10 hrs)", expectativas: ["Desarrollan estrategias para problemas de adición."], contenidos: ["Suma U + U llevando a la decena", "Operaciones DU + U y U + DU menores que 20", "Tablas de cálculo"] },
+      { unidad: "Unidad 11: Resta (2) (8 hrs)", expectativas: ["Desarrollan estrategias para problemas de sustracción."], contenidos: ["Forma de cálculo 13 - 9", "Resta prestando DU - U = U", "Cálculo vertical"] },
+      { unidad: "Unidad 12: Figuras de dibujos (6 hrs)", expectativas: ["Reconocen y nombran figuras geométricas: triángulo, cuadrado, rectángulo, círculo.", "Componen y descomponen figuras."], contenidos: ["Copia de superficies", "Clasificación de figuras planas", "Largo y ancho", "Interior, exterior y borde"] },
+      { unidad: "Unidad 13: Números hasta 99 (8 hrs)", expectativas: ["Aplican el concepto de posición de unidades para construir números grandes."], contenidos: ["Conteo y escritura de números de 2 cifras", "Composición y descomposición", "Comparación (<, >)", "Conteo en grupos de 2, 5 y 10"] },
+      { unidad: "Unidad 14: Números ordinales (2) (2 hrs)", expectativas: ["Usan números ordinales hasta el vigésimo."], contenidos: ["Los números ordinales hasta el 20°"] },
+      { unidad: "Unidad 15: Moneda nacional (6 hrs)", expectativas: ["Conocen monedas (1 a 50 centavos) y billetes (1 a 50 lempiras).", "Suman y restan con dinero."], contenidos: ["Identificación de monedas y billetes", "Uso de los signos L y C", "Suma y resta aplicada al dinero"] },
+      { unidad: "Unidad 16: Longitud (4 hrs)", expectativas: ["Construyen el concepto de longitud.", "Comparan cualitativamente longitudes."], contenidos: ["Comparación directa e indirecta", "Medición con unidades arbitrarias y corporales"] }
     ],
     "2° Grado": [
-      { unidad: "Unidad 1: Números hasta 999 (14 hrs)", expectativas: ["Construyen decenas hasta 100.", "Amplían el concepto de número hasta 1000."], contenidos: ["Sentido de la centena (100)", "Números de tres cifras", "Lectura, escritura y valor posicional", "Comparación y recta numérica"] },
-      { unidad: "Unidad 4: Suma (12 hrs)", expectativas: ["Aplican el concepto de adición cuyo total es menor que 100 sin llevar y llevando."], contenidos: ["Cálculo horizontal D0+D0", "Cálculo vertical DU+DU sin llevar y llevando", "Resolución de problemas cotidianos"] },
+      { unidad: "Unidad 1: Números hasta 999 (14 hrs)", expectativas: ["Construyen decenas hasta 100.", "Amplían el concepto de número hasta 1000."], contenidos: ["Sentido de la centena (100)", "Números de tres cifras", "Lectura, escritura y valor posicional", "Comparación y recta numérica", "Decenas y centenas próximas"] },
+      { unidad: "Unidad 2: Líneas (3 hrs)", expectativas: ["Identifican los segmentos como lados de figuras."], contenidos: ["Líneas rectas y segmento", "Identificación de segmentos en figuras planas"] },
+      { unidad: "Unidad 3: Suma y resta combinadas (3 hrs)", expectativas: ["Resuelven adiciones y sustracciones combinadas."], contenidos: ["Sumas y restas sucesivas (< 20)", "Operaciones combinadas de suma y resta"] },
+      { unidad: "Unidad 4: Suma (12 hrs)", expectativas: ["Aplican la adición cuyo total es menor que 100 sin llevar y llevando."], contenidos: ["Cálculo horizontal D0+D0", "Cálculo vertical DU+DU sin llevar y llevando", "Resolución de problemas cotidianos"] },
       { unidad: "Unidad 5: Resta (12 hrs)", expectativas: ["Aplican la sustracción cuyo minuendo es menor que 100 sin prestar y prestando."], contenidos: ["Cálculo horizontal DU-D0", "Cálculo vertical DU-DU prestando", "Problemas cotidianos"] },
-      { unidad: "Unidad 7: Multiplicación (37 hrs)", expectativas: ["Construyen el concepto de multiplicación como adición de sumandos iguales.", "Desarrollan las tablas de multiplicar del 1 al 9."], contenidos: ["Sentido del signo (×)", "Términos multiplicando, multiplicador y producto", "Tablas del 1 al 9", "Multiplicación con cero"] },
-      { unidad: "Unidad 9: División (4 hrs)", expectativas: ["Desarrollan el concepto de división como repartir en partes iguales."], contenidos: ["Sentido del signo (÷)", "Términos dividendo, divisor y cociente", "Divisiones exactas usando tablas"] }
+      { unidad: "Unidad 6: Figuras geométricas (5 hrs)", expectativas: ["Construyen figuras geométricas utilizando líneas diversas."], contenidos: ["Composición y descomposición de figuras con tarjetas y pajillas", "Construcción con líneas rectas, curvas y quebradas"] },
+      { unidad: "Unidad 7: Multiplicación (37 hrs)", expectativas: ["Construyen el concepto de multiplicación como adición de sumandos iguales.", "Desarrollan las tablas del 1 al 9."], contenidos: ["Sentido del signo (×)", "Términos multiplicando, multiplicador y producto", "Tablas del 1 al 9", "Multiplicación con cero", "Propiedad conmutativa"] },
+      { unidad: "Unidad 8: Longitud (9 hrs)", expectativas: ["Aplican las unidades de centímetro, decímetro y metro."], contenidos: ["Metro (m), decímetro (dm), centímetro (cm)", "Relaciones (1 m = 10 dm = 100 cm)", "Suma y resta de longitudes"] },
+      { unidad: "Unidad 9: División (4 hrs)", expectativas: ["Desarrollan el concepto de división como repartir en partes iguales."], contenidos: ["Sentido del signo (÷)", "Términos dividendo, divisor y cociente", "Divisiones exactas usando tablas"] },
+      { unidad: "Unidad 10: Sólidos (4 hrs)", expectativas: ["Reconocen cubos, sólidos rectangulares y esferas."], contenidos: ["Clasificación por superficie", "Elementos: superficie, vértice, arista"] },
+      { unidad: "Unidad 11: Moneda (7 hrs)", expectativas: ["Conocen billetes de 100 y 500 lempiras.", "Suman y restan dinero."], contenidos: ["Billetes de 100 y 500 Lempiras", "Equivalencia 1 Lempira = 100 centavos", "Pequeño plan de compras"] },
+      { unidad: "Unidad 12: Tiempo (9 hrs)", expectativas: ["Aplican unidades oficiales de tiempo (segundo, minuto, hora, día, mes, año)."], contenidos: ["Uso del reloj de aguja", "Hora en punto, media hora y minutos", "Calendario"] },
+      { unidad: "Unidad 13: Tablas (2 hrs)", expectativas: ["Recopilan, clasifican y organizan datos estadísticos."], contenidos: ["Conteo y organización de datos", "Elaboración de tablas e interpretación"] }
     ],
     "3° Grado": [
       { unidad: "Unidad 1: Números hasta 9999 (8 hrs)", expectativas: ["Construyen números grandes con unidades de millar."], contenidos: ["Sentido de las unidades de millar (1000)", "Números de 4 cifras", "Forma desarrollada y recta numérica"] },
+      { unidad: "Unidad 2: Líneas paralelas y perpendiculares (6 hrs)", expectativas: ["Desarrollan el concepto de líneas paralelas y perpendiculares."], contenidos: ["Ángulo recto", "Uso del transportador", "Trazo de líneas perpendiculares y paralelas"] },
       { unidad: "Unidad 3: Adición (10 hrs)", expectativas: ["Aplican la adición con total menor que 1000 sin llevar y llevando."], contenidos: ["Cálculo vertical CDU+CDU sin llevar", "Cálculo vertical llevando a la decena, centena y ambas"] },
       { unidad: "Unidad 4: Sustracción (9 hrs)", expectativas: ["Aplican la sustracción con minuendo menor que 1000 sin prestar y prestando."], contenidos: ["Términos de la sustracción", "Cálculo vertical CDU-CDU prestando de decenas y centenas"] },
+      { unidad: "Unidad 5: Triángulos (7 hrs)", expectativas: ["Clasifican e identifican triángulos equiláteros, isósceles y escalenos."], contenidos: ["Vértices, lados, base y altura", "Construcción con compás", "Cálculo del perímetro"] },
       { unidad: "Unidad 6: Multiplicación (13 hrs)", expectativas: ["Aplican la multiplicación cuyo producto es menor que 10,000."], contenidos: ["Multiplicación por 10, 100, 1000", "Algoritmo CDU×U con llevada"] },
-      { unidad: "Unidad 7: División (17 hrs)", expectativas: ["Aplican la división en números hasta 9999 con y sin residuo."], contenidos: ["Divisiones equivalentes e incluidas", "Algoritmo DU÷U y CDU÷U con residuo"] }
+      { unidad: "Unidad 7: División (17 hrs)", expectativas: ["Aplican la división en números hasta 9999 con y sin residuo."], contenidos: ["Divisiones equivalentes e incluidas", "Algoritmo DU÷U y CDU÷U con residuo"] },
+      { unidad: "Unidad 8: Cuadriláteros (6 hrs)", expectativas: ["Reconocen y construyen cuadrados y rectángulos."], contenidos: ["Elementos del cuadrilátero", "Construcción con regla y transportador"] },
+      { unidad: "Unidad 9: Números decimales (9 hrs)", expectativas: ["Desarrollan el concepto de números decimales hasta las décimas."], contenidos: ["Concepto de 0.1 m y 0.1 cm", "Punto decimal y recta numérica", "Suma y resta de decimales"] },
+      { unidad: "Unidad 10: Sólidos geométricos (4 hrs)", expectativas: ["Reconocen cilindros, pirámides, conos y esferas."], contenidos: ["Identificación de elementos: superficie, vértice, arista"] },
+      { unidad: "Unidad 11: Longitud (12 hrs)", expectativas: ["Operan con unidades de mm, cm, dm, m y km."], contenidos: ["El milímetro (mm) y kilómetro (km)", "Uso de la cinta métrica", "Conversiones y notación decimal"] },
+      { unidad: "Unidad 12: Operaciones combinadas (8 hrs)", expectativas: ["Aplican el reglamento del cálculo en operaciones combinadas."], contenidos: ["Uso de paréntesis", "Propiedad asociativa", "Orden de operaciones (+, -, ×, ÷)"] },
+      { unidad: "Unidad 13: Peso (12 hrs)", expectativas: ["Utilizan las unidades oficiales de peso: gramo, kilogramo y tonelada."], contenidos: ["Uso de la balanza", "Unidades g, kg y t", "Conversiones y cálculos"] },
+      { unidad: "Unidad 14: Figuras simétricas (5 hrs)", expectativas: ["Realizan rotaciones tomando como centro el eje de simetría."], contenidos: ["Figuras simétricas y eje de simetría", "Construcción de simetrías"] },
+      { unidad: "Unidad 15: Tiempo (7 hrs)", expectativas: ["Convierten unidades de tiempo y resuelven problemas de duración."], contenidos: ["Reloj y calendario", "Conversiones horas-minutos-segundos", "Tiempo inicial y final"] },
+      { unidad: "Unidad 16: Tablas y gráficos (6 hrs)", expectativas: ["Organizan e interpretan datos en tablas y pictogramas."], contenidos: ["Encuestas sencillas", "Elaboración de pictogramas y tablas de dos dimensiones"] },
+      { unidad: "Unidad 17: Moneda (7 hrs)", expectativas: ["Resuelven problemas usando las denominaciones de la moneda nacional."], contenidos: ["Combinaciones con notación decimal", "Cálculo vertical llevando centavos a lempiras"] }
+    ],
+    "4° Grado": [
+      { unidad: "Unidad 1: Números hasta 1,000,000 (11 hrs)", expectativas: ["Construyen decenas y centenas de millar hasta 1,000,000."], contenidos: ["Lectura y escritura de números de 6 cifras", "Forma desarrollada", "Redondeo y comparación"] },
+      { unidad: "Unidad 2: Ángulos (8 hrs)", expectativas: ["Leen, clasifican y construyen ángulos opuestos y adyacentes."], contenidos: ["Unidad del grado (°)", "Uso del transportador", "Ángulos agudos, llanos y obtusos"] },
+      { unidad: "Unidad 3: Multiplicación (15 hrs)", expectativas: ["Resuelven problemas de multiplicación de números grandes."], contenidos: ["Cálculo vertical ×U, ×D0 y ×DU", "Propiedad asociativa"] },
+      { unidad: "Unidad 4: Triángulos (7 hrs)", expectativas: ["Clasifican triángulos por sus ángulos y calculan su perímetro."], contenidos: ["Acutángulos, rectángulos y obtusángulos", "Suma de ángulos (180°)", "Perímetro"] },
+      { unidad: "Unidad 5: División (16 hrs)", expectativas: ["Resuelven problemas que implican la división de números."], contenidos: ["Cálculo vertical ÷U, ÷D0, ÷DU", "Propiedades de la división"] },
+      { unidad: "Unidad 6: Cuadriláteros (10 hrs)", expectativas: ["Clasifican cuadriláteros en paralelogramos y no paralelogramos."], contenidos: ["Trapecios, romboides y rombos", "Diagonales, base, altura y perímetro"] },
+      { unidad: "Unidad 7: Números decimales (13 hrs)", expectativas: ["Desarrollan el concepto de decimales hasta las milésimas."], contenidos: ["Centésimas y milésimas", "Multiplicación/división por 10", "Suma y resta de decimales"] },
+      { unidad: "Unidad 8: Longitud (8 hrs)", expectativas: ["Operan con unidades del sistema métrico e inglés."], contenidos: ["Decámetro y hectómetro", "Unidades del sistema inglés: pulgada, pie, yarda"] },
+      { unidad: "Unidad 9: Sólidos geométricos (7 hrs)", expectativas: ["Reconocen y construyen modelos de prismas y pirámides."], contenidos: ["Elementos de prismas y pirámides", "Perpendicularidad y paralelismo de aristas"] },
+      { unidad: "Unidad 10: Capacidad (11 hrs)", expectativas: ["Resuelven problemas que implican capacidad de recipientes."], contenidos: ["Litro (l), decilitro (dl), mililitro (ml)", "Galón y botella"] },
+      { unidad: "Unidad 11: Fracciones (7 hrs)", expectativas: ["Desarrollan el concepto de fracción y reconocen sus términos."], contenidos: ["Fracciones propias (< 1)", "Representación gráfica y recta numérica"] },
+      { unidad: "Unidad 12: Monedas (3 hrs)", expectativas: ["Operan con monedas de Centroamérica y Estados Unidos."], contenidos: ["Unidades monetarias regionales", "Conversiones monetarias básicas"] },
+      { unidad: "Unidad 13: Hora y tiempo (3 hrs)", expectativas: ["Resuelven problemas que implican tiempo y duración."], contenidos: ["Uso de tablas y horarios", "Fracciones de hora y año"] },
+      { unidad: "Unidad 14: Peso (8 hrs)", expectativas: ["Resuelven problemas de peso en unidades métricas y no-métricas."], contenidos: ["Gramos, kg, toneladas", "Libras, onzas, quintales y cargas"] },
+      { unidad: "Unidad 15: Ubicación de puntos (4 hrs)", expectativas: ["Leen y ubican puntos en rectas y planos cartesianos."], contenidos: ["Coordenadas cartesianas en el plano"] },
+      { unidad: "Unidad 16: Gráficas de barras (10 hrs)", expectativas: ["Construyen e interpretan gráficas de barras."], contenidos: ["Organización de datos", "Elaboración e interpretación de gráficas de barras"] }
+    ],
+    "5° Grado": [
+      { unidad: "Unidad 1: Potencia y raíz cuadrada (2 hrs)", expectativas: ["Reconocen la potencia y la raíz cuadrada perfecta."], contenidos: ["Potencias (base, exponente)", "Raíz cuadrada de números pequeños"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Reconocen y construyen ángulos complementarios y suplementarios."], contenidos: ["Ángulos complementarios (90°)", "Ángulos suplementarios (180°)"] },
+      { unidad: "Unidad 3: Divisibilidad de números (19 hrs)", expectativas: ["Determinan múltiplos, divisores, mcm, MCD y números primos."], contenidos: ["Reglas de divisibilidad (2, 3, 5, 10)", "Descomposición en factores primos", "mcm y MCD"] },
+      { unidad: "Unidad 4: Área (1) (19 hrs)", expectativas: ["Construyen fórmulas de área de cuadrados y rectángulos."], contenidos: ["Concepto de área", "Unidades oficiales (cm², m², km²)", "Unidades no oficiales (vara², manzana)"] },
+      { unidad: "Unidad 5: Fracciones (21 hrs)", expectativas: ["Desarrollan concepto de fracciones mixtas e impropias y equivalencias."], contenidos: ["Fracciones propias, impropias y mixtas", "Fracciones equivalentes y mínima expresión", "Suma y resta con igual denominador"] },
+      { unidad: "Unidad 6: Gráficas lineales (10 hrs)", expectativas: ["Construyen e interpretan gráficas lineales."], contenidos: ["Elaboración de gráficas de líneas", "Interpretación de tendencias"] },
+      { unidad: "Unidad 7: Números decimales (17 hrs)", expectativas: ["Multiplican y dividen números decimales por naturales."], contenidos: ["Conversión a fracciones", "Multiplicación y división de decimales por naturales"] },
+      { unidad: "Unidad 8: Sólidos geométricos (7 hrs)", expectativas: ["Construyen modelos de cubos, prismas y pirámides."], contenidos: ["Construcción de modelos", "Representación en el plano"] },
+      { unidad: "Unidad 9: Área (2) (21 hrs)", expectativas: ["Calculan el área de triángulos, cuadriláteros y circunferencia."], contenidos: ["Fórmulas de área de triángulos, romboides y trapecios", "Longitud de la circunferencia"] },
+      { unidad: "Unidad 10: Círculo y circunferencia (11 hrs)", expectativas: ["Identifican elementos del círculo y aplican la fórmula del perímetro."], contenidos: ["Radio, diámetro y Pi (π ≈ 3.14)", "Construcción con compás"] },
+      { unidad: "Unidad 11: Polígonos (10 hrs)", expectativas: ["Reconocen características de polígonos regulares y calculan perímetro."], contenidos: ["Clasificación por número de lados", "Polígonos regulares y perímetro"] },
+      { unidad: "Unidad 12: Sistema de numeración de los romanos (2 hrs)", expectativas: ["Reconocen los símbolos romanos del 1 al 3999."], contenidos: ["Símbolos romanos (I, V, X, L, C, D, M)", "Reglas de composición"] }
+    ],
+    "6° Grado": [
+      { unidad: "Unidad 1: Divisibilidad de números (5 hrs)", expectativas: ["Manejan reglas de divisibilidad entre 9 y 11 y MCD/mcm de varios números."], contenidos: ["Regla de divisibilidad entre 9 y 11", "MCD y mcm de tres o más números"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Construyen la bisectriz de un ángulo."], contenidos: ["Sentido de la bisectriz", "Construcción con regla y compás"] },
+      { unidad: "Unidad 3: Números decimales (20 hrs)", expectativas: ["Multiplican y dividen números decimales entre decimales."], contenidos: ["Multiplicación y división decimal×decimal", "Manejo del residuo y redondeo"] },
+      { unidad: "Unidad 4: Área (14 hrs)", expectativas: ["Aplican áreas de polígonos regulares y del círculo."], contenidos: ["Área de pentágonos y hexágonos (apotema)", "Área del círculo (A = πr²)"] },
+      { unidad: "Unidad 5: Adición y sustracción de fracciones (9 hrs)", expectativas: ["Suman y restan fracciones de distinto denominador."], contenidos: ["Adición y sustracción de fracciones heterogéneas", "Fracciones mixtas"] },
+      { unidad: "Unidad 6: Sólidos geométricos (15 hrs)", expectativas: ["Construyen modelos de sólidos y reconocen cuerpos redondos."], contenidos: ["Poliedros y cuerpos redondos", "Desarrollo plano de cilindros y conos"] },
+      { unidad: "Unidad 7: Multiplicación y división de fracciones (16 hrs)", expectativas: ["Multiplican y dividen fracciones entre fracciones."], contenidos: ["Fracción × Fracción", "Fracción ÷ Fracción", "Operaciones combinadas"] },
+      { unidad: "Unidad 8: Volumen (17 hrs)", expectativas: ["Usan unidades de volumen (cm³, m³, km³) para resolver problemas."], contenidos: ["Concepto de volumen", "Cálculo de volumen en prismas y cubos", "Relación volumen-capacidad"] },
+      { unidad: "Unidad 9: Sistema de numeración de los mayas (8 hrs)", expectativas: ["Conocen los fundamentos del sistema maya hasta 400."], contenidos: ["Sistema vigesimal maya", "Suma y resta con números mayas"] },
+      { unidad: "Unidad 10: El calendario de los mayas (4 hrs)", expectativas: ["Conocen los calendarios Tzolkín, Haab y Cuenta Larga."], contenidos: ["Mecanismo del calendario maya", "Rueda calendárica"] },
+      { unidad: "Unidad 11: Cantidad de veces (6 hrs)", expectativas: ["Establecen relaciones entre cantidad básica, comparada y de veces."], contenidos: ["Cálculo de cantidad de veces", "Comparación de cantidades"] },
+      { unidad: "Unidad 12: Cantidad por unidad (18 hrs)", expectativas: ["Aplican conceptos de media, cantidad por unidad y velocidad."], contenidos: ["Media aritmética (promedio)", "Densidad poblacional", "Cálculo de velocidad"] },
+      { unidad: "Unidad 13: Transformaciones (11 hrs)", expectativas: ["Aplican simetría reflexiva y rotacional."], contenidos: ["Simetría reflexiva y rotacional en figuras geométricas"] }
     ],
     "7° Grado": [
       { unidad: "Unidad 1: Números positivos y negativos (29 hrs)", expectativas: ["Comprenden el concepto de números positivos y negativos.", "Aplican las operaciones fundamentales con números positivos y negativos."], contenidos: ["Uso de números positivos y negativos", "Representación gráfica, orden y valor absoluto", "Operaciones combinadas y propiedades"] },
       { unidad: "Unidad 2: Variables y expresiones (22 hrs)", expectativas: ["Expresan cantidades utilizando variables y símbolos algebraicos."], contenidos: ["Expresión algebraica", "Valor numérico", "Términos y coeficientes", "Operaciones algebraicas"] },
       { unidad: "Unidad 3: Ecuaciones de primer grado en una variable (18 hrs)", expectativas: ["Resuelven ecuaciones de primer grado aplicando propiedades de la igualdad."], contenidos: ["Definición de ecuación lineal", "Propiedades de la igualdad y transposición", "Problemas con ecuaciones"] },
-      { unidad: "Unidad 6: Razón, proporcionalidad y porcentaje (23 hrs)", expectativas: ["Resuelven problemas aplicando proporcionalidad directa, inversa y porcentaje."], contenidos: ["Razones y proporciones", "Proporcionalidad directa e inversa", "Porcentaje o tanto por ciento"] }
+      { unidad: "Unidad 4: Conjunto de puntos (5 hrs)", expectativas: ["Definen y construyen conceptos fundamentales de geometría."], contenidos: ["Punto, recta, plano, rayo y segmento", "Distancia y punto medio", "Puntos colineales"] },
+      { unidad: "Unidad 5: Ángulos (8 hrs)", expectativas: ["Miden, clasifican y construyen ángulos y rectas perpendiculares."], contenidos: ["Clasificación de ángulos", "Construcción de bisectriz y mediatriz", "Rectas perpendiculares"] },
+      { unidad: "Unidad 6: Razón, proporcionalidad y porcentaje (23 hrs)", expectativas: ["Resuelven problemas aplicando proporcionalidad directa, inversa y porcentaje."], contenidos: ["Razones y proporciones", "Proporcionalidad directa e inversa", "Porcentaje o tanto por ciento"] },
+      { unidad: "Unidad 7: Gráficas de faja y circulares (10 hrs)", expectativas: ["Organizan e interpretan datos en gráficas de faja y circulares."], contenidos: ["Lectura y construcción de gráficas de faja", "Gráficas circulares o de pastel"] }
     ],
     "8° Grado": [
       { unidad: "Unidad 1: Polinomios (10 hrs)", expectativas: ["Efectúan operaciones de suma, resta, multiplicación y división con monomios y polinomios."], contenidos: ["Monomios y polinomios", "Adición y sustracción", "Multiplicación y división por número"] },
       { unidad: "Unidad 2: Sistema de dos ecuaciones de primer grado en dos variables (20 hrs)", expectativas: ["Resuelven sistemas de dos ecuaciones lineales en dos variables."], contenidos: ["Despeje de variables", "Métodos de reducción y sustitución", "Aplicaciones en problemas reales"] },
-      { unidad: "Unidad 6: Funciones de primer grado (28 hrs)", expectativas: ["Modelan situaciones mediante funciones lineales y grafican en el plano."], contenidos: ["Concepto de función lineal", "Gráfica y forma y=ax+b", "Paralelismo y perpendicularidad"] }
+      { unidad: "Unidad 3: Paralelismo (8 hrs)", expectativas: ["Analizan propiedades de rectas paralelas y transversales."], contenidos: ["Ángulos correspondientes y alternos", "Distancia entre paralelas", "Suma de ángulos de un polígono"] },
+      { unidad: "Unidad 4: Congruencia de triángulos (21 hrs)", expectativas: ["Demuestran la congruencia de triángulos aplicando criterios geométricos."], contenidos: ["Criterios LLL, LAL, ALA", "Demostraciones geométricas", "Triángulos isósceles y rectángulos"] },
+      { unidad: "Unidad 5: Cuadriláteros (10 hrs)", expectativas: ["Identifican y aplican propiedades de cuadriláteros y paralelogramos."], contenidos: ["Condiciones para ser paralelogramo", "Propiedades de rectángulos, rombos y trapecios"] },
+      { unidad: "Unidad 6: Funciones de primer grado (28 hrs)", expectativas: ["Modelan situaciones mediante funciones lineales y grafican en el plano."], contenidos: ["Concepto de función lineal", "Gráfica y forma y=ax+b", "Paralelismo y perpendicularidad"] },
+      { unidad: "Unidad 7: Manera de contar (8 hrs)", expectativas: ["Aplican principios fundamentales del conteo."], contenidos: ["Principio de la suma", "Principio del producto (diagramas de árbol)"] },
+      { unidad: "Unidad 8: Probabilidad (13 hrs)", expectativas: ["Calculan la probabilidad de eventos en situaciones de azar."], contenidos: ["Relación entre razón y probabilidad", "Fórmula de probabilidad", "Cálculo de probabilidad simple"] }
     ],
     "9° Grado": [
       { unidad: "Unidad 1: Polinomios (19 hrs)", expectativas: ["Aplican los productos notables y la factorización de polinomios."], contenidos: ["Multiplicación de polinomios", "Productos notables", "Factorización por factor común, tanteo y trinomios"] },
       { unidad: "Unidad 2: Números reales (24 hrs)", expectativas: ["Comprenden el concepto de raíz cuadrada y efectúan operaciones con números reales."], contenidos: ["Raíz cuadrada e irracionales", "Simplificación y racionalización de raíces"] },
-      { unidad: "Unidad 3: Ecuaciones de segundo grado (13 hrs)", expectativas: ["Resuelven ecuaciones cuadráticas por factorización, completación y fórmula."], contenidos: ["Ecuación de segundo grado", "Métodos de resolución y aplicaciones"] }
+      { unidad: "Unidad 3: Ecuaciones de segundo grado (13 hrs)", expectativas: ["Resuelven ecuaciones cuadráticas por factorización, completación y fórmula."], contenidos: ["Ecuación de segundo grado", "Métodos de resolución y aplicaciones"] },
+      { unidad: "Unidad 4: Semejanza de triángulos (18 hrs)", expectativas: ["Aplican criterios de semejanza de triángulos y proporciones."], contenidos: ["Criterios de semejanza", "Teorema de Thales", "Aplicaciones de semejanza"] },
+      { unidad: "Unidad 5: Teorema de Pitágoras (13 hrs)", expectativas: ["Demuestran y aplican el Teorema de Pitágoras."], contenidos: ["Teorema de Pitágoras en triángulos rectángulos", "Aplicaciones prácticas"] },
+      { unidad: "Unidad 6: Polígonos regulares y el círculo (16 hrs)", expectativas: ["Determinan propiedades de polígonos regulares y tangentes al círculo."], contenidos: ["Polígonos regulares", "Elementos del círculo y tangentes"] },
+      { unidad: "Unidad 7: Sólidos geométricos (11 hrs)", expectativas: ["Calculan área de superficie lateral y volumen de sólidos."], contenidos: ["Área lateral de prismas, conos y pirámides", "Volumen de cilindros, conos y esferas"] },
+      { unidad: "Unidad 8: Organización y presentación de datos (11 hrs)", expectativas: ["Organizan datos en histogramas y calculan medidas de tendencia central."], contenidos: ["Tablas de frecuencia e histogramas", "Media, mediana y moda para datos agrupados"] }
     ]
   };
 
-  /* ... existing UI event listener code ... */
+  var selectCiclo = document.getElementById("s-ciclo");
+  var selectGrado = document.getElementById("s-grado");
+  var selectUnidad = document.getElementById("s-unidad");
+  var previewContent = document.getElementById("cnb-preview-content");
+
+  function actualizarGradosPorCiclo() {
+    var ciclo = selectCiclo.value;
+    selectGrado.innerHTML = "";
+
+    var gradosOptions = [];
+    if (ciclo === "I_CICLO") {
+      gradosOptions = ["1° Grado", "2° Grado", "3° Grado"];
+    } else if (ciclo === "II_CICLO") {
+      gradosOptions = ["4° Grado", "5° Grado", "6° Grado"];
+    } else if (ciclo === "III_CICLO") {
+      gradosOptions = ["7° Grado", "8° Grado", "9° Grado"];
+    }
+
+    gradosOptions.forEach(function (g) {
+      var opt = document.createElement("option");
+      opt.value = g;
+      opt.textContent = g;
+      selectGrado.appendChild(opt);
+    });
+
+    actualizarUnidadesPorGrado();
+  }
+
+  function actualizarUnidadesPorGrado() {
+    var grado = selectGrado.value;
+    selectUnidad.innerHTML = "";
+
+    var unidades = cnbDataMatematica[grado] || [];
+    unidades.forEach(function (u, index) {
+      var opt = document.createElement("option");
+      opt.value = index;
+      opt.textContent = u.unidad;
+      selectUnidad.appendChild(opt);
+    });
+
+    actualizarPreviewCNB();
+  }
+
+  function actualizarPreviewCNB() {
+    var grado = selectGrado.value;
+    var unidadIndex = parseInt(selectUnidad.value, 10) || 0;
+    var unidades = cnbDataMatematica[grado] || [];
+    var u = unidades[unidadIndex];
+
+    if (!u) {
+      previewContent.innerHTML = "No hay datos disponibles.";
+      return;
+    }
+
+    var html = "<p><strong>Expectativas de Logro Oficiales:</strong></p><ul>";
+    u.expectativas.forEach(function (exp) {
+      html += "<li>" + exp + "</li>";
+    });
+    html += "</ul><p style='margin-top:8px;'><strong>Contenidos Clave del CNB:</strong></p><ul>";
+    u.contenidos.forEach(function (c) {
+      html += "<li>" + c + "</li>";
+    });
+    html += "</ul>";
+
+    previewContent.innerHTML = html;
+  }
+
+  selectCiclo.addEventListener("change", actualizarGradosPorCiclo);
+  selectGrado.addEventListener("change", actualizarUnidadesPorGrado);
+  selectUnidad.addEventListener("change", actualizarPreviewCNB);
+
+  // Inicializar al cargar
+  actualizarGradosPorCiclo();
+
+  var tabBtns = document.querySelectorAll(".tab-btn");
+  var tabContents = document.querySelectorAll(".tab-content");
+
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var targetId = btn.getAttribute("data-target");
+      tabBtns.forEach(function (b) { b.classList.remove("active"); });
+      tabContents.forEach(function (c) { c.classList.remove("active"); });
+
+      btn.classList.add("active");
+      document.getElementById(targetId).classList.add("active");
+    });
+  });
+
+  // Modal Flotante de Colaboración
+  var modal = document.getElementById("collaboration-modal");
+  var btnCloseModal = document.getElementById("btn-close-modal");
+  var btnCopyBank = document.getElementById("btn-copy-bank");
+
+  btnCloseModal.addEventListener("click", function () {
+    modal.classList.remove("active");
+  });
+
+  btnCopyBank.addEventListener("click", function () {
+    var textToCopy = "Banco: CUSCATLAN (Ahorros)\nCuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
+    navigator.clipboard.writeText(textToCopy).then(function () {
+      alert("¡Datos bancarios copiados al portapapeles exitosamente!");
+    });
+  });
 
   function generarPlanMejoraLocal(data) {
     var temas = data.temasLista;
@@ -770,24 +963,24 @@ Perímetro y área de figuras planas</textarea>
       return {
         tema: t,
         objetivos: "Aplicar los procedimientos y fórmulas correspondientes a " + t + " en la resolución de problemas.",
-        acciones: "Concepto / Regla: Cálculo de Áreas de Figuras Planas\n" +
-                  "Fórmula: A = (b × h) ÷ 2\n" +
-                  "Desglose de Variables:\n" +
+        acciones: "Concepto / Propiedad: Resolución de " + t + "\n" +
+                  "Fórmula / Ecuación: A = (b × h) ÷ 2\n" +
+                  "Variables:\n" +
                   "  • A = Área de la figura (cm²)\n" +
-                  "  • b = Base del triángulo (cm)\n" +
-                  "  • h = Altura del triángulo (cm)\n" +
+                  "  • b = Base de la figura (cm)\n" +
+                  "  • h = Altura correspondiente (cm)\n" +
                   "Problema Modelo: Hallar el área de un triángulo con base b = 10 cm y altura h = 8 cm.\n" +
-                  "Resolución Paso a Paso:\n" +
-                  "  • Paso 1: Sustitución de valores => A = (10 cm × 8 cm) ÷ 2\n" +
-                  "  • Paso 2: Multiplicación de base por altura => 80 cm²\n" +
+                  "Procedimiento paso a paso:\n" +
+                  "  • Paso 1: Sustitución de valores en la fórmula => A = (10 cm × 8 cm) ÷ 2\n" +
+                  "  • Paso 2: Multiplicación de la base por la altura => 80 cm²\n" +
                   "  • Paso 3: División entre dos => 80 ÷ 2 = 40\n" +
-                  "Respuesta (R): Área = 40 cm²\n" +
+                  "Respuesta (R): Área final = 40 cm²\n" +
                   "Actividad de Ejercitación:\n" +
-                  "  • Taller práctico individual con guía de 5 ejercicios graduados.",
-        estrategias: "Resolución demostrativa en pizarra y trabajo colaborativo en parejas.",
-        producto: "Guía de ejercicios resueltos con procedimiento completo y comprobación.",
-        recursos: "Cuaderno de trabajo, pizarra, marcadores, guías impresas.",
-        observaciones: "Acompañamiento pedagógico continuo por parte del docente."
+                  "  • Guía de 5 problemas graduados para resolver en el cuaderno.",
+        estrategias: "Demostración guiada en la pizarra y resolución individual con apoyo.",
+        producto: "Guía de ejercicios resueltos paso a paso con comprobación.",
+        recursos: "Cuaderno, pizarra, marcadores, fichas de fórmulas.",
+        observaciones: "Acompañamiento pedagógico continuo."
       };
     });
 
@@ -848,13 +1041,13 @@ Perímetro y área de figuras planas</textarea>
               "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
               "Fórmula / Ecuación: a × x + b = c\n" +
               "Variables:\n" +
-              "  • a = Coeficiente de la variable\n" +
+              "  • a = Coeficiente multiplicador de la variable\n" +
               "  • x = Incógnita / Variable desconocida\n" +
-              "  • b, c = Términos independientes",
+              "  • b, c = Términos independientes\n" +
               "Problema Modelo: Hallar el valor de x en la ecuación 3x + 6 = 21.\n" +
               "Procedimiento paso a paso:\n" +
               "  • Paso 1: Transposición del término independiente => 3x = 21 - 6\n" +
-              "  • Paso 2: Resta de términos => 3x = 15\n" +
+              "  • Paso 2: Resta de los términos constantes => 3x = 15\n" +
               "  • Paso 3: Despeje del coeficiente multiplicador => x = 15 ÷ 3\n" +
               "Respuesta (R): x = 5",
               "Práctica guiada en parejas resolviendo 3 ejercicios similares en el cuaderno."
@@ -916,7 +1109,57 @@ Perímetro y área de figuras planas</textarea>
     var GOLD = "A8781F";
     var LABEL_BG = "F1EEE3";
 
-    /* ... existing header/footer & page 1 builders ... */
+    function cell(text, bold, bg, widthPercent) {
+      return new D.TableCell({
+        width: widthPercent ? { size: widthPercent, type: D.WidthType.PERCENTAGE } : undefined,
+        shading: bg ? { fill: bg } : undefined,
+        margins: { top: 80, bottom: 80, left: 100, right: 100 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text || "", bold: !!bold, size: 18, font: "Calibri" })] })]
+      });
+    }
+
+    function headerFooter() {
+      return {
+        default: new D.Header({
+          children: [
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 18, color: NAVY, font: "Calibri" })] }),
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY, space: 4 } }, children: [new D.TextRun({ text: "PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA — " + data.centro.toUpperCase(), size: 16, color: "44506B", font: "Calibri" })] })
+          ]
+        }),
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Documento Docente Oficial · Página ", size: 14, color: "6B7686", font: "Calibri" }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 14, color: "6B7686", font: "Calibri" })] })]
+          })
+        }
+      };
+    }
+
+    var sec1 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 120 }, children: [new D.TextRun({ text: "PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA", bold: true, size: 26, color: NAVY })] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [cell("Centro Educativo:", true, LABEL_BG, 22), cell(data.centro, false, undefined, 28), cell("Ubicación:", true, LABEL_BG, 22), cell(data.ubicacion, false, undefined, 28)] }),
+          new D.TableRow({ children: [cell("Docente Titular:", true, LABEL_BG, 22), cell(data.docente, false, undefined, 28), cell("Asignatura:", true, LABEL_BG, 22), cell(data.asignatura, false, undefined, 28)] }),
+          new D.TableRow({ children: [cell("Grado y Sección:", true, LABEL_BG, 22), cell(data.gradoSeccion, false, undefined, 28), cell("Nivel Educativo:", true, LABEL_BG, 22), cell(data.nivel, false, undefined, 28)] })
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 200, after: 60 }, children: [new D.TextRun({ text: "1. OBJETIVO GENERAL", bold: true, size: 20, color: NAVY })] }),
+      new D.Paragraph({ spacing: { after: 140 }, children: [new D.TextRun({ text: contenido.objetivoGeneral, size: 18 })] }),
+      new D.Paragraph({ spacing: { before: 100, after: 60 }, children: [new D.TextRun({ text: "2. OBJETIVOS ESPECÍFICOS", bold: true, size: 20, color: NAVY })] })
+    ];
+
+    (contenido.objetivosEspecificos || []).forEach(function (obj) {
+      sec1.push(new D.Paragraph({ bullet: { level: 0 }, spacing: { after: 40 }, children: [new D.TextRun({ text: obj, size: 18 })] }));
+    });
+
+    sec1.push(new D.Paragraph({ spacing: { before: 160, after: 60 }, children: [new D.TextRun({ text: "3. JUSTIFICACIÓN PEDAGÓGICA", bold: true, size: 20, color: NAVY })] }));
+    sec1.push(new D.Paragraph({ spacing: { after: 140 }, children: [new D.TextRun({ text: contenido.justificacion, size: 18 })] }));
+    sec1.push(new D.Paragraph({ spacing: { before: 160, after: 60 }, children: [new D.TextRun({ text: "4. METODOLOGÍA DE EJECUCIÓN (4 FASES)", bold: true, size: 20, color: NAVY })] }));
+
+    (contenido.metodologia || []).forEach(function (f) {
+      sec1.push(new D.Paragraph({ spacing: { before: 40, after: 20 }, children: [new D.TextRun({ text: f.titulo + ": ", bold: true, size: 18, color: GOLD }), new D.TextRun({ text: f.texto, size: 18 })] }));
+    });
 
     function mCellHeader(text) {
       return new D.TableCell({ shading: { fill: NAVY }, margins: { top: 90, bottom: 90, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: text, bold: true, color: "FFFFFF", size: 18 })] })] });
@@ -1013,6 +1256,14 @@ Perímetro y área de figuras planas</textarea>
       };
     }
 
+    function tableCell(text, bold, bg, fontSize) {
+      return new D.TableCell({
+        shading: bg ? { fill: bg } : undefined,
+        margins: { top: 70, bottom: 70, left: 80, right: 80 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text || "", bold: !!bold, size: fontSize || 18, font: "Calibri" })] })]
+      });
+    }
+
     function createBulletParagraphs(items) {
       var paragraphs = [];
       (items || []).forEach(function(it) {
@@ -1044,7 +1295,75 @@ Perímetro y área de figuras planas</textarea>
       return paragraphs;
     }
 
-    /* ... existing page1Children code ... */
+    // --- PÁGINA 1: CABECERA Y DATOS GENERALES ---
+    var page1Children = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 60 }, children: [new D.TextRun({ text: "PLAN DE CLASES SEMANAL", bold: true, size: 28, color: NAVY })] }),
+      new D.Paragraph({
+        spacing: { after: 160 },
+        children: [
+          new D.TextRun({ text: data.semana, bold: true, size: 18, color: "44506B" }),
+          new D.TextRun({ text: "\t\t\t\t\t\t\t\t" }),
+          new D.TextRun({ text: data.grado + " – " + data.asignatura, bold: true, size: 18, color: GREEN_HEADER })
+        ]
+      }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+        rows: [
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Institución: ", bold: true, size: 18 }), new D.TextRun({ text: data.centro, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Grado: ", bold: true, size: 18 }), new D.TextRun({ text: data.grado, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Sección: ", bold: true, size: 18 }), new D.TextRun({ text: "_______________", size: 18 })] })] })
+          ]}),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Profesor(a): ", bold: true, size: 18 }), new D.TextRun({ text: data.docente, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Jornada: ", bold: true, size: 18 }), new D.TextRun({ text: data.jornada, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Asignatura: ", bold: true, size: 18 }), new D.TextRun({ text: data.asignatura, size: 18 })] })] })
+          ]}),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Duración: ", bold: true, size: 18 }), new D.TextRun({ text: data.duracion, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Unidad: ", bold: true, size: 18 }), new D.TextRun({ text: data.unidadNombre, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Semana del: ", bold: true, size: 18 }), new D.TextRun({ text: "_______________", size: 18 })] })] })
+          ]})
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 160 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Competencia", true, GREEN_LIGHT, 18), tableCell(contenido.competencia, false, undefined, 18)] }),
+          new D.TableRow({ children: [tableCell("Capacidades", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.capacidades) })] }),
+          new D.TableRow({ children: [tableCell("Desempeños / Indicadores", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.desempenos) })] })
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 120 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Evaluación del aprendizaje", true, GREEN_LIGHT, 18), tableCell("Adaptaciones curriculares", true, GREEN_LIGHT, 18)] }),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 50, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: [
+              new D.Paragraph({ children: [new D.TextRun({ text: "Técnica: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.tecnica, size: 18 })] }),
+              new D.Paragraph({ children: [new D.TextRun({ text: "Instrumento: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.instrumento, size: 18 })] }),
+              new D.Paragraph({ children: [new D.TextRun({ text: "Evidencia: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.evidencia, size: 18 })] })
+            ]}),
+            new D.TableCell({ width: { size: 50, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: [
+              new D.Paragraph({ children: [new D.TextRun({ text: "Para estudiantes con dificultades:", bold: true, size: 18, color: GREEN_HEADER })] })
+            ].concat(createBulletParagraphs(contenido.adaptaciones.dificultades)).concat([
+              new D.Paragraph({ spacing: { before: 60 }, children: [new D.TextRun({ text: "Para estudiantes con ritmo avanzado:", bold: true, size: 18, color: GREEN_HEADER })] })
+            ]).concat(createBulletParagraphs(contenido.adaptaciones.avanzado)) })
+          ]})
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 120 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Referencias docente", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.referenciasDocente) })] }),
+          new D.TableRow({ children: [tableCell("Referencias estudiante", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.referenciasEstudiante) })] })
+        ]
+      })
+    ];
 
     // --- PÁGINA 2+: SESIONES DE APRENDIZAJE ---
     var page2Children = [
@@ -1079,7 +1398,7 @@ Perímetro y área de figuras planas</textarea>
             tableCell(label, true, GREEN_LIGHT, 18),
             new D.TableCell({ width: { size: 52, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(datosMomento.actividades) }),
             new D.TableCell({ width: { size: 20, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(datosMomento.recursos) }),
-            tableCell(datosMomento.tiempo, false, undefined, 10)
+            tableCell(datosMomento.tiempo, false, undefined, 18)
           ]
         }));
       });
@@ -1088,7 +1407,18 @@ Perímetro y área de figuras planas</textarea>
       page2Children.push(new D.Paragraph({ spacing: { before: 120 }, children: [] }));
     });
 
-    /* ... remaining docx generation code ... */
+    // FIRMAS AL FINAL
+    page2Children.push(new D.Paragraph({ spacing: { before: 300 }, children: [] }));
+    page2Children.push(new D.Table({
+      width: { size: 100, type: D.WidthType.PERCENTAGE },
+      borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+      rows: [new D.TableRow({
+        children: [
+          new D.TableCell({ margins: { top: 200, left: 100, right: 100 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma del Docente Titular\n" + data.docente, bold: true, size: 18, color: NAVY })] })] }),
+          new D.TableCell({ margins: { top: 200, left: 100, right: 100 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma de Dirección / Subdirección\n" + data.centro, bold: true, size: 18, color: NAVY })] })] })
+        ]
+      })]
+    }));
 
     var doc = new D.Document({
       sections: [
@@ -1100,7 +1430,164 @@ Perímetro y área de figuras planas</textarea>
     return D.Packer.toBlob(doc);
   }
 
-  /* ... remaining submit handlers ... */
+  function setStatus(el, text, type) {
+    el.className = "status visible " + (type || "info");
+    el.innerHTML = text;
+  }
+
+  function hideStatus(el) {
+    el.className = "status";
+    el.innerHTML = "";
+  }
+
+  function descargarBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }
+
+  // --- SUBMIT FORM 1: PLAN DE MEJORA ---
+  document.getElementById("form-mejora").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    var btn = document.getElementById("btn-mejora");
+    var statusEl = document.getElementById("status-mejora");
+    hideStatus(statusEl);
+
+    var centro = document.getElementById("m-centro").value.trim();
+    var ubicacion = document.getElementById("m-ubicacion").value.trim();
+    var docente = document.getElementById("m-docente").value.trim();
+    var asignatura = document.getElementById("m-asignatura").value.trim();
+    var gradoSeccion = document.getElementById("m-gradoSeccion").value.trim();
+    var nivel = document.getElementById("m-nivel").value.trim();
+    var temasRaw = document.getElementById("m-temas").value.trim();
+
+    if (!centro || !docente || !asignatura || !gradoSeccion || !temasRaw) {
+      setStatus(statusEl, "<strong>Campos requeridos:</strong> Por favor complete los datos obligatorios del formulario.", "error");
+      return;
+    }
+
+    var temasLista = temasRaw.split("\n").map(function (t) { return t.trim(); }).filter(Boolean);
+    var formData = { centro: centro, ubicacion: ubicacion, docente: docente, asignatura: asignatura, gradoSeccion: gradoSeccion, nivel: nivel, temasLista: temasLista };
+
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+
+    try {
+      var response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "plan_mejora", data: formData })
+      });
+
+      var parsedJSON = null;
+      if (response.ok) {
+        var resData = await response.json();
+        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        parsedJSON = JSON.parse(rawText);
+      } else {
+        console.warn("Servidor respondió con error. Generando plan de contingencia pedagógico...");
+        parsedJSON = generarPlanMejoraLocal(formData);
+      }
+
+      var blob = await construirDocxMejora(formData, parsedJSON);
+      descargarBlob(blob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+
+      setStatus(statusEl, "<strong>¡Plan de Mejora generado con éxito!</strong> El archivo Word (.docx) se ha descargado a su dispositivo.", "success");
+    } catch (err) {
+      console.error("Error al procesar:", err);
+      try {
+        var fallbackJSON = generarPlanMejoraLocal(formData);
+        var fallbackBlob = await construirDocxMejora(formData, fallbackJSON);
+        descargarBlob(fallbackBlob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+        setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión estructurada con el formato oficial del CNB.", "success");
+      } catch (fErr) {
+        setStatus(statusEl, "<strong>Error de generación:</strong> No se pudo crear el archivo Word. Revisa tu conexión.", "error");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.removeAttribute("data-loading");
+    }
+  });
+
+  // --- SUBMIT FORM 2: PLANIFICACIÓN SEMANAL ---
+  document.getElementById("form-semanal").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    var btn = document.getElementById("btn-semanal");
+    var statusEl = document.getElementById("status-semanal");
+    hideStatus(statusEl);
+
+    var centro = document.getElementById("s-centro").value.trim();
+    var docente = document.getElementById("s-docente").value.trim();
+    var ciclo = selectCiclo.value;
+    var grado = selectGrado.value;
+    var asignatura = document.getElementById("s-asignatura").value.trim();
+    var semana = document.getElementById("s-semana").value.trim();
+    var duracion = document.getElementById("s-duracion").value.trim();
+    var jornada = document.getElementById("s-jornada").value.trim();
+
+    var unidadIndex = parseInt(selectUnidad.value, 10) || 0;
+    var unidadObj = (cnbDataMatematica[grado] || [])[unidadIndex] || {};
+    var unidadNombre = unidadObj.unidad || "Unidad Curricular";
+
+    if (!centro || !docente || !semana || !duracion) {
+      setStatus(statusEl, "<strong>Campos requeridos:</strong> Complete los campos de la planificación semanal.", "error");
+      return;
+    }
+
+    var formData = {
+      centro: centro, docente: docente, ciclo: ciclo, grado: grado,
+      asignatura: asignatura, semana: semana, duracion: duracion, jornada: jornada,
+      unidadNombre: unidadNombre, expectativas: unidadObj.expectativas || [], contenidos: unidadObj.contenidos || []
+    };
+
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+
+    try {
+      var response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "plan_semanal", data: formData })
+      });
+
+      var parsedJSON = null;
+      if (response.ok) {
+        var resData = await response.json();
+        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        parsedJSON = JSON.parse(rawText);
+      } else {
+        console.warn("Servidor no disponible. Generando planificación con contingencia oficial...");
+        parsedJSON = generarPlanSemanalLocal(formData);
+      }
+
+      var blob = await construirDocxSemanal(formData, parsedJSON);
+      descargarBlob(blob, "Plan_Semanal_" + asignatura + "_" + grado.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+
+      setStatus(statusEl, "<strong>¡Planificación Semanal generada con éxito!</strong> El archivo Word (.docx) está listo para imprimir y firmar.", "success");
+    } catch (err) {
+      console.error("Error al procesar planificación:", err);
+      try {
+        var fallbackJSON = generarPlanSemanalLocal(formData);
+        var fallbackBlob = await construirDocxSemanal(formData, fallbackJSON);
+        descargarBlob(fallbackBlob, "Plan_Semanal_" + asignatura + "_" + grado.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+        setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión oficial alineada al CNB.", "success");
+      } catch (fErr) {
+        setStatus(statusEl, "<strong>Error de generación:</strong> No se pudo procesar el plan semanal.", "error");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.removeAttribute("data-loading");
+    }
+  });
 
 })();
 </script>
