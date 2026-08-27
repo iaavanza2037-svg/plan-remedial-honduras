@@ -996,6 +996,213 @@ Perímetro y área de figuras planas</textarea>
     });
   });
 
+  var cnbDataMatematica = {
+    "1° Grado": [
+      { unidad: "Unidad 1: Relación de objetos (10 hrs)", expectativas: ["Identifican la característica común de objetos de su entorno."], contenidos: ["Tamaños (grande, pequeño)", "Espesores (grueso, delgado)", "Colores", "Distancias (cerca, lejos)", "Formas y posiciones", "El tiempo"] },
+      { unidad: "Unidad 2: Conjunto (4 hrs)", expectativas: ["Identifican objetos de igual característica como conjunto.", "Establecen correspondencia uno a uno.", "Comparan tamaño de conjuntos."], contenidos: ["Característica común", "Formación de conjunto", "Correspondencia uno a uno"] },
+      { unidad: "Unidad 3: Números hasta 9 (11 hrs)", expectativas: ["Desarrollan el concepto de número.", "Componen y descomponen números."], contenidos: ["Conteo 1 a 9", "El número cero", "Orden ascendente/descendente", "Composición/descomposición del 4 al 9"] },
+      { unidad: "Unidad 4: Números ordinales (1) (2 hrs)", expectativas: ["Usan números ordinales en situaciones cotidianas."], contenidos: ["Ordinales del 1° al 9°", "Diferencia con cardinales"] },
+      { unidad: "Unidad 5: Líneas (4 hrs)", expectativas: ["Reconocen y nombran distintos tipos de líneas."], contenidos: ["Líneas abiertas y cerradas", "Rectas, curvas, mixtas", "Horizontales, verticales, inclinadas"] },
+      { unidad: "Unidad 6: Suma (1) (10 hrs)", expectativas: ["Reconocen la adición como agrupación y agregación."], contenidos: ["Sentidos de la suma", "Planteamiento PO y R (totales <= 9)", "Suma con cero", "Propiedad conmutativa"] },
+      { unidad: "Unidad 7: Resta (1) (7 hrs)", expectativas: ["Reconocen la resta como quitar o hallar la diferencia."], contenidos: ["Sentido de quitar y diferencia", "Resta con cero", "Cálculo horizontal y vertical"] },
+      { unidad: "Unidad 8: Formas de objetos (6 hrs)", expectativas: ["Clasifican sólidos geométricos (caja, lata, pelota)."], contenidos: ["Superficies planas y curvas", "Largo, ancho y altura"] },
+      { unidad: "Unidad 9: Números hasta 19 (6 hrs)", expectativas: ["Desarrollan concepto de unidades y decenas."], contenidos: ["El número 10 (1 decena = 10 U)", "Números del 11 al 19", "Tabla de valores D U"] },
+      { unidad: "Unidad 10: Suma (2) (10 hrs)", expectativas: ["Solución de problemas de adición con totales de 10 a 18."], contenidos: ["Suma U + U llevando a la decena", "Operaciones DU + U sin llevar"] },
+      { unidad: "Unidad 11: Resta (2) (8 hrs)", expectativas: ["Solución de problemas de sustracción prestando."], contenidos: ["Resta prestando DU - U = U", "Cálculo horizontal y vertical"] },
+      { unidad: "Unidad 12: Figuras de dibujos (6 hrs)", expectativas: ["Reconocen triángulo, cuadrado, rectángulo y círculo."], contenidos: ["Figuras planas", "Largo y ancho", "Composición y descomposición"] },
+      { unidad: "Unidad 13: Números hasta 99 (8 hrs)", expectativas: ["Aplican concepto de posición de unidades hasta 99."], contenidos: ["Lectura y escritura hasta 99", "Decenas y unidades", "Comparación (<, >)", "Conteo en grupos de 2, 5 y 10"] },
+      { unidad: "Unidad 14: Números ordinales (2) (2 hrs)", expectativas: ["Usan números ordinales hasta el vigésimo."], contenidos: ["Ordinales del 10° al 20°"] },
+      { unidad: "Unidad 15: Moneda nacional (6 hrs)", expectativas: ["Conocen monedas y billetes (1 a 50 lempiras)."], contenidos: ["Símbolos L y C", "Combinaciones de dinero", "Suma y resta con dinero"] },
+      { unidad: "Unidad 16: Longitud (4 hrs)", expectativas: ["Comparan cualitativamente longitudes."], contenidos: ["Comparación directa e indirecta", "Unidades corporales (cuarta, jeme, paso)"] }
+    ],
+    "2° Grado": [
+      { unidad: "Unidad 1: Números hasta 999 (14 hrs)", expectativas: ["Construyen decenas hasta 100 y números hasta 1000."], contenidos: ["Sentido de la centena", "Lectura y escritura hasta 999", "Composición y descomposición", "Recta numérica"] },
+      { unidad: "Unidad 2: Líneas (3 hrs)", expectativas: ["Identifican segmentos como lados de figuras."], contenidos: ["Líneas rectas", "Concepto de segmento"] },
+      { unidad: "Unidad 3: Suma y resta combinadas (3 hrs)", expectativas: ["Resuelven situaciones combinadas de adición y sustracción."], contenidos: ["Operaciones combinadas (< 20)"] },
+      { unidad: "Unidad 4: Suma (12 hrs)", expectativas: ["Adición cuyo total es menor que 100."], contenidos: ["Cálculo vertical DU + DU sin llevar y llevando"] },
+      { unidad: "Unidad 5: Resta (12 hrs)", expectativas: ["Sustracción cuyo minuendo es menor que 100."], contenidos: ["Cálculo vertical DU - DU sin prestar y prestando"] },
+      { unidad: "Unidad 6: Figuras geométricas (5 hrs)", expectativas: ["Construyen figuras con distintos tipos de líneas."], contenidos: ["Composición con tarjetas y pajillas", "Construcción de figuras"] },
+      { unidad: "Unidad 7: Multiplicación (37 hrs)", expectativas: ["Construyen las tablas de multiplicar del 1 al 9."], contenidos: ["Sentido de ×", "Multiplicando, multiplicador, producto", "Tablas del 1 al 9", "Propiedad conmutativa"] },
+      { unidad: "Unidad 8: Longitud (9 hrs)", expectativas: ["Aplican metro, decímetro y centímetro."], contenidos: ["1 m = 10 dm = 100 cm", "Medición con regla", "Operaciones con longitud"] },
+      { unidad: "Unidad 9: División (4 hrs)", expectativas: ["Desarrollan la división como repartición en partes iguales."], contenidos: ["Signo ÷", "Dividendo, divisor, cociente", "División exacta con tablas"] },
+      { unidad: "Unidad 10: Sólidos (4 hrs)", expectativas: ["Reconocen cubos, sólidos rectangulares y esferas."], contenidos: ["Superficies, vértices y aristas"] },
+      { unidad: "Unidad 11: Moneda (7 hrs)", expectativas: ["Conocen billetes de 100 y 500 lempiras."], contenidos: ["Suma y resta de dinero (< 100)", "Presupuesto sencillo"] },
+      { unidad: "Unidad 12: Tiempo (9 hrs)", expectativas: ["Aplican reloj de aguja y unidades de tiempo."], contenidos: ["Horas, minutos, segundos", "Lectura del reloj", "Calendario"] }
+    ],
+    "3° Grado": [
+      { unidad: "Unidad 1: Números hasta 9999 (8 hrs)", expectativas: ["Construyen números de cuatro cifras."], contenidos: ["Unidades de millar", "Forma desarrollada", "Comparación y orden"] },
+      { unidad: "Unidad 2: Líneas paralelas y perpendiculares (6 hrs)", expectativas: ["Desarrollan concepto de paralelismo y perpendicularidad."], contenidos: ["Ángulo recto", "Transportador", "Líneas perpendiculares y paralelas"] },
+      { unidad: "Unidad 3: Adición (10 hrs)", expectativas: ["Adición con total menor que 1000."], contenidos: ["Cálculo vertical CDU + CDU", "Llevando a decenas y centenas"] },
+      { unidad: "Unidad 4: Sustracción (9 hrs)", expectativas: ["Sustracción con minuendo menor que 1000."], contenidos: ["Cálculo vertical CDU - CDU", "Prestando de decenas y centenas"] },
+      { unidad: "Unidad 5: Triángulos (7 hrs)", expectativas: ["Clasifican triángulos por lados y compás."], contenidos: ["Equiláteros, isósceles, escalenos", "Uso del compás", "Perímetro del triángulo"] },
+      { unidad: "Unidad 6: Multiplicación (13 hrs)", expectativas: ["Multiplicación con producto menor que 10000."], contenidos: ["Multiplicación por U y DU", "Cálculo vertical llevando"] },
+      { unidad: "Unidad 7: División (17 hrs)", expectativas: ["División en números hasta 9999."], contenidos: ["División exacta e inexacta", "Residuo", "Prueba de la división"] },
+      { unidad: "Unidad 8: Cuadriláteros (6 hrs)", expectativas: ["Reconocen rectángulos y cuadrados."], contenidos: ["Elementos del cuadrilátero", "Construcción con regla y transportador"] },
+      { unidad: "Unidad 9: Números decimales (9 hrs)", expectativas: ["Desarrollan concepto de número decimal."], contenidos: ["Las décimas (0.1)", "Punto decimal", "Comparación, suma y resta de decimales"] },
+      { unidad: "Unidad 10: Sólidos geométricos (4 hrs)", expectativas: ["Reconocen cilindros, pirámides y conos."], contenidos: ["Elementos: superficie, vértice, arista"] },
+      { unidad: "Unidad 11: Longitud (12 hrs)", expectativas: ["Unidades oficiales mm, cm, dm, m y km."], contenidos: ["1 cm = 10 mm", "1 km = 1000 m", "Cinta métrica", "Conversiones"] },
+      { unidad: "Unidad 12: Operaciones combinadas (8 hrs)", expectativas: ["Aplican jerarquía de operaciones y paréntesis."], contenidos: ["Uso de paréntesis", "Propiedades asociativa y distributiva"] },
+      { unidad: "Unidad 13: Peso (12 hrs)", expectativas: ["Unidades de peso: gramo, kilogramo, tonelada."], contenidos: ["1 kg = 1000 g", "1 t = 1000 kg", "Uso de la balanza"] },
+      { unidad: "Unidad 14: Figuras simétricas (5 hrs)", expectativas: ["Identifican simetría en figuras."], contenidos: ["Eje de simetría", "Construcción de figuras simétricas"] },
+      { unidad: "Unidad 15: Tiempo (7 hrs)", expectativas: ["Conversiones de horas, minutos y segundos."], contenidos: ["Cálculo de hora inicial, duración y hora final"] },
+      { unidad: "Unidad 16: Tablas y gráficos (6 hrs)", expectativas: ["Organizan información en pictogramas y tablas."], contenidos: ["Encuestas sencillas", "Pictogramas", "Tablas de doble entrada"] },
+      { unidad: "Unidad 17: Moneda (7 hrs)", expectativas: ["Operaciones avanzadas con moneda nacional."], contenidos: ["Notación decimal en Lempiras y centavos", "Cálculo vertical"] }
+    ],
+    "4° Grado": [
+      { unidad: "Unidad 1: Números hasta 1,000,000 (11 hrs)", expectativas: ["Construyen decenas y centenas de millar."], contenidos: ["Lectura y escritura hasta 1,000,000", "Forma desarrollada", "Redondeo"] },
+      { unidad: "Unidad 2: Ángulos (8 hrs)", expectativas: ["Miden y clasifican ángulos."], contenidos: ["Ángulos agudos, llanos, obtusos", "Opuestos por el vértice", "Adyacentes"] },
+      { unidad: "Unidad 3: Multiplicación (15 hrs)", expectativas: ["Multiplicación por U, D0 y DU en cálculo vertical."], contenidos: ["Algoritmo vertical", "Propiedad asociativa", "Estimación"] },
+      { unidad: "Unidad 4: Triángulos (7 hrs)", expectativas: ["Clasifican triángulos por la medida de sus ángulos."], contenidos: ["Acutángulos, rectángulos, obtusángulos", "Suma de ángulos internos = 180°"] },
+      { unidad: "Unidad 5: División (16 hrs)", expectativas: ["División entre U, D0 y DU."], contenidos: ["Algoritmo vertical de división", "Propiedades del cociente y residuo"] },
+      { unidad: "Unidad 6: Cuadriláteros (10 hrs)", expectativas: ["Clasifican paralelogramos y no paralelogramos."], contenidos: ["Trapecios, romboides, rombos", "Diagonales y perímetro"] },
+      { unidad: "Unidad 7: Números decimales (13 hrs)", expectativas: ["Concepto de centésimas y milésimas."], contenidos: ["Lectura, escritura, suma, resta y redondeo de decimales"] },
+      { unidad: "Unidad 8: Longitud (8 hrs)", expectativas: ["Unidades del sistema métrico e inglés."], contenidos: ["Decámetro, hectómetro", "Pulgada, pie, yarda"] },
+      { unidad: "Unidad 9: Sólidos geométricos (7 hrs)", expectativas: ["Describen y construyen prismas y pirámides."], contenidos: ["Paralelismo y perpendicularidad de caras y aristas"] },
+      { unidad: "Unidad 10: Capacidad (11 hrs)", expectativas: ["Unidades de capacidad y conversiones."], contenidos: ["Litro, decilitro, mililitro", "Galón y botella"] },
+      { unidad: "Unidad 11: Fracciones (7 hrs)", expectativas: ["Desarrollan el concepto de fracción propia e impropia."], contenidos: ["Numerador y denominador", "Fracciones en la recta numérica"] },
+      { unidad: "Unidad 12: Monedas (3 hrs)", expectativas: ["Monedas centroamericanas y dólares."], contenidos: ["Conversión básica de divisas regional"] },
+      { unidad: "Unidad 13: Hora y tiempo (3 hrs)", expectativas: ["Cálculo de lapsos y horarios."], contenidos: ["Lectura de itinerarios y tablas de tiempo"] },
+      { unidad: "Unidad 14: Peso (8 hrs)", expectativas: ["Unidades métricas y no métricas."], contenidos: ["Libra, onza, arroba, quintal y carga"] },
+      { unidad: "Unidad 15: Ubicación de puntos (4 hrs)", expectativas: ["Leen y ubican puntos en el plano."], contenidos: ["Plano cartesiano", "Coordenadas (x, y)"] },
+      { unidad: "Unidad 16: Gráficas de barras (10 hrs)", expectativas: ["Construyen e interpretan gráficas de barras."], contenidos: ["Lectura y elaboración de gráficas de barras"] }
+    ],
+    "5° Grado": [
+      { unidad: "Unidad 1: Potencia y raíz cuadrada (2 hrs)", expectativas: ["Reconocen potencias y raíces cuadradas sencillas."], contenidos: ["Base y exponente", "Raíz cuadrada de números cuadrados perfectos"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Reconocen ángulos complementarios y suplementarios."], contenidos: ["Suma de ángulos (90° y 180°)"] },
+      { unidad: "Unidad 3: Divisibilidad de números (19 hrs)", expectativas: ["Múltiplos, divisores, m.c.m., M.C.D. y reglas de divisibilidad."], contenidos: ["Divisibilidad entre 2, 3, 5, 10", "Números primos y compuestos", "Descomposición en factores primos"] },
+      { unidad: "Unidad 4: Área (1) (19 hrs)", expectativas: ["Fórmulas de área para cuadrados y rectángulos."], contenidos: ["Concepto de área", "Unidades cm², m², km²", "Unidades no oficiales (vara², manzana)"] },
+      { unidad: "Unidad 5: Fracciones (21 hrs)", expectativas: ["Fracciones equivalentes, reducción y operaciones."], contenidos: ["Fracción mixta e impropia", "Mínima expresión", "Suma y resta con igual denominador"] },
+      { unidad: "Unidad 6: Gráficas lineales (10 hrs)", expectativas: ["Construyen e interpretan gráficas de líneas."], contenidos: ["Interpretación de tendencia (aumento/disminución)"] },
+      { unidad: "Unidad 7: Números decimales (17 hrs)", expectativas: ["Multiplicación y división de decimales por enteros."], contenidos: ["Operaciones con decimales", "Conversión a fracciones de denominador 10"] },
+      { unidad: "Unidad 8: Sólidos geométricos (7 hrs)", expectativas: ["Modelos de cubos, prismas y pirámides."], contenidos: ["Representación en el plano"] },
+      { unidad: "Unidad 9: Área (2) (21 hrs)", expectativas: ["Área de triángulos, romboides, trapecios y círculo."], contenidos: ["Fórmulas de área para polígonos", "Longitud de la circunferencia (2 π r)"] },
+      { unidad: "Unidad 10: Círculo y circunferencia (11 hrs)", expectativas: ["Elementos del círculo y circunferencia."], contenidos: ["Radio, diámetro, centro", "Uso del compás"] },
+      { unidad: "Unidad 11: Polígonos (10 hrs)", expectativas: ["Clasifican polígonos hasta 10 lados."], contenidos: ["Cóncavos y convexos", "Polígonos regulares", "Perímetro"] },
+      { unidad: "Unidad 12: Números romanos (2 hrs)", expectativas: ["Sistema de numeración romana."], contenidos: ["Símbolos del I al MMMCMXCIX"] }
+    ],
+    "6° Grado": [
+      { unidad: "Unidad 1: Divisibilidad de números (5 hrs)", expectativas: ["Reglas de divisibilidad entre 9 y 11, m.c.m. y M.C.D."], contenidos: ["Criterios de 9 y 11", "M.C.D y m.c.m. de más de 2 números"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Construyen la bisectriz de un ángulo."], contenidos: ["Trazado de bisectriz con compás"] },
+      { unidad: "Unidad 3: Números decimales (20 hrs)", expectativas: ["Multiplicación y división entre números decimales."], contenidos: ["Multiplicación decimal × decimal", "División decimal ÷ decimal", "Redondeo de cociente"] },
+      { unidad: "Unidad 4: Área (14 hrs)", expectativas: ["Área de polígonos regulares y círculos."], contenidos: ["Apotema", "Área del círculo (π r²)", "Sector circular"] },
+      { unidad: "Unidad 5: Adición y sustracción de fracciones (9 hrs)", expectativas: ["Suma y resta de fracciones heterogéneas."], contenidos: ["Mínimo común denominador", "Simplificación"] },
+      { unidad: "Unidad 6: Sólidos geométricos (15 hrs)", expectativas: ["Poliedros y cuerpos redondos."], contenidos: ["Cilindro, cono, esfera", "Cuerpos de revolución"] },
+      { unidad: "Unidad 7: Multiplicación y división de fracciones (16 hrs)", expectativas: ["Multiplicación y división de fracciones."], contenidos: ["Fracción × Fracción", "Fracción ÷ Fracción", "Propiedades"] },
+      { unidad: "Unidad 8: Volumen (17 hrs)", expectativas: ["Unidades de volumen (cm³, m³, km³)."], contenidos: ["Volumen de prismas y cilindros", "Relación volumen-capacidad"] },
+      { unidad: "Unidad 9: Numeración maya (8 hrs)", expectativas: ["Fundamentos de la numeración maya."], contenidos: ["Símbolos punto, barra y caracol", "Base 20 hasta 400"] },
+      { unidad: "Unidad 10: Calendario maya (4 hrs)", expectativas: ["Mecanismo del calendario maya."], contenidos: ["Tzolkín, Haab y Cuenta Larga"] },
+      { unidad: "Unidad 11: Cantidad de veces (6 hrs)", expectativas: ["Relación entre cantidad básica, comparada y veces."], contenidos: ["Cálculo de razón de cambio escalar"] },
+      { unidad: "Unidad 12: Cantidad por unidad (18 hrs)", expectativas: ["Concepto de media y velocidad."], contenidos: ["Promedio aritmético", "Velocidad = Distancia / Tiempo"] },
+      { unidad: "Unidad 13: Transformaciones (11 hrs)", expectativas: ["Simetría reflexiva y rotacional."], contenidos: ["Ejes de simetría", "Rotaciones en el plano"] }
+    ],
+    "7° Grado": [
+      { unidad: "Unidad 1: Números positivos y negativos (29 hrs)", expectativas: ["Construyen el concepto de números enteros y racionales.", "Operan con números positivos y negativos."], contenidos: ["Representación en la recta numérica", "Valor absoluto y orden", "Adición, sustracción, multiplicación y división", "Propiedad distributiva"] },
+      { unidad: "Unidad 2: Variables y expresiones (22 hrs)", expectativas: ["Expresan cantidades usando variables algebraicas."], contenidos: ["Variables", "Reglas del lenguaje algebraico", "Valor numérico", "Operaciones con expresiones algebraicas"] },
+      { unidad: "Unidad 3: Ecuaciones de primer grado en una variable (18 hrs)", expectativas: ["Resuelven ecuaciones de primer grado."], contenidos: ["Propiedades de la igualdad", "Transposición de términos", "Resolución de problemas contextualizados"] },
+      { unidad: "Unidad 4: Conjunto de puntos (5 hrs)", expectativas: ["Definen y construyen elementos fundamentales de geometría."], contenidos: ["Punto, recta, plano, rayo, segmento", "Distancia y punto medio"] },
+      { unidad: "Unidad 5: Ángulos (8 hrs)", expectativas: ["Construyen y clasifican ángulos."], contenidos: ["Clasificación de ángulos", "Bisectriz", "Perpendicularidad y mediatriz"] },
+      { unidad: "Unidad 6: Razón, proporcionalidad y porcentaje (23 hrs)", expectativas: ["Resuelven problemas de proporción y porcentaje."], contenidos: ["Razones y proporciones", "Proporcionalidad directa e inversa", "Porcentajes"] },
+      { unidad: "Unidad 7: Gráficas de faja y circulares (10 hrs)", expectativas: ["Construyen e interpretan gráficas circulares."], contenidos: ["Gráficas de faja", "Gráficas circulares", "Interpretación de datos"] }
+    ],
+    "8° Grado": [
+      { unidad: "Unidad 1: Polinomios (10 hrs)", expectativas: ["Operan con monomios y polinomios."], contenidos: ["Suma, resta, multiplicación y división de polinomios"] },
+      { unidad: "Unidad 2: Sistema de dos ecuaciones de primer grado en dos variables (20 hrs)", expectativas: ["Resuelven sistemas de ecuaciones 2x2."], contenidos: ["Métodos de eliminación y sustitución", "Problemas de aplicación"] },
+      { unidad: "Unidad 3: Paralelismo (8 hrs)", expectativas: ["Relacionan ángulos formados por rectas paralelas y transversales."], contenidos: ["Ángulos alternos internos, alternos externos y correspondientes"] },
+      { unidad: "Unidad 4: Congruencia de triángulos (21 hrs)", expectativas: ["Demuestran congruencia de triángulos."], contenidos: ["Criterios LLL, LAL, ALA", "Triángulos isósceles y rectángulos"] },
+      { unidad: "Unidad 5: Cuadriláteros (10 hrs)", expectativas: ["Demuestran propiedades de paralelogramos."], contenidos: ["Condiciones para ser paralelogramo", "Trapecios y rombos"] },
+      { unidad: "Unidad 6: Funciones de primer grado (28 hrs)", expectativas: ["Analizan y grafican funciones lineales y = ax + b."], contenidos: ["Razón de cambio", "Gráfica de funciones lineales", "Criterio de paralelismo"] },
+      { unidad: "Unidad 7: Manera de contar (8 hrs)", expectativas: ["Aplican principios del conteo."], contenidos: ["Principio de la suma", "Principio del producto"] },
+      { unidad: "Unidad 8: Probabilidad (13 hrs)", expectativas: ["Calculan probabilidades de eventos."], contenidos: ["Fórmula de probabilidad", "Propiedades de la probabilidad"] }
+    ],
+    "9° Grado": [
+      { unidad: "Unidad 1: Polinomios (19 hrs)", expectativas: ["Multiplicación de polinomios, productos notables y factorización."], contenidos: ["Productos notables", "Factorización por diferencia de cuadrados y trinomios"] },
+      { unidad: "Unidad 2: Números reales (24 hrs)", expectativas: ["Operan con raíces cuadradas y números irracionales."], contenidos: ["Raíz cuadrada", "Simplificación y racionalización", "Operaciones con radicales"] },
+      { unidad: "Unidad 3: Ecuaciones de segundo grado (13 hrs)", expectativas: ["Resuelven ecuaciones cuadráticas ax² + bx + c = 0."], contenidos: ["Factorización", "Fórmula cuadrática", "Aplicación de ecuaciones cuadráticas"] },
+      { unidad: "Unidad 4: Semejanza de triángulos (18 hrs)", expectativas: ["Aplican criterios de semejanza de triángulos."], contenidos: ["Criterios de semejanza", "Teorema de Thales", "Aplicaciones prácticas"] },
+      { unidad: "Unidad 5: Teorema de Pitágoras (13 hrs)", expectativas: ["Aplican el Teorema de Pitágoras en problemas geométricos."], contenidos: ["a² + b² = c²", "Demostración y aplicaciones cotidianas"] },
+      { unidad: "Unidad 6: Polígonos regulares y el círculo (16 hrs)", expectativas: ["Propiedades de círculos y polígonos regulares."], contenidos: ["Tangentes a un círculo", "Área y perímetro de polígonos regulares"] },
+      { unidad: "Unidad 7: Sólidos geométricos (11 hrs)", expectativas: ["Calculan área lateral y volumen de cuerpos 3D."], contenidos: ["Volumen de cilindros, pirámides, conos y esferas"] },
+      { unidad: "Unidad 8: Organización y presentación de datos (11 hrs)", expectativas: ["Analizan medidas de tendencia central y histogramas."], contenidos: ["Tablas de frecuencia", "Histogramas", "Moda, media y mediana"] }
+    ]
+  };
+
+  var selectCiclo = document.getElementById("s-ciclo");
+  var selectGrado = document.getElementById("s-grado");
+  var selectUnidad = document.getElementById("s-unidad");
+  var cnbPreviewContent = document.getElementById("cnb-preview-content");
+
+  function actualizarGradosPorCiclo() {
+    if (!selectCiclo || !selectGrado) return;
+    var cicloVal = selectCiclo.value;
+    selectGrado.innerHTML = "";
+
+    var gradosList = [];
+    if (cicloVal === "I_CICLO") {
+      gradosList = ["1° Grado", "2° Grado", "3° Grado"];
+    } else if (cicloVal === "II_CICLO") {
+      gradosList = ["4° Grado", "5° Grado", "6° Grado"];
+    } else {
+      gradosList = ["7° Grado", "8° Grado", "9° Grado"];
+    }
+
+    gradosList.forEach(function(g) {
+      var opt = document.createElement("option");
+      opt.value = g;
+      opt.textContent = g;
+      selectGrado.appendChild(opt);
+    });
+
+    actualizarUnidadesPorGrado();
+  }
+
+  function actualizarUnidadesPorGrado() {
+    if (!selectGrado || !selectUnidad) return;
+    var gradoVal = selectGrado.value;
+    selectUnidad.innerHTML = "";
+
+    var unidades = cnbDataMatematica[gradoVal] || [];
+    unidades.forEach(function(u, idx) {
+      var opt = document.createElement("option");
+      opt.value = idx;
+      opt.textContent = u.unidad;
+      selectUnidad.appendChild(opt);
+    });
+
+    actualizarPreviewCNB();
+  }
+
+  function actualizarPreviewCNB() {
+    if (!selectGrado || !selectUnidad || !cnbPreviewContent) return;
+    var gradoVal = selectGrado.value;
+    var uIdx = parseInt(selectUnidad.value, 10) || 0;
+    var unidades = cnbDataMatematica[gradoVal] || [];
+    var uObj = unidades[uIdx];
+
+    if (!uObj) {
+      cnbPreviewContent.innerHTML = "<em>No hay datos del CNB seleccionados.</em>";
+      return;
+    }
+
+    var html = "<p><strong>Expectativas de Logro Oficiales:</strong></p><ul>";
+    (uObj.expectativas || []).forEach(function(exp) {
+      html += "<li>" + exp + "</li>";
+    });
+    html += "</ul><p style='margin-top:8px;'><strong>Contenidos Clave del CNB:</strong></p><ul>";
+    (uObj.contenidos || []).forEach(function(c) {
+      html += "<li>" + c + "</li>";
+    });
+    html += "</ul>";
+
+    cnbPreviewContent.innerHTML = html;
+  }
+
+  if (selectCiclo) selectCiclo.addEventListener("change", actualizarGradosPorCiclo);
+  if (selectGrado) selectGrado.addEventListener("change", actualizarUnidadesPorGrado);
+  if (selectUnidad) selectUnidad.addEventListener("change", actualizarPreviewCNB);
+
+  // Inicializar selectores en pantalla
+  actualizarGradosPorCiclo();
+
   function generarPlanMejoraLocal(data) {
     var centro = data.centro || "Centro Educativo";
     var docente = data.docente || "Docente Titular";
