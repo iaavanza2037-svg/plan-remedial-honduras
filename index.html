@@ -661,8 +661,8 @@
 </head>
 <body>
 
-<!-- Modal Flotante de Colaboración (Oculto por defecto) -->
-<div class="modal-overlay" id="collaboration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<!-- Modal Flotante de Colaboración (Visible automáticamente al cargar) -->
+<div class="modal-overlay active" id="collaboration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-card">
     <div class="modal-header">
       <div class="modal-header-icon">🤝</div>
@@ -954,102 +954,34 @@ Perímetro y área de figuras planas</textarea>
 (function () {
   "use strict";
 
-  function generarPlanMejoraLocal(data) {
-    var temas = data.temasLista || [];
-    var temasTexto = temas.join(", ");
+  var modal = document.getElementById("collaboration-modal");
+  var btnCloseModal = document.getElementById("btn-close-modal");
+  var btnOpenModal = document.getElementById("btn-open-modal");
+  var btnCopyBank = document.getElementById("btn-copy-bank");
 
-    var objetivoGeneral = "Fortalecer y nivelar los aprendizajes de las y los estudiantes de " + data.gradoSeccion +
-      " del " + data.centro + " en " + data.asignatura +
-      ", mediante un plan de recuperación pedagógica alineado al CNB para superar el rezago en: " + temasTexto + ".";
-
-    var objetivosEspecificos = temas.map(function (t) {
-      return "Consolidar el dominio técnico, algoritmos y resolución de problemas correspondientes a " + t + " mediante talleres guiados y ejercitación práctica.";
+  if (btnCloseModal && modal) {
+    btnCloseModal.addEventListener("click", function() {
+      modal.classList.remove("active");
     });
+  }
 
-    var justificacion = "El presente Plan de Mejora responde a la necesidad de atender oportunamente el rezago en " + data.asignatura +
-      " para " + data.gradoSeccion + " en " + data.centro + ", garantizando el logro de las competencias del CNB.";
+  if (btnOpenModal && modal) {
+    btnOpenModal.addEventListener("click", function() {
+      modal.classList.add("active");
+    });
+  }
 
-    var metodologia = [
-      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Evaluación inicial para identificar errores procedimentales y conceptuales en " + temasTexto + "." },
-      { titulo: "Fase 2: Modelado Directo y Ejercitación Guiada", texto: "Explicación de conceptos clave con resolución rigurosa de problemas modelo en la pizarra." },
-      { titulo: "Fase 3: Tutorías Individualizadas", texto: "Atención personalizada mediante guías prácticas graduadas paso a paso." },
-      { titulo: "Fase 4: Evaluación de Dominio", texto: "Prueba formativa de desempeño y verificación de aprendizajes alcanzados." }
-    ];
-
-    var matriz = temas.map(function (t) {
-      var tMin = t.toLowerCase();
-      var accionesTexto = "";
-
-      if (tMin.includes("racional") || tMin.includes("fraccion") || tMin.includes("decimal")) {
-        accionesTexto = "Concepto o Regla: Adición y Sustracción de Números Racionales (Fracciones Heterogéneas)\n" +
-                        "Fórmula o Propiedad: a/b + c/d = (a × d + b × c) ÷ (b × d)\n" +
-                        "Problema Modelo: Un estudiante resuelve 3/4 partes de una guía en la mañana y 1/2 parte en la tarde. ¿Qué fracción del total resolvió?\n" +
-                        "Resolución Paso a Paso:\n" +
-                        "  • Paso 1: Mínimo común denominador entre 4 y 2 => mcm(4, 2) = 4\n" +
-                        "  • Paso 2: Conversión a fracciones equivalentes => 3/4 + 2/4\n" +
-                        "  • Paso 3: Suma de numeradores manteniendo el denominador => (3 + 2) ÷ 4 = 5/4 = 1 1/4\n" +
-                        "Respuesta (R): Resolvió 5/4 (o 1 entero y 1/4) del total de la guía.\n" +
-                        "Actividad de Ejercitación:\n" +
-                        "  • Resolver taller de 5 ejercicios con operaciones combinadas de números racionales (fracciones y decimales).";
-      } else if (tMin.includes("ecuacio") || tMin.includes("primer grado") || tMin.includes("lineal")) {
-        accionesTexto = "Concepto o Regla: Ecuaciones Lineales de Primer Grado en una Variable\n" +
-                        "Fórmula o Propiedad: a × x + b = c (Ecuación Canónica)\n" +
-                        "Desglose de Variables:\n" +
-                        "  • a = Coeficiente multiplicador de la variable (3)\n" +
-                        "  • x = Incógnita / Variable desconocida por despejar\n" +
-                        "  • b = Término independiente constante (+ 5)\n" +
-                        "  • c = Valor constante resultante (20)\n" +
-                        "Problema Modelo: Resolver la ecuación lineal 3 × x + 5 = 20 aplicando transposición de términos.\n" +
-                        "Resolución Paso a Paso:\n" +
-                        "  • Paso 1: Transposición de la constante b (+5) al lado derecho => 3 × x = 20 - 5\n" +
-                        "  • Paso 2: Simplificación de constantes => 3 × x = 15\n" +
-                        "  • Paso 3: Despeje del coeficiente a (3) dividiendo ambos miembros => x = 15 ÷ 3\n" +
-                        "  • Paso 4: Obtención del valor de la incógnita x => x = 5\n" +
-                        "Respuesta (R): x = 5\n" +
-                        "Actividad de Ejercitación:\n" +
-                        "  • Resolver guía práctica de 5 ecuaciones de primer grado verificando el valor de x por sustitución.";
-      } else if (tMin.includes("perimetro") || tMin.includes("area") || tMin.includes("superficie")) {
-        accionesTexto = "Concepto o Regla: Cálculo del Perímetro y Área de Figuras Planas (Triángulo y Rectángulo)\n" +
-                        "Fórmula o Propiedad: Área del Triángulo A = (b × h) ÷ 2 ; Perímetro del Rectángulo P = 2 × b + 2 × h\n" +
-                        "Desglose de Variables:\n" +
-                        "  • A = Área o superficie resultante en unidades cuadradas (cm²)\n" +
-                        "  • b = Base de la figura plana (10 cm)\n" +
-                        "  • h = Altura de la figura plana (6 cm)\n" +
-                        "Problema Modelo: Calcule el área A de un triángulo cuya base mide b = 10 cm y su altura h = 6 cm.\n" +
-                        "Resolución Paso a Paso:\n" +
-                        "  • Paso 1: Sustitución de variables b y h en la fórmula del área => A = (10 cm × 6 cm) ÷ 2\n" +
-                        "  • Paso 2: Multiplicación de la base por la altura => A = 60 cm² ÷ 2\n" +
-                        "  • Paso 3: División entre 2 para obtener el área A => A = 30 cm²\n" +
-                        "Respuesta (R): Área del triángulo A = 30 cm²\n" +
-                        "Actividad de Ejercitación:\n" +
-                        "  • Resolver guía con 4 problemas de perímetro P y área A para rectángulos y triángulos trazados en el cuaderno.";
-      } else if (tMin.includes("puntos") || tMin.includes("recta") || tMin.includes("segmento") || tMin.includes("geometr")) {
-        accionesTexto = "Concepto o Regla: Distancia entre dos puntos en un segmento de recta\n" +
-                        "Fórmula o Propiedad: d = |x2 - x1|\n" +
-                        "Desglose de Variables:\n" +
-                        "  • d = Distancia total entre el punto A y el punto B\n" +
-                        "  • x1 = Coordenada inicial del punto A (3)\n" +
-                        "  • x2 = Coordenada final del punto B (11)\n" +
-                        "Problema Modelo: Hallar la distancia d entre el punto A(3) y el punto B(11) en la recta numérica.\n" +
-                        "Resolución Paso a Paso:\n" +
-                        "  • Paso 1: Sustitución de coordenadas x1 y x2 en la fórmula => d = |11 - 3|\n" +
-                        "  • Paso 2: Cálculo de la diferencia interna => d = |8|\n" +
-                        "  • Paso 3: Aplicación del valor absoluto => d = 8 unidades\n" +
-                        "Respuesta (R): Distancia d = 8 unidades\n" +
-                        "Actividad de Ejercitación:\n" +
-                        "  • Resolver guía de 5 ejercicios en la recta numérica calculando distancias d y puntos medios M.";
-      } else {
-        accionesTexto = "Concepto o Regla: Dominio y aplicación de " + t + "\n" +
-                        "Fórmula o Propiedad: Regla procedimental de " + t + "\n" +
-                        "Problema Modelo: Resolver ejercicio representativo de " + t + " aplicando el algoritmo oficial del CNB.\n" +
-                        "Resolución Paso a Paso:\n" +
-                        "  • Paso 1: Análisis de datos e identificación del procedimiento adecuado.\n" +
-                        "  • Paso 2: Ejecución del cálculo o desarrollo matemático en el cuaderno.\n" +
-                        "  • Paso 3: Verificación del resultado final y comprobación.\n" +
-                        "Respuesta (R): Resultado verificado y justificado.\n" +
-                        "Actividad de Ejercitación:\n" +
-                        "  • Resolver guía de 5 ejercicios del libro de texto correspondientes a " + t + ".";
-      }
+  if (btnCopyBank) {
+    btnCopyBank.addEventListener("click", function() {
+      var textoBanco = "Banco: CUSCATLAN (Ahorros)\nN° Cuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
+      navigator.clipboard.writeText(textoBanco).then(function() {
+        btnCopyBank.innerText = "¡Datos copiados!";
+        setTimeout(function() { btnCopyBank.innerText = "Copiar datos de cuenta"; }, 2500);
+      }).catch(function() {
+        alert(textoBanco);
+      });
+    });
+  }
 
       return {
         tema: t,
