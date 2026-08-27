@@ -13,8 +13,88 @@ export default async function handler(req, res) {
 
   const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
-  const systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior de la Secretaría de Educación de Honduras. 
-Tu función es redactar y estructurar Planes de Recuperación y Nivelación Académica de acuerdo con el Currículo Nacional Básico (CNB) de Honduras.
+  const taskType = req.body.type || "plan_mejora";
+  const data = req.body.data || {};
+
+  let systemPrompt = "";
+  let userMessage = "";
+
+  if (taskType === "plan_semanal") {
+    systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior de la Secretaría de Educación de Honduras.
+Tu función es redactar la Planificación Semanal de Clases en formato JSON exacto, estructurado con competencias, capacidades, indicadores, evaluación, adaptaciones y sesiones didácticas.
+
+REGLA OBLIGATORIA PARA MATEMÁTICA, FÍSICA, QUÍMICA Y ASIGNATURAS PRÁCTICAS:
+- En las actividades de desarrollo de las sesiones debes incluir OBLIGATORIAMENTE:
+  1. Fórmulas y ecuaciones necesarias con desglose explícito de sus variables (ejemplo: $A = \\frac{b \\cdot h}{2}$, donde $A$ = Área, $b$ = Base, $h$ = Altura).
+  2. Ejercicios modelo resueltos paso a paso con simbología matemática limpia, clara y rigurosa.
+  3. Problemas prácticos aplicados a situaciones cotidianas con Planteamiento Operativo (PO), desarrollo algebraico y respuesta (R).
+
+Debes responder obligatoriamente en formato JSON exacto respetando el siguiente esquema:
+{
+  "competencia": "string",
+  "capacidades": ["string", "string", "string", "string"],
+  "desempenos": ["string", "string", "string", "string"],
+  "evaluacion": {
+    "tecnica": "string",
+    "instrumento": "string",
+    "evidencia": "string"
+  },
+  "adaptaciones": {
+    "dificultades": ["string", "string"],
+    "avanzado": ["string"]
+  },
+  "referenciasDocente": ["string", "string"],
+  "referenciasEstudiante": ["string", "string"],
+  "sesiones": [
+    {
+      "numero": 1,
+      "titulo": "string",
+      "inicio": {
+        "actividades": ["string", "string"],
+        "recursos": ["string", "string"],
+        "tiempo": "8 min"
+      },
+      "desarrollo": {
+        "actividades": [
+          "Explicación de fórmula/ecuación y variables...",
+          "Ejercicio modelo resuelto paso a paso con simbología matemática formal...",
+          "Práctica guiada de resolución de problemas..."
+        ],
+        "recursos": ["string", "string"],
+        "tiempo": "28 min"
+      },
+      "cierre": {
+        "actividades": ["string", "string"],
+        "recursos": ["string"],
+        "tiempo": "9 min"
+      }
+    }
+  ]
+}`;
+
+    userMessage = `Genera la Planificación Semanal de Clases oficial para:
+Centro Educativo: ${data.centro}
+Docente: ${data.docente}
+Ciclo: ${data.ciclo}
+Grado: ${data.grado}
+Asignatura: ${data.asignatura}
+Semana / Fechas: ${data.semana}
+Duración: ${data.duracion}
+Jornada: ${data.jornada}
+Unidad Curricular CNB: ${data.unidadNombre}
+Expectativas de Logro Oficiales: ${JSON.stringify(data.expectativas)}
+Contenidos Clave del CNB: ${JSON.stringify(data.contenidos)}`;
+
+  } else {
+    // Task Type: plan_mejora
+    systemPrompt = `Eres un Asesor Técnico-Pedagógico Senior de la Secretaría de Educación de Honduras. 
+Tu función es redactar y estructurar Planes de Mejora y Nivelación Académica de acuerdo con el Currículo Nacional Básico (CNB) de Honduras.
+
+REGLA OBLIGATORIA PARA MATEMÁTICA Y ASIGNATURAS PRÁCTICAS:
+- En las acciones, estrategias y productos de la Matriz Operativa debes incluir OBLIGATORIAMENTE:
+  1. Fórmulas y ecuaciones clave con sus variables definidas.
+  2. Ejercicios tipo resueltos paso a paso con simbología matemática limpia y profesional.
+
 Debes responder obligatoriamente en formato JSON exacto respetando el siguiente esquema:
 {
   "objetivoGeneral": "string",
@@ -30,7 +110,7 @@ Debes responder obligatoriamente en formato JSON exacto respetando el siguiente 
     {
       "tema": "string",
       "objetivos": "string",
-      "acciones": "string",
+      "acciones": "string con fórmulas, variables y ejercicios resueltos paso a paso",
       "estrategias": "string",
       "producto": "string",
       "recursos": "string",
@@ -39,8 +119,19 @@ Debes responder obligatoriamente en formato JSON exacto respetando el siguiente 
   ]
 }`;
 
+    userMessage = `Genera un Plan de Mejora Académica para:
+Centro Educativo: ${data.centro}
+Ubicación: ${data.ubicacion}
+Docente: ${data.docente}
+Asignatura: ${data.asignatura}
+Grado y Sección: ${data.gradoSeccion}
+Nivel Educativo: ${data.nivel}
+Temas reprobados / críticos con rezago:
+${(data.temasLista || []).map(t => "- " + t).join("\n")}`;
+  }
+
   const payload = {
-    contents: req.body.contents,
+    contents: [{ parts: [{ text: userMessage }] }],
     systemInstruction: { parts: [{ text: systemPrompt }] },
     generationConfig: {
       responseMimeType: "application/json"
@@ -62,8 +153,8 @@ Debes responder obligatoriamente en formato JSON exacto respetando el siguiente 
       });
     }
 
-    const data = await response.json();
-    return res.status(200).json(data);
+    const resData = await response.json();
+    return res.status(200).json(resData);
 
   } catch (error) {
     console.error('Error en el servidor proxy:', error);
