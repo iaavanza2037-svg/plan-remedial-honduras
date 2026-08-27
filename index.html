@@ -217,7 +217,7 @@
 
     .field.invalid .field-error { display: block; }
 
-    /* ---------- Botón de Acción ---------- */
+    /* ---------- Botones ---------- */
     .actions {
       display: flex;
       align-items: center;
@@ -355,9 +355,180 @@
       font-size: 12.5px;
       color: var(--ink-soft);
     }
+
+    /* ---------- Modal Flotante de Colaboración ---------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(8, 23, 38, 0.72);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+      padding: 28px 24px;
+      position: relative;
+      transform: translateY(12px);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-header-icon {
+      flex: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 1.28rem;
+      color: var(--ink);
+    }
+
+    .modal-body {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .modal-body p { margin: 0 0 12px; }
+
+    .bank-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 16px 0;
+    }
+
+    .bank-box h3 {
+      margin: 0 0 8px;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.8px;
+      padding: 3px 0;
+      border-bottom: 1px stroke var(--line);
+    }
+
+    .bank-row strong { color: var(--ink); }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      transition: background 0.15s ease;
+    }
+
+    .btn-secondary:hover { background: var(--gold-soft); }
+
+    .btn-primary-close {
+      appearance: none;
+      border: none;
+      background: var(--navy);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      transition: background 0.15s ease;
+    }
+
+    .btn-primary-close:hover { background: var(--navy-soft); }
   </style>
 </head>
 <body>
+
+<!-- Modal Flotante de Colaboración -->
+<div class="modal-overlay active" id="collaboration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-header-icon">🤝</div>
+      <h2 id="modal-title">Apoyo y Sostenibilidad del Proyecto</h2>
+    </div>
+    <div class="modal-body">
+      <p>Estimado docente: esta herramienta ha sido creada con el compromiso de simplificar su labor pedagógica y ahorrarle horas de trabajo administrativo.</p>
+      <p>Mantener este servicio activo implica costos continuos de **procesamiento con Inteligencia Artificial (API de Gemini)**, alojamiento en servidores y desarrollo de nuevas utilidades técnico-pedagógicas.</p>
+      <p>Si esta herramienta le es de utilidad, le invitamos a realizar una **colaboración voluntaria** para apoyar el mantenimiento de la plataforma:</p>
+
+      <div class="bank-box">
+        <h3>Aportes y Donaciones</h3>
+        <div class="bank-row"><span>Banco:</span> <strong>CUSCATLAN (Ahorros)</strong></div>
+        <div class="bank-row"><span>N° de Cuenta:</span> <strong>216020010216</strong></div>
+        <div class="bank-row"><span>Celular / Tigo Money:</span> <strong>88839869</strong></div>
+        <div class="bank-row"><span>Titular:</span> <strong>Kenfor Euceda</strong></div>
+        <div class="bank-row"><span>DNI:</span> <strong>1707198102734</strong></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" id="btn-copy-bank" type="button">Copiar datos de cuenta</button>
+      <button class="btn-primary-close" id="btn-close-modal" type="button">Continuar a la herramienta</button>
+    </div>
+  </div>
+</div>
 
 <div class="page">
   <header class="letterhead">
@@ -492,6 +663,27 @@ Perímetro y área de figuras planas</textarea>
 <script>
 (function () {
   "use strict";
+
+  /* ============================================================
+     LÓGICA DEL MODAL DE COLABORACIÓN
+     ============================================================ */
+  var modal = document.getElementById("collaboration-modal");
+  var btnCloseModal = document.getElementById("btn-close-modal");
+  var btnCopyBank = document.getElementById("btn-copy-bank");
+
+  btnCloseModal.addEventListener("click", function () {
+    modal.classList.remove("active");
+  });
+
+  btnCopyBank.addEventListener("click", function () {
+    var textToCopy = "BANCO CUSCATLAN (Ahorros)\nCuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
+    navigator.clipboard.writeText(textToCopy).then(function() {
+      btnCopyBank.textContent = "¡Copiado con éxito!";
+      setTimeout(function() { btnCopyBank.textContent = "Copiar datos de cuenta"; }, 2500);
+    }).catch(function() {
+      alert(textToCopy);
+    });
+  });
 
   function splitTemas(raw) {
     return raw
