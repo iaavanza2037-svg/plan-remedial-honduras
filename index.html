@@ -1168,7 +1168,50 @@ Perímetro y área de figuras planas</textarea>
   // Inicializar selectores
   actualizarGradosPorCiclo();
 
-  // Genera UNA fila de la matriz de Plan de Mejora para un tema puntual.
+  // ¿Es una asignatura "práctica" (Matemática, Física, Química, Biología con
+  // cálculos, Estadística), donde el docente espera problemas resueltos con
+  // números reales paso a paso? Si no, se asume "teórica/comunicativa"
+  // (Español, Estudios Sociales, Historia, Cívica, etc.), donde NO tiene
+  // sentido inventar fórmulas ni "problemas numéricos".
+  function normalizarSinAcentos(str) {
+    return String(str || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+  }
+
+  function esAsignaturaPractica(asignatura) {
+    var a = normalizarSinAcentos(asignatura);
+    var clavesPracticas = ["matemat", "fisica", "quimic", "biolog", "ciencias naturales", "estadistic"];
+    return clavesPracticas.some(function (k) { return a.indexOf(k) !== -1; });
+  }
+
+  // Fila de respaldo para una asignatura TEÓRICA / COMUNICATIVA (Español,
+  // Estudios Sociales, etc.): sin fórmulas ni "problemas" numéricos, con
+  // una estructura de análisis de texto y producción oral/escrita.
+  function generarFilaTeoricaLocal(t) {
+    var accionesTexto = "Concepto o Contenido: " + t + "\n" +
+                       "Texto o Situación Modelo: Fragmento o situación comunicativa auténtica relacionada con " + t + ".\n" +
+                       "Guía de Análisis:\n" +
+                       "  • Pregunta 1: ¿Qué elementos o características de " + t + " se identifican en el texto o situación presentada?\n" +
+                       "  • Pregunta 2: ¿Cómo se relaciona lo observado con la vida cotidiana del estudiante?\n" +
+                       "Actividad de Producción (oral o escrita): Los estudiantes redactan o exponen oralmente un ejemplo propio aplicando " + t + ".\n" +
+                       "Retroalimentación: El docente revisa la producción con una lista de cotejo y brinda observaciones individuales.";
+
+    return {
+      tema: t,
+      objetivos: "Demostrar comprensión y aplicación práctica (oral o escrita) del contenido de " + t + ".",
+      acciones: accionesTexto,
+      estrategias: "Modelado del docente con texto guía, análisis dirigido y producción individual o en parejas con retroalimentación.",
+      producto: "Producción oral o escrita evaluada con lista de cotejo.",
+      recursos: "Textos de apoyo, cuaderno de trabajo, pizarra y marcadores.",
+      observaciones: "Acompañamiento personalizado para asegurar la superación de la dificultad."
+    };
+  }
+
+  // Genera UNA fila de la matriz de Plan de Mejora para un tema puntual de
+  // una asignatura PRÁCTICA (Matemática, Física, Química, etc.).
   // Se extrajo como función independiente (antes vivía dentro de un
   // .map() anónimo) para poder reutilizarla también como respaldo cuando
   // la IA devuelve menos filas de las solicitadas (ver alinearMatrizConTemas).
@@ -1180,7 +1223,7 @@ Perímetro y área de figuras planas</textarea>
   // primer grado") caía en la rama de cuadráticas por error, generando el
   // tema equivocado en el documento. Ahora la rama de cuadráticas solo se
   // activa con palabras específicas de segundo grado / cuadrática.
-  function generarFilaMejoraLocal(t) {
+  function generarFilaPracticaLocal(t) {
     var tMin = t.toLowerCase();
     var accionesTexto = "";
 
@@ -1268,32 +1311,48 @@ Perímetro y área de figuras planas</textarea>
     };
   }
 
+  // Selecciona la plantilla correcta (práctica o teórica) según la
+  // asignatura, para una fila puntual de la matriz.
+  function generarFilaMejoraLocal(t, asignatura) {
+    return esAsignaturaPractica(asignatura) ? generarFilaPracticaLocal(t) : generarFilaTeoricaLocal(t);
+  }
+
   function generarPlanMejoraLocal(data) {
     var centro = data.centro || "Centro Educativo";
     var docente = data.docente || "Docente Titular";
     var asignatura = data.asignatura || "Asignatura";
     var gradoSeccion = data.gradoSeccion || "Grado y Sección";
     var temas = data.temasLista || ["Contenido Curricular"];
+    var practica = esAsignaturaPractica(asignatura);
 
     var objetivoGeneral = "Fortalecer los aprendizajes no alcanzados en la asignatura de " + asignatura + " en el grado " + gradoSeccion + " del centro " + centro + ", mediante acciones remediales estructuradas y contextualizadas.";
 
-    var objetivosEspecificos = [
+    var objetivosEspecificos = practica ? [
       "Diagnosticar las dificultades conceptuales y procedimentales de los estudiantes en los contenidos no alcanzados.",
       "Desarrollar acciones didácticas de modelado directo y resolución de problemas modelo paso a paso.",
       "Evaluar formativamente la nivelación mediante guías prácticas y tareas de aplicación real."
+    ] : [
+      "Diagnosticar las dificultades de comprensión y expresión de los estudiantes en los contenidos no alcanzados.",
+      "Desarrollar acciones didácticas de análisis de textos/situaciones modelo y producción oral o escrita guiada.",
+      "Evaluar formativamente la nivelación mediante producciones orales o escritas y listas de cotejo."
     ];
 
     var justificacion = "Atendiendo a los resultados de evaluación y en cumplimiento con la normativa de la Secretaría de Educación de Honduras, se implementa el presente Plan de Mejora y Nivelación Académica para brindar acompañamiento pedagógico oportuno y recuperatorio a los estudiantes con rezago.";
 
-    var metodologia = [
+    var metodologia = practica ? [
       { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Revisión de instrumentos de evaluación anteriores e identificación de errores frecuentes en las tareas o exámenes." },
       { titulo: "Fase 2: Modelado Directo y Talleres Prácticos", texto: "Explicación directa de conceptos, fórmulas y resolución guiada de problemas modelo paso a paso operando con las variables." },
       { titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio", texto: "Atención diferenciada según las necesidades de aprendizaje con apoyo de guías de trabajo adaptadas." },
       { titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos", texto: "Verificación del dominio del contenido mediante guías calificadas, listas de cotejo y cuadernos de trabajo." }
+    ] : [
+      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Revisión de producciones orales o escritas anteriores e identificación de errores frecuentes de comprensión o expresión." },
+      { titulo: "Fase 2: Modelado Directo y Análisis de Textos Modelo", texto: "Presentación de textos o situaciones auténticas y guía de análisis dirigida por el docente." },
+      { titulo: "Fase 3: Tutorías Individualizadas y Círculos de Estudio", texto: "Atención diferenciada según las necesidades de comprensión o expresión con apoyo de guías adaptadas." },
+      { titulo: "Fase 4: Evaluación Formativa mediante Rúbricas y Compromisos", texto: "Verificación del dominio del contenido mediante producciones orales o escritas calificadas con lista de cotejo." }
     ];
 
     var matriz = temas.map(function (t) {
-      return generarFilaMejoraLocal(t);
+      return generarFilaMejoraLocal(t, asignatura);
     });
 
     return { objetivoGeneral: objetivoGeneral, objetivosEspecificos: objetivosEspecificos, justificacion: justificacion, metodologia: metodologia, matriz: matriz };
@@ -1303,11 +1362,12 @@ Perímetro y área de figuras planas</textarea>
   // IA (o la plantilla local), esta función garantiza que cada fila de la
   // matriz quede etiquetada EXACTAMENTE con el tema que el docente escribió
   // en el formulario, en el mismo orden. Si a la IA le faltó una fila,
-  // se completa con la plantilla local para ese tema puntual.
-  function alinearMatrizConTemas(parsedJSON, temasLista) {
+  // se completa con la plantilla local (práctica o teórica, según la
+  // asignatura) para ese tema puntual.
+  function alinearMatrizConTemas(parsedJSON, temasLista, asignatura) {
     var matrizOriginal = (parsedJSON && Array.isArray(parsedJSON.matriz)) ? parsedJSON.matriz : [];
     var matrizAlineada = temasLista.map(function (tema, i) {
-      var fila = matrizOriginal[i] || generarFilaMejoraLocal(tema);
+      var fila = matrizOriginal[i] || generarFilaMejoraLocal(tema, asignatura);
       fila.tema = tema;
       return fila;
     });
@@ -1320,11 +1380,30 @@ Perímetro y área de figuras planas</textarea>
     var uNombre = data.unidadNombre || "Unidad Curricular";
     var uMin = uNombre.toLowerCase();
     var grado = data.grado || "3° Grado";
+    var practica = esAsignaturaPractica(data.asignatura);
 
     var desarrolloSesion1 = "";
     var desarrolloSesion2 = "";
 
-    if (uMin.includes("puntos") || uMin.includes("recta") || uMin.includes("geomet")) {
+    if (!practica) {
+      // Asignatura teórica/comunicativa (Español, Estudios Sociales, etc.):
+      // nunca se inventan fórmulas ni "problemas" numéricos.
+      desarrolloSesion1 = "Concepto o Contenido: " + uNombre + "\n" +
+                         "Texto o Situación Modelo: Fragmento o situación comunicativa auténtica relacionada con " + uNombre + ".\n" +
+                         "Guía de Análisis:\n" +
+                         "  • Pregunta 1: ¿Qué elementos clave de " + uNombre + " se observan en el texto o situación?\n" +
+                         "  • Pregunta 2: ¿Cómo se relaciona con experiencias de la vida cotidiana del estudiante?\n" +
+                         "Actividad de Producción (oral o escrita): Los estudiantes elaboran una producción propia (oral o escrita) aplicando " + uNombre + ".\n" +
+                         "Retroalimentación: El docente revisa con una lista de cotejo y brinda observaciones individuales.";
+
+      desarrolloSesion2 = "Concepto o Contenido: Profundización de " + uNombre + "\n" +
+                         "Texto o Situación Modelo: Segundo texto o situación con mayor nivel de complejidad sobre " + uNombre + ".\n" +
+                         "Guía de Análisis:\n" +
+                         "  • Pregunta 1: ¿Qué diferencias o matices se identifican respecto al ejemplo anterior?\n" +
+                         "  • Pregunta 2: ¿Qué conclusiones se pueden argumentar sobre el contenido?\n" +
+                         "Actividad de Producción (oral o escrita): Exposición breve o texto final integrando lo trabajado en ambas sesiones.\n" +
+                         "Retroalimentación: Coevaluación entre pares guiada por una rúbrica sencilla.";
+    } else if (uMin.includes("puntos") || uMin.includes("recta") || uMin.includes("geomet")) {
       desarrolloSesion1 = "Concepto / Propiedad: Conceptos Fundamentales de Geometría (Punto, Recta, Plano y Segmento)\n" +
                          "Fórmula / Ecuación: Distancia en el segmento AB = |xB - xA|\n" +
                          "Desglose de Variables:\n" +
@@ -1387,23 +1466,39 @@ Perímetro y área de figuras planas</textarea>
     }
 
     return {
-      competencia: "Resuelve problemas acordes a " + uNombre + " (" + grado + "), aplicando rigurosamente los conceptos, fórmulas y estrategias del CNB de Honduras.",
-      capacidades: [
+      competencia: practica
+        ? "Resuelve problemas acordes a " + uNombre + " (" + grado + "), aplicando rigurosamente los conceptos, fórmulas y estrategias del CNB de Honduras."
+        : "Comprende, analiza y produce (oralmente o por escrito) textos y situaciones relacionadas con " + uNombre + " (" + grado + "), conforme al CNB de Honduras.",
+      capacidades: practica ? [
         "Traduce datos y condiciones a expresiones numéricas u operacionales de " + uNombre + ".",
         "Comunica su comprensión sobre las propiedades y algoritmos clave de " + uNombre + ".",
         "Usa estrategias y procedimientos de cálculo adecuados para " + grado + ".",
         "Argumenta afirmaciones sobre relaciones matemáticas y justifica sus soluciones."
+      ] : [
+        "Identifica las características clave de " + uNombre + " en textos o situaciones auténticas.",
+        "Comunica su comprensión sobre " + uNombre + " de forma oral y escrita.",
+        "Usa estrategias de análisis y producción adecuadas para " + grado + ".",
+        "Argumenta sus ideas y justifica sus producciones orales o escritas."
       ],
-      desempenos: [
+      desempenos: practica ? [
         "Establece relaciones entre datos y los transforma en expresiones matemáticas.",
         "Expresa con lenguaje formal su comprensión sobre los contenidos de " + uNombre + ".",
         "Aplica procedimientos de cálculo para resolver problemas modelo paso a paso.",
         "Justifica sus procedimientos mediante ejercicios resueltos en el cuaderno."
+      ] : [
+        "Identifica ideas y elementos clave en los textos o situaciones analizadas.",
+        "Expresa con lenguaje adecuado su comprensión sobre los contenidos de " + uNombre + ".",
+        "Elabora producciones orales o escritas aplicando lo aprendido.",
+        "Justifica sus opiniones y producciones con argumentos claros."
       ],
-      evaluacion: {
+      evaluacion: practica ? {
         tecnica: "Observación sistemática y revisión de producciones escritas.",
         instrumento: "Lista de cotejo y guía de ejercicios calificada.",
         evidencia: "Resolución de problemas en el cuaderno con procedimientos explicados paso a paso."
+      } : {
+        tecnica: "Observación sistemática y revisión de producciones orales y escritas.",
+        instrumento: "Lista de cotejo y rúbrica de producción oral/escrita.",
+        evidencia: "Producciones orales o escritas del estudiante con retroalimentación docente."
       },
       adaptaciones: {
         dificultades: [
@@ -1553,7 +1648,7 @@ Perímetro y área de figuras planas</textarea>
         var trimmed = line.trim();
         if (!trimmed) return;
 
-        var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Resolución") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
+        var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Resolución") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("Texto o Situación") || trimmed.startsWith("Guía de Análisis") || trimmed.startsWith("Retroalimentación") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
         var isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
         var isStep = trimmed.toLowerCase().startsWith("paso") || trimmed.startsWith("PO:") || trimmed.startsWith("R:");
 
@@ -1652,7 +1747,7 @@ Perímetro y área de figuras planas</textarea>
           var trimmed = line.trim();
           if (!trimmed) return;
 
-          var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Procedimiento") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
+          var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Procedimiento") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("Texto o Situación") || trimmed.startsWith("Guía de Análisis") || trimmed.startsWith("Retroalimentación") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
           var isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
           var isStep = trimmed.toLowerCase().startsWith("paso") || trimmed.startsWith("PO:") || trimmed.startsWith("R:");
 
@@ -1901,7 +1996,7 @@ Perímetro y área de figuras planas</textarea>
       // Blindaje: cada fila de la matriz queda etiquetada EXACTAMENTE con
       // el tema escrito en el formulario, sin importar lo que haya
       // respondido la IA (evita el "me mete otro tema en el plan").
-      parsedJSON = alinearMatrizConTemas(parsedJSON, temasLista);
+      parsedJSON = alinearMatrizConTemas(parsedJSON, temasLista, asignatura);
 
       var blob = await construirDocxMejora(formData, parsedJSON);
       descargarBlob(blob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
@@ -1913,7 +2008,7 @@ Perímetro y área de figuras planas</textarea>
     } catch (err) {
       console.error("Error al procesar:", err);
       try {
-        var fallbackJSON = alinearMatrizConTemas(generarPlanMejoraLocal(formData), temasLista);
+        var fallbackJSON = alinearMatrizConTemas(generarPlanMejoraLocal(formData), temasLista, asignatura);
         var fallbackBlob = await construirDocxMejora(formData, fallbackJSON);
         descargarBlob(fallbackBlob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
         setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión estructurada con el formato oficial del CNB.", "success");
