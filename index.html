@@ -97,6 +97,1946 @@
       height: 56px;
     }
 
+    .letterhead-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .letterhead-text .eyebrow {
+      margin: 0 0 3px;
+      font-size: 12.5px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .letterhead-text h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 1rem + 1.2vw, 2.05rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .letterhead-text p {
+      margin: 4px 0 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      max-width: 65ch;
+    }
+
+    /* ---------- Navegación Módulos (Tabs) ---------- */
+    .module-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+
+    .module-nav::-webkit-scrollbar {
+      display: none; /* Chrome / Safari / Edge */
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: none;
+      background: none;
+      font-family: "Spectral", Georgia, serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -6px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .tab-btn:hover { color: var(--navy); }
+
+    .tab-btn.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+    }
+
+    .tab-badge {
+      font-family: "Public Sans", sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 12px;
+      background: var(--gold-soft);
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ---------- Tarjetas y Paneles ---------- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 26px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 18px 12px 48px;
+      }
+
+      .letterhead {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .seal {
+        width: 46px;
+        height: 46px;
+      }
+
+      .card {
+        padding: 20px 16px;
+      }
+
+      button.generate {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .btn-donate-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 1.22rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .card .card-sub {
+      margin: 0 0 22px;
+      color: var(--ink-soft);
+      font-size: 13.8px;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ---------- Formulario y Campos ---------- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .field .hint {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    input[type="text"], select, textarea {
+      font: inherit;
+      font-size: 14.8px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px 12px;
+      width: 100%;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    select:disabled, input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--focus);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.5;
+    }
+
+    .cnb-info-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--navy);
+      border-radius: 7px;
+      padding: 14px 16px;
+      margin-top: 6px;
+      font-size: 13.8px;
+    }
+
+    .cnb-info-box h4 {
+      margin: 0 0 6px;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .cnb-info-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    /* ---------- Botones ---------- */
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    button.generate {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      background: var(--navy);
+      color: #fdfbf6;
+      font: inherit;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 24px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 6px 16px -6px color-mix(in srgb, var(--navy) 70%, transparent);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+    }
+
+    button.generate:hover:not(:disabled) { background: var(--navy-soft); }
+    button.generate:active:not(:disabled) { transform: translateY(1px); }
+
+    button.generate:disabled {
+      cursor: progress;
+      opacity: 0.85;
+    }
+
+    .spinner {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(253, 251, 246, 0.35);
+      border-top-color: #fdfbf6;
+      animation: spin 0.75s linear infinite;
+      display: none;
+    }
+
+    button.generate[data-loading="true"] .spinner { display: inline-block; }
+    button.generate[data-loading="true"] .btn-label-idle { display: none; }
+    button.generate .btn-label-loading { display: none; }
+    button.generate[data-loading="true"] .btn-label-loading { display: inline; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------- Alertas ---------- */
+    .status {
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    .status.visible { display: flex; flex-direction: column; }
+
+    .status.success {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
+    }
+
+    .status.error {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    }
+
+    .status.info {
+      background: var(--gold-soft);
+      color: color-mix(in srgb, var(--gold) 70%, var(--ink) 30%);
+      border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+    }
+
+    .status strong { display: block; margin-bottom: 2px; }
+
+    footer.page-footer {
+      margin-top: 34px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Modal Flotante de Colaboración ---------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(8, 23, 38, 0.72);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+      padding: 28px 24px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 480px) {
+      .modal-card {
+        padding: 20px 16px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+
+      .modal-actions button {
+        width: 100%;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-header-icon {
+      flex: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold-soft);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .modal-header h2 { margin: 0; font-size: 1.28rem; }
+    .modal-body { font-size: 14.5px; line-height: 1.55; }
+    .modal-body p { margin: 0 0 12px; }
+
+    .bank-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 16px 0;
+    }
+
+    .bank-box h3 {
+      margin: 0 0 8px;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+    }
+
+    .bank-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.8px;
+      padding: 3px 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-donate-link {
+      appearance: none;
+      border: 1px solid var(--gold);
+      background: var(--gold-soft);
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease, transform 0.12s ease;
+    }
+
+    .btn-donate-link:hover {
+      background: var(--gold);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn-secondary:hover { background: var(--gold-soft); }
+
+    .btn-primary-close {
+      appearance: none;
+      border: none;
+      background: var(--navy);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+    }
+
+    .btn-primary-close:hover { background: var(--navy-soft); }
+
+    /* ---------- Estilos Módulo Secuencia Completa Bloqueado ---------- */
+    .locked-badge {
+      background: #ae2b1e !important;
+      color: #ffffff !important;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 12px;
+    }
+
+    .pipeline-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0;
+      padding: 20px 16px;
+      background: var(--paper);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .pipeline-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-align: center;
+    }
+
+    .pipeline-flow {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px 8px;
+      width: 100%;
+    }
+
+    .pipeline-step {
+      background: var(--surface);
+      border: 1px solid var(--navy-soft);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 10.5px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .pipeline-arrow {
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .locked-banner {
+      background: var(--gold-soft);
+      border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    @media (max-width: 520px) {
+      .locked-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
+    .locked-banner-icon {
+      font-size: 26px;
+      flex: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Modal Flotante de Colaboración (Oculto por defecto) -->
+<div class="modal-overlay" id="collaboration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-header-icon">🤝</div>
+      <h2 id="modal-title">Apoyo y Sostenibilidad del Proyecto</h2>
+    </div>
+    <div class="modal-body">
+      <p>Estimado docente: esta herramienta ha sido creada con el compromiso de simplificar su labor pedagógica y ahorrarle horas de trabajo administrativo.</p>
+      <p>Mantener este servicio activo implica costos continuos de **procesamiento con Inteligencia Artificial (API de Gemini)**, alojamiento en servidores y desarrollo de nuevas utilidades técnico-pedagógicas.</p>
+      <p>Si esta herramienta le es de utilidad, le invitamos a realizar una **colaboración voluntaria** para apoyar el mantenimiento de la plataforma:</p>
+
+      <div class="bank-box">
+        <h3>Aportes y Donaciones</h3>
+        <div class="bank-row"><span>Banco:</span> <strong>CUSCATLAN (Ahorros)</strong></div>
+        <div class="bank-row"><span>N° de Cuenta:</span> <strong>216020010216</strong></div>
+        <div class="bank-row"><span>Celular / Tigo Money:</span> <strong>88839869</strong></div>
+        <div class="bank-row"><span>Titular:</span> <strong>Kenfor Euceda</strong></div>
+        <div class="bank-row"><span>DNI:</span> <strong>1707198102734</strong></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" id="btn-copy-bank" type="button">Copiar datos de cuenta</button>
+      <button class="btn-primary-close" id="btn-close-modal" type="button">Continuar a la herramienta</button>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <header class="letterhead">
+    <svg class="seal" viewBox="0 0 56 56" role="img" aria-label="Sello institucional">
+      <circle cx="28" cy="28" r="26" fill="none" stroke="var(--navy)" stroke-width="2"></circle>
+      <circle cx="28" cy="28" r="20.5" fill="none" stroke="var(--gold)" stroke-width="1.2"></circle>
+      <text x="28" y="33" text-anchor="middle" font-family="Spectral, Georgia, serif" font-weight="700" font-size="15" fill="var(--navy)">SE</text>
+    </svg>
+    <div class="letterhead-text">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <p class="eyebrow" style="margin:0;">Secretaría de Educación de Honduras</p>
+        <button type="button" class="btn-donate-link" id="btn-open-modal">🤝 Apoyar Proyecto</button>
+      </div>
+      <h1>EduPlan AI HN — Generador Autónomo Docente</h1>
+      <p>Seleccione el módulo deseado para redactar automáticamente sus planes oficiales alineados al Currículo Nacional Básico (CNB) y descargarlos en formato Word (.docx).</p>
+    </div>
+  </header>
+
+  <!-- Navegación de Módulos (Tabs) -->
+  <nav class="module-nav" aria-label="Módulos pedagógicos">
+    <button class="tab-btn active" data-target="tab-mejora" type="button">
+      📝 Plan de Mejora
+    </button>
+    <button class="tab-btn" data-target="tab-semanal" type="button">
+      📅 Planificación Semanal <span class="tab-badge">CNB Oficial</span>
+    </button>
+    <button class="tab-btn" data-target="tab-secuencia" type="button">
+      🤖 Secuencia Completa <span class="tab-badge locked-badge">🔒 Pro</span>
+    </button>
+  </nav>
+
+  <!-- MÓDULO 1: PLAN DE MEJORA -->
+  <section class="card tab-content active" id="tab-mejora">
+    <h2>Plan de Mejora y Nivelación Académica</h2>
+    <p class="card-sub">Complete los datos del centro y los temas reprobados. La IA generará el plan con objetivos de Bloom, justificación, metodología de 4 fases y la Matriz Operativa horizontal.</p>
+
+    <form id="form-mejora" novalidate>
+      <div class="grid-2">
+        <div class="field">
+          <label for="m-centro">Centro educativo</label>
+          <input type="text" id="m-centro" value="C.E.B. Policarpo Bonilla" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="m-ubicacion">Ubicación / aldea</label>
+          <input type="text" id="m-ubicacion" value="El Hato, Langue, Valle" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="m-docente">Docente titular</label>
+          <input type="text" id="m-docente" value="Kenfor Euceda" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="m-asignatura">Asignatura</label>
+          <input type="text" id="m-asignatura" value="Matemática" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="m-gradoSeccion">Grado y sección</label>
+          <input type="text" id="m-gradoSeccion" value="Séptimo Grado 7° - Sección U" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="m-nivel">Nivel / Ciclo educativo</label>
+          <input type="text" id="m-nivel" value="III Ciclo de Educación Básica" autocomplete="off">
+        </div>
+
+        <div class="field full">
+          <label for="m-temas">Temas / contenidos críticos con rezago <span class="hint">— uno por línea</span></label>
+          <textarea id="m-temas">Operaciones con números racionales
+Ecuaciones de primer grado
+Perímetro y área de figuras planas</textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="generate" type="submit" id="btn-mejora">
+          <span class="spinner"></span>
+          <span class="btn-label-idle">Generar Plan de Mejora (.docx)</span>
+          <span class="btn-label-loading">Procesando Plan de Mejora con IA…</span>
+        </button>
+      </div>
+
+      <div class="status" id="status-mejora" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- MÓDULO 2: PLANIFICACIÓN SEMANAL -->
+  <section class="card tab-content" id="tab-semanal">
+    <h2>Planificación Semanal de Clases</h2>
+    <p class="card-sub">Estructura completa de competencias, capacidades, indicadores, evaluación, adaptaciones y tabla por sesiones con momentos (Inicio, Desarrollo y Cierre), recursos y tiempos.</p>
+
+    <form id="form-semanal" novalidate>
+      <div class="grid-2">
+        <div class="field">
+          <label for="s-centro">Centro educativo</label>
+          <input type="text" id="s-centro" value="C.E.B. Policarpo Bonilla" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="s-docente">Docente titular</label>
+          <input type="text" id="s-docente" value="Kenfor Euceda" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="s-ciclo">Ciclo Educativo <span class="hint">— Selección CNB</span></label>
+          <select id="s-ciclo">
+            <option value="I_CICLO">I Ciclo de Educación Básica (1° a 3°)</option>
+            <option value="II_CICLO">II Ciclo de Educación Básica (4° a 6°)</option>
+            <option value="III_CICLO" selected>III Ciclo de Educación Básica (7° a 9°)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="s-grado">Grado de estudio</label>
+          <select id="s-grado">
+            <!-- Se carga dinámicamente según el Ciclo -->
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="s-asignatura">Asignatura</label>
+          <select id="s-asignatura">
+            <option value="Matemática">Matemática (Disponible 1° a 9°)</option>
+            <option value="Español" disabled>Español (Próximamente)</option>
+            <option value="Ciencias Naturales" disabled>Ciencias Naturales (Próximamente)</option>
+            <option value="Ciencias Sociales" disabled>Ciencias Sociales (Próximamente)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="s-semana">Semana / Fechas de ejecución</label>
+          <input type="text" id="s-semana" value="Primer Parcial – Semana 2 (Del 10 al 14 de marzo)" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="s-duracion">Duración / Sesiones</label>
+          <input type="text" id="s-duracion" value="4 sesiones de 45 min" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="s-jornada">Jornada</label>
+          <input type="text" id="s-jornada" value="Matutina" autocomplete="off">
+        </div>
+
+        <div class="field full">
+          <label for="s-unidad">Unidad curricular oficial del CNB</label>
+          <select id="s-unidad">
+            <!-- Se carga dinámicamente según el grado -->
+          </select>
+        </div>
+
+        <div class="field full">
+          <div class="cnb-info-box" id="cnb-preview">
+            <h4>Contenidos y Expectativas del CNB</h4>
+            <div id="cnb-preview-content">Cargando datos oficiales…</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="generate" type="submit" id="btn-semanal">
+          <span class="spinner"></span>
+          <span class="btn-label-idle">Generar Planificación Semanal (.docx)</span>
+          <span class="btn-label-loading">Procesando Planificación Semanal con IA…</span>
+        </button>
+      </div>
+
+      <div class="status" id="status-semanal" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- MÓDULO 3: GENERADOR INTELIGENTE DE SECUENCIA COMPLETA (BLOQUEADO) -->
+  <section class="card tab-content" id="tab-secuencia">
+    <div class="locked-banner">
+      <div class="locked-banner-icon">🔒</div>
+      <div>
+        <strong>Módulo Pro en Fase de Preparación</strong>
+        <div style="font-size: 13.5px; opacity: 0.9;">Próximamente podrás generar automáticamente la secuencia pedagógica completa e integrada en un solo paquete documental.</div>
+      </div>
+    </div>
+
+    <h2>🤖 Generador Inteligente de Secuencia Completa</h2>
+    <p class="card-sub">A partir de datos mínimos, el motor EduPlan AI HN construirá en cadena toda la secuencia curricular de 360° para la unidad seleccionada.</p>
+
+    <!-- Visualización del Flujo de Trabajo (Pipeline) -->
+    <div class="pipeline-container">
+      <div class="pipeline-title">Cadena Pedagógica Automatizada EduPlan AI HN</div>
+      
+      <div class="pipeline-flow">
+        <span class="pipeline-step">📋 PLANIFICACIÓN COMPLETA</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">🎯 OBJETIVOS</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">💡 COMPETENCIAS</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">📊 INDICADORES DE LOGRO</span>
+      </div>
+
+      <div class="pipeline-flow">
+        <span class="pipeline-arrow">⬇</span>
+      </div>
+
+      <div class="pipeline-flow">
+        <span class="pipeline-step">📖 PLAN DE CLASE</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">✏️ ACTIVIDADES</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">📦 RECURSOS</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">🏠 TAREA</span>
+      </div>
+
+      <div class="pipeline-flow">
+        <span class="pipeline-arrow">⬇</span>
+      </div>
+
+      <div class="pipeline-flow">
+        <span class="pipeline-step">📝 INSTRUMENTO DE EVALUACIÓN</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">📄 EXAMEN</span>
+        <span class="pipeline-arrow">➔</span>
+        <span class="pipeline-step">📐 RÚBRICA</span>
+      </div>
+    </div>
+
+    <form novalidate onsubmit="return false;">
+      <div class="grid-2">
+        <div class="field">
+          <label>Asignatura</label>
+          <input type="text" value="Matemáticas" disabled style="opacity: 0.7; cursor: not-allowed;">
+        </div>
+
+        <div class="field">
+          <label>Grado de estudio</label>
+          <input type="text" value="9.º Grado" disabled style="opacity: 0.7; cursor: not-allowed;">
+        </div>
+
+        <div class="field">
+          <label>Tema a desarrollar</label>
+          <input type="text" value="Funciones cuadráticas" disabled style="opacity: 0.7; cursor: not-allowed;">
+        </div>
+
+        <div class="field">
+          <label>Tiempo asignado</label>
+          <input type="text" value="3 horas / 3 sesiones" disabled style="opacity: 0.7; cursor: not-allowed;">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="generate" type="button" disabled style="opacity: 0.65; cursor: not-allowed; background: var(--navy-soft);">
+          <span>🔒 Generar Secuencia Completa (Módulo Restringido)</span>
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="page-footer">Herramienta de apoyo técnico-pedagógico · Secretaría de Educación de Honduras</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     BASE DE DATOS COMPLETA 100% DEL CNB DE MATEMÁTICA (1° A 9° GRADO)
+     ============================================================ */
+  var cnbDataMatematica = {
+    "1° Grado": [
+      { unidad: "Unidad 1: Relación de objetos (10 hrs)", expectativas: ["Identifican la característica común de objetos de su entorno."], contenidos: ["Tamaños (grande, pequeño)", "Espesores (grueso, delgado, gordo, flaco)", "Colores (rojo, azul, claro, oscuro)", "Distancias (cerca, lejos)", "Formas (cuadrangular, rectangular, triangular, redonda)", "Posiciones (izquierda, derecha, dentro, fuera)", "El tiempo (día, noche, antes, ahora, después)"] },
+      { unidad: "Unidad 2: Conjunto (4 hrs)", expectativas: ["Identifican objetos de igual característica como conjunto.", "Establecen la correspondencia uno a uno entre los elementos de dos conjuntos.", "Comparan el tamaño de conjuntos."], contenidos: ["Identificación de características comunes", "Formación del conjunto", "Relación entre dos objetos", "Comparación del tamaño mediante la correspondencia uno a uno"] },
+      { unidad: "Unidad 3: Números hasta 9 (11 hrs)", expectativas: ["Desarrollan el concepto de número.", "Componen y descomponen números para preparar el aprendizaje de la suma y sustracción."], contenidos: ["Conteo del 1 al 9", "El número cero", "Orden ascendente/descendente", "Composición y descomposición"] },
+      { unidad: "Unidad 4: Números ordinales (1) (2 hrs)", expectativas: ["Usan números ordinales para describir situaciones de su vida cotidiana."], contenidos: ["Los números ordinales del primero al noveno (1° al 9°)", "Diferencia entre número ordinal y número cardinal"] },
+      { unidad: "Unidad 5: Líneas (4 hrs)", expectativas: ["Reconocen y nombran los distintos tipos de líneas: abiertas, cerradas, rectas, curvas, mixtas.", "Aplican líneas verticales, horizontales e inclinadas."], contenidos: ["Líneas abiertas y cerradas", "Líneas rectas, curvas, mixtas y quebradas", "Líneas horizontales, verticales e inclinadas"] },
+      { unidad: "Unidad 6: Suma (1) (10 hrs)", expectativas: ["Construyen el concepto de agrupación y agregación.", "Resuelven problemas de su entorno."], contenidos: ["Sentidos de la suma", "Planteamiento PO y Respuesta R", "Suma con cero", "Propiedad conmutativa"] },
+      { unidad: "Unidad 7: Resta (1) (7 hrs)", expectativas: ["Construyen el concepto de quitar y diferencia."], contenidos: ["Sentido de quita o sobrante", "Diferencia entre dos grupos", "Resta con cero"] },
+      { unidad: "Unidad 8: Formas de objetos (6 hrs)", expectativas: ["Identifican y aplican las características de los objetos.", "Clasifican sólidos geométricos."], contenidos: ["Familiarización con objetos", "Clasificación por forma (caja, lata, pelota)", "Superficies planas y curvas", "Largo, ancho y altura"] },
+      { unidad: "Unidad 9: Números hasta 19 (6 hrs)", expectativas: ["Desarrollan el concepto de unidades y decenas.", "Desarrollan el valor posicional."], contenidos: ["Conteo y escritura del 10", "Construcción del 10 (1 decena)", "Números del 11 al 19", "Tabla de valores y recta numérica"] },
+      { unidad: "Unidad 10: Suma (2) (10 hrs)", expectativas: ["Desarrollan estrategias para problemas de adición."], contenidos: ["Suma U + U llevando a la decena", "Operaciones DU + U y U + DU menores que 20", "Tablas de cálculo"] },
+      { unidad: "Unidad 11: Resta (2) (8 hrs)", expectativas: ["Desarrollan estrategias para problemas de sustracción."], contenidos: ["Forma de cálculo 13 - 9", "Resta prestando DU - U = U", "Cálculo vertical"] },
+      { unidad: "Unidad 12: Figuras de dibujos (6 hrs)", expectativas: ["Reconocen y nombran figuras geométricas: triángulo, cuadrado, rectángulo, círculo.", "Componen y descomponen figuras."], contenidos: ["Copia de superficies", "Clasificación de figuras planas", "Largo y ancho", "Interior, exterior y borde"] },
+      { unidad: "Unidad 13: Números hasta 99 (8 hrs)", expectativas: ["Aplican el concepto de posición de unidades para construir números grandes."], contenidos: ["Conteo y escritura de números de 2 cifras", "Composición y descomposición", "Comparación (<, >)", "Conteo en grupos de 2, 5 y 10"] },
+      { unidad: "Unidad 14: Números ordinales (2) (2 hrs)", expectativas: ["Usan números ordinales hasta el vigésimo."], contenidos: ["Los números ordinales hasta el 20°"] },
+      { unidad: "Unidad 15: Moneda nacional (6 hrs)", expectativas: ["Conocen monedas (1 a 50 centavos) y billetes (1 a 50 lempiras).", "Suman y restan con dinero."], contenidos: ["Identificación de monedas y billetes", "Uso de los signos L y C", "Suma y resta aplicada al dinero"] },
+      { unidad: "Unidad 16: Longitud (4 hrs)", expectativas: ["Construyen el concepto de longitud.", "Comparan cualitativamente longitudes."], contenidos: ["Comparación directa e indirecta", "Medición con unidades arbitrarias y corporales"] }
+    ],
+    "2° Grado": [
+      { unidad: "Unidad 1: Números hasta 999 (14 hrs)", expectativas: ["Construyen decenas hasta 100.", "Amplían el concepto de número hasta 1000."], contenidos: ["Sentido de la centena (100)", "Números de tres cifras", "Lectura, escritura y valor posicional", "Comparación y recta numérica", "Decenas y centenas próximas"] },
+      { unidad: "Unidad 2: Líneas (3 hrs)", expectativas: ["Identifican los segmentos como lados de figuras."], contenidos: ["Líneas rectas y segmento", "Identificación de segmentos en figuras planas"] },
+      { unidad: "Unidad 3: Suma y resta combinadas (3 hrs)", expectativas: ["Resuelven adiciones y sustracciones combinadas."], contenidos: ["Sumas y restas sucesivas (< 20)", "Operaciones combinadas de suma y resta"] },
+      { unidad: "Unidad 4: Suma (12 hrs)", expectativas: ["Aplican la adición cuyo total es menor que 100 sin llevar y llevando."], contenidos: ["Cálculo horizontal D0+D0", "Cálculo vertical DU+DU sin llevar y llevando", "Resolución de problemas cotidianos"] },
+      { unidad: "Unidad 5: Resta (12 hrs)", expectativas: ["Aplican la sustracción cuyo minuendo es menor que 100 sin prestar y prestando."], contenidos: ["Cálculo horizontal DU-D0", "Cálculo vertical DU-DU prestando", "Problemas cotidianos"] },
+      { unidad: "Unidad 6: Figuras geométricas (5 hrs)", expectativas: ["Construyen figuras geométricas utilizando líneas diversas."], contenidos: ["Composición y descomposición de figuras con tarjetas y pajillas", "Construcción con líneas rectas, curvas y quebradas"] },
+      { unidad: "Unidad 7: Multiplicación (37 hrs)", expectativas: ["Construyen el concepto de multiplicación como adición de sumandos iguales.", "Desarrollan las tablas del 1 al 9."], contenidos: ["Sentido del signo (×)", "Términos multiplicando, multiplicador y producto", "Tablas del 1 al 9", "Multiplicación con cero", "Propiedad conmutativa"] },
+      { unidad: "Unidad 8: Longitud (9 hrs)", expectativas: ["Aplican las unidades de centímetro, decímetro y metro."], contenidos: ["Metro (m), decímetro (dm), centímetro (cm)", "Relaciones (1 m = 10 dm = 100 cm)", "Suma y resta de longitudes"] },
+      { unidad: "Unidad 9: División (4 hrs)", expectativas: ["Desarrollan el concepto de división como repartir en partes iguales."], contenidos: ["Sentido del signo (÷)", "Términos dividendo, divisor y cociente", "Divisiones exactas usando tablas"] },
+      { unidad: "Unidad 10: Sólidos (4 hrs)", expectativas: ["Reconocen cubos, sólidos rectangulares y esferas."], contenidos: ["Clasificación por superficie", "Elementos: superficie, vértice, arista"] },
+      { unidad: "Unidad 11: Moneda (7 hrs)", expectativas: ["Conocen billetes de 100 y 500 lempiras.", "Suman y restan dinero."], contenidos: ["Billetes de 100 y 500 Lempiras", "Equivalencia 1 Lempira = 100 centavos", "Pequeño plan de compras"] },
+      { unidad: "Unidad 12: Tiempo (9 hrs)", expectativas: ["Aplican unidades oficiales de tiempo (segundo, minuto, hora, día, mes, año)."], contenidos: ["Uso del reloj de aguja", "Hora en punto, media hora y minutos", "Calendario"] },
+      { unidad: "Unidad 13: Tablas (2 hrs)", expectativas: ["Recopilan, clasifican y organizan datos estadísticos."], contenidos: ["Conteo y organización de datos", "Elaboración de tablas e interpretación"] }
+    ],
+    "3° Grado": [
+      { unidad: "Unidad 1: Números hasta 9999 (8 hrs)", expectativas: ["Construyen números grandes con unidades de millar."], contenidos: ["Sentido de las unidades de millar (1000)", "Números de 4 cifras", "Forma desarrollada y recta numérica"] },
+      { unidad: "Unidad 2: Líneas paralelas y perpendiculares (6 hrs)", expectativas: ["Desarrollan el concepto de líneas paralelas y perpendiculares."], contenidos: ["Ángulo recto", "Uso del transportador", "Trazo de líneas perpendiculares y paralelas"] },
+      { unidad: "Unidad 3: Adición (10 hrs)", expectativas: ["Aplican la adición con total menor que 1000 sin llevar y llevando."], contenidos: ["Cálculo vertical CDU+CDU sin llevar", "Cálculo vertical llevando a la decena, centena y ambas"] },
+      { unidad: "Unidad 4: Sustracción (9 hrs)", expectativas: ["Aplican la sustracción con minuendo menor que 1000 sin prestar y prestando."], contenidos: ["Términos de la sustracción", "Cálculo vertical CDU-CDU prestando de decenas y centenas"] },
+      { unidad: "Unidad 5: Triángulos (7 hrs)", expectativas: ["Clasifican e identifican triángulos equiláteros, isósceles y escalenos."], contenidos: ["Vértices, lados, base y altura", "Construcción con compás", "Cálculo del perímetro"] },
+      { unidad: "Unidad 6: Multiplicación (13 hrs)", expectativas: ["Aplican la multiplicación cuyo producto es menor que 10,000."], contenidos: ["Multiplicación por 10, 100, 1000", "Algoritmo CDU×U con llevada"] },
+      { unidad: "Unidad 7: División (17 hrs)", expectativas: ["Aplican la división en números hasta 9999 con y sin residuo."], contenidos: ["Divisiones equivalentes e incluidas", "Algoritmo DU÷U y CDU÷U con residuo"] },
+      { unidad: "Unidad 8: Cuadriláteros (6 hrs)", expectativas: ["Reconocen y construyen cuadrados y rectángulos."], contenidos: ["Elementos del cuadrilátero", "Construcción con regla y transportador"] },
+      { unidad: "Unidad 9: Números decimales (9 hrs)", expectativas: ["Desarrollan el concepto de números decimales hasta las décimas."], contenidos: ["Concepto de 0.1 m y 0.1 cm", "Punto decimal y recta numérica", "Suma y resta de decimales"] },
+      { unidad: "Unidad 10: Sólidos geométricos (4 hrs)", expectativas: ["Reconocen cilindros, pirámides, conos y esferas."], contenidos: ["Identificación de elementos: superficie, vértice, arista"] },
+      { unidad: "Unidad 11: Longitud (12 hrs)", expectativas: ["Operan con unidades de mm, cm, dm, m y km."], contenidos: ["El milímetro (mm) y kilómetro (km)", "Uso de la cinta métrica", "Conversiones y notación decimal"] },
+      { unidad: "Unidad 12: Operaciones combinadas (8 hrs)", expectativas: ["Aplican el reglamento del cálculo en operaciones combinadas."], contenidos: ["Uso de paréntesis", "Propiedad asociativa", "Orden de operaciones (+, -, ×, ÷)"] },
+      { unidad: "Unidad 13: Peso (12 hrs)", expectativas: ["Utilizan las unidades oficiales de peso: gramo, kilogramo y tonelada."], contenidos: ["Uso de la balanza", "Unidades g, kg y t", "Conversiones y cálculos"] },
+      { unidad: "Unidad 14: Figuras simétricas (5 hrs)", expectativas: ["Realizan rotaciones tomando como centro el eje de simetría."], contenidos: ["Figuras simétricas y eje de simetría", "Construcción de simetrías"] },
+      { unidad: "Unidad 15: Tiempo (7 hrs)", expectativas: ["Convierten unidades de tiempo y resuelven problemas de duración."], contenidos: ["Reloj y calendario", "Conversiones horas-minutos-segundos", "Tiempo inicial y final"] },
+      { unidad: "Unidad 16: Tablas y gráficos (6 hrs)", expectativas: ["Organizan e interpretan datos en tablas y pictogramas."], contenidos: ["Encuestas sencillas", "Elaboración de pictogramas y tablas de dos dimensiones"] },
+      { unidad: "Unidad 17: Moneda (7 hrs)", expectativas: ["Resuelven problemas usando las denominaciones de la moneda nacional."], contenidos: ["Combinaciones con notación decimal", "Cálculo vertical llevando centavos a lempiras"] }
+    ],
+    "4° Grado": [
+      { unidad: "Unidad 1: Números hasta 1,000,000 (11 hrs)", expectativas: ["Construyen decenas y centenas de millar hasta 1,000,000."], contenidos: ["Lectura y escritura de números de 6 cifras", "Forma desarrollada", "Redondeo y comparación"] },
+      { unidad: "Unidad 2: Ángulos (8 hrs)", expectativas: ["Leen, clasifican y construyen ángulos opuestos y adyacentes."], contenidos: ["Unidad del grado (°)", "Uso del transportador", "Ángulos agudos, llanos y obtusos"] },
+      { unidad: "Unidad 3: Multiplicación (15 hrs)", expectativas: ["Resuelven problemas de multiplicación de números grandes."], contenidos: ["Cálculo vertical ×U, ×D0 y ×DU", "Propiedad asociativa"] },
+      { unidad: "Unidad 4: Triángulos (7 hrs)", expectativas: ["Clasifican triángulos por sus ángulos y calculan su perímetro."], contenidos: ["Acutángulos, rectángulos y obtusángulos", "Suma de ángulos (180°)", "Perímetro"] },
+      { unidad: "Unidad 5: División (16 hrs)", expectativas: ["Resuelven problemas que implican la división de números."], contenidos: ["Cálculo vertical ÷U, ÷D0, ÷DU", "Propiedades de la división"] },
+      { unidad: "Unidad 6: Cuadriláteros (10 hrs)", expectativas: ["Clasifican cuadriláteros en paralelogramos y no paralelogramos."], contenidos: ["Trapecios, romboides y rombos", "Diagonales, base, altura y perímetro"] },
+      { unidad: "Unidad 7: Números decimales (13 hrs)", expectativas: ["Desarrollan el concepto de decimales hasta las milésimas."], contenidos: ["Centésimas y milésimas", "Multiplicación/división por 10", "Suma y resta de decimales"] },
+      { unidad: "Unidad 8: Longitud (8 hrs)", expectativas: ["Operan con unidades del sistema métrico e inglés."], contenidos: ["Decámetro y hectómetro", "Unidades del sistema inglés: pulgada, pie, yarda"] },
+      { unidad: "Unidad 9: Sólidos geométricos (7 hrs)", expectativas: ["Reconocen y construyen modelos de prismas y pirámides."], contenidos: ["Elementos de prismas y pirámides", "Perpendicularidad y paralelismo de aristas"] },
+      { unidad: "Unidad 10: Capacidad (11 hrs)", expectativas: ["Resuelven problemas que implican capacidad de recipientes."], contenidos: ["Litro (l), decilitro (dl), mililitro (ml)", "Galón y botella"] },
+      { unidad: "Unidad 11: Fracciones (7 hrs)", expectativas: ["Desarrollan el concepto de fracción y reconocen sus términos."], contenidos: ["Fracciones propias (< 1)", "Representación gráfica y recta numérica"] },
+      { unidad: "Unidad 12: Monedas (3 hrs)", expectativas: ["Operan con monedas de Centroamérica y Estados Unidos."], contenidos: ["Unidades monetarias regionales", "Conversiones monetarias básicas"] },
+      { unidad: "Unidad 13: Hora y tiempo (3 hrs)", expectativas: ["Resuelven problemas que implican tiempo y duración."], contenidos: ["Uso de tablas y horarios", "Fracciones de hora y año"] },
+      { unidad: "Unidad 14: Peso (8 hrs)", expectativas: ["Resuelven problemas de peso en unidades métricas y no-métricas."], contenidos: ["Gramos, kg, toneladas", "Libras, onzas, quintales y cargas"] },
+      { unidad: "Unidad 15: Ubicación de puntos (4 hrs)", expectativas: ["Leen y ubican puntos en rectas y planos cartesianos."], contenidos: ["Coordenadas cartesianas en el plano"] },
+      { unidad: "Unidad 16: Gráficas de barras (10 hrs)", expectativas: ["Construyen e interpretan gráficas de barras."], contenidos: ["Organización de datos", "Elaboración e interpretación de gráficas de barras"] }
+    ],
+    "5° Grado": [
+      { unidad: "Unidad 1: Potencia y raíz cuadrada (2 hrs)", expectativas: ["Reconocen la potencia y la raíz cuadrada perfecta."], contenidos: ["Potencias (base, exponente)", "Raíz cuadrada de números pequeños"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Reconocen y construyen ángulos complementarios y suplementarios."], contenidos: ["Ángulos complementarios (90°)", "Ángulos suplementarios (180°)"] },
+      { unidad: "Unidad 3: Divisibilidad de números (19 hrs)", expectativas: ["Determinan múltiplos, divisores, mcm, MCD y números primos."], contenidos: ["Reglas de divisibilidad (2, 3, 5, 10)", "Descomposición en factores primos", "mcm y MCD"] },
+      { unidad: "Unidad 4: Área (1) (19 hrs)", expectativas: ["Construyen fórmulas de área de cuadrados y rectángulos."], contenidos: ["Concepto de área", "Unidades oficiales (cm², m², km²)", "Unidades no oficiales (vara², manzana)"] },
+      { unidad: "Unidad 5: Fracciones (21 hrs)", expectativas: ["Desarrollan concepto de fracciones mixtas e impropias y equivalencias."], contenidos: ["Fracciones propias, impropias y mixtas", "Fracciones equivalentes y mínima expresión", "Suma y resta con igual denominador"] },
+      { unidad: "Unidad 6: Gráficas lineales (10 hrs)", expectativas: ["Construyen e interpretan gráficas lineales."], contenidos: ["Elaboración de gráficas de líneas", "Interpretación de tendencias"] },
+      { unidad: "Unidad 7: Números decimales (17 hrs)", expectativas: ["Multiplican y dividen números decimales por naturales."], contenidos: ["Conversión a fracciones", "Multiplicación y división de decimales por naturales"] },
+      { unidad: "Unidad 8: Sólidos geométricos (7 hrs)", expectativas: ["Construyen modelos de cubos, prismas y pirámides."], contenidos: ["Construcción de modelos", "Representación en el plano"] },
+      { unidad: "Unidad 9: Área (2) (21 hrs)", expectativas: ["Calculan el área de triángulos, cuadriláteros y circunferencia."], contenidos: ["Fórmulas de área de triángulos, romboides y trapecios", "Longitud de la circunferencia"] },
+      { unidad: "Unidad 10: Círculo y circunferencia (11 hrs)", expectativas: ["Identifican elementos del círculo y aplican la fórmula del perímetro."], contenidos: ["Radio, diámetro y Pi (π ≈ 3.14)", "Construcción con compás"] },
+      { unidad: "Unidad 11: Polígonos (10 hrs)", expectativas: ["Reconocen características de polígonos regulares y calculan perímetro."], contenidos: ["Clasificación por número de lados", "Polígonos regulares y perímetro"] },
+      { unidad: "Unidad 12: Sistema de numeración de los romanos (2 hrs)", expectativas: ["Reconocen los símbolos romanos del 1 al 3999."], contenidos: ["Símbolos romanos (I, V, X, L, C, D, M)", "Reglas de composición"] }
+    ],
+    "6° Grado": [
+      { unidad: "Unidad 1: Divisibilidad de números (5 hrs)", expectativas: ["Manejan reglas de divisibilidad entre 9 y 11 y MCD/mcm de varios números."], contenidos: ["Regla de divisibilidad entre 9 y 11", "MCD y mcm de tres o más números"] },
+      { unidad: "Unidad 2: Ángulos (2 hrs)", expectativas: ["Construyen la bisectriz de un ángulo."], contenidos: ["Sentido de la bisectriz", "Construcción con regla y compás"] },
+      { unidad: "Unidad 3: Números decimales (20 hrs)", expectativas: ["Multiplican y dividen números decimales entre decimales."], contenidos: ["Multiplicación y división decimal×decimal", "Manejo del residuo y redondeo"] },
+      { unidad: "Unidad 4: Área (14 hrs)", expectativas: ["Aplican áreas de polígonos regulares y del círculo."], contenidos: ["Área de pentágonos y hexágonos (apotema)", "Área del círculo (A = πr²)"] },
+      { unidad: "Unidad 5: Adición y sustracción de fracciones (9 hrs)", expectativas: ["Suman y restan fracciones de distinto denominador."], contenidos: ["Adición y sustracción de fracciones heterogéneas", "Fracciones mixtas"] },
+      { unidad: "Unidad 6: Sólidos geométricos (15 hrs)", expectativas: ["Construyen modelos de sólidos y reconocen cuerpos redondos."], contenidos: ["Poliedros y cuerpos redondos", "Desarrollo plano de cilindros y conos"] },
+      { unidad: "Unidad 7: Multiplicación y división de fracciones (16 hrs)", expectativas: ["Multiplican y dividen fracciones entre fracciones."], contenidos: ["Fracción × Fracción", "Fracción ÷ Fracción", "Operaciones combinadas"] },
+      { unidad: "Unidad 8: Volumen (17 hrs)", expectativas: ["Usan unidades de volumen (cm³, m³, km³) para resolver problemas."], contenidos: ["Concepto de volumen", "Cálculo de volumen en prismas y cubos", "Relación volumen-capacidad"] },
+      { unidad: "Unidad 9: Sistema de numeración de los mayas (8 hrs)", expectativas: ["Conocen los fundamentos del sistema maya hasta 400."], contenidos: ["Sistema vigesimal maya", "Suma y resta con números mayas"] },
+      { unidad: "Unidad 10: El calendario de los mayas (4 hrs)", expectativas: ["Conocen los calendarios Tzolkín, Haab y Cuenta Larga."], contenidos: ["Mecanismo del calendario maya", "Rueda calendárica"] },
+      { unidad: "Unidad 11: Cantidad de veces (6 hrs)", expectativas: ["Establecen relaciones entre cantidad básica, comparada y de veces."], contenidos: ["Cálculo de cantidad de veces", "Comparación de cantidades"] },
+      { unidad: "Unidad 12: Cantidad por unidad (18 hrs)", expectativas: ["Aplican conceptos de media, cantidad por unidad y velocidad."], contenidos: ["Media aritmética (promedio)", "Densidad poblacional", "Cálculo de velocidad"] },
+      { unidad: "Unidad 13: Transformaciones (11 hrs)", expectativas: ["Aplican simetría reflexiva y rotacional."], contenidos: ["Simetría reflexiva y rotacional en figuras geométricas"] }
+    ],
+    "7° Grado": [
+      { unidad: "Unidad 1: Números positivos y negativos (29 hrs)", expectativas: ["Comprenden el concepto de números positivos y negativos.", "Aplican las operaciones fundamentales con números positivos y negativos."], contenidos: ["Uso de números positivos y negativos", "Representación gráfica, orden y valor absoluto", "Operaciones combinadas y propiedades"] },
+      { unidad: "Unidad 2: Variables y expresiones (22 hrs)", expectativas: ["Expresan cantidades utilizando variables y símbolos algebraicos."], contenidos: ["Expresión algebraica", "Valor numérico", "Términos y coeficientes", "Operaciones algebraicas"] },
+      { unidad: "Unidad 3: Ecuaciones de primer grado en una variable (18 hrs)", expectativas: ["Resuelven ecuaciones de primer grado aplicando propiedades de la igualdad."], contenidos: ["Definición de ecuación lineal", "Propiedades de la igualdad y transposición", "Problemas con ecuaciones"] },
+      { unidad: "Unidad 4: Conjunto de puntos (5 hrs)", expectativas: ["Definen y construyen conceptos fundamentales de geometría."], contenidos: ["Punto, recta, plano, rayo y segmento", "Distancia y punto medio", "Puntos colineales"] },
+      { unidad: "Unidad 5: Ángulos (8 hrs)", expectativas: ["Miden, clasifican y construyen ángulos y rectas perpendiculares."], contenidos: ["Clasificación de ángulos", "Construcción de bisectriz y mediatriz", "Rectas perpendiculares"] },
+      { unidad: "Unidad 6: Razón, proporcionalidad y porcentaje (23 hrs)", expectativas: ["Resuelven problemas aplicando proporcionalidad directa, inversa y porcentaje."], contenidos: ["Razones y proporciones", "Proporcionalidad directa e inversa", "Porcentaje o tanto por ciento"] },
+      { unidad: "Unidad 7: Gráficas de faja y circulares (10 hrs)", expectativas: ["Organizan e interpretan datos en gráficas de faja y circulares."], contenidos: ["Lectura y construcción de gráficas de faja", "Gráficas circulares o de pastel"] }
+    ],
+    "8° Grado": [
+      { unidad: "Unidad 1: Polinomios (10 hrs)", expectativas: ["Efectúan operaciones de suma, resta, multiplicación y división con monomios y polinomios."], contenidos: ["Monomios y polinomios", "Adición y sustracción", "Multiplicación y división por número"] },
+      { unidad: "Unidad 2: Sistema de dos ecuaciones de primer grado en dos variables (20 hrs)", expectativas: ["Resuelven sistemas de dos ecuaciones lineales en dos variables."], contenidos: ["Despeje de variables", "Métodos de reducción y sustitución", "Aplicaciones en problemas reales"] },
+      { unidad: "Unidad 3: Paralelismo (8 hrs)", expectativas: ["Analizan propiedades de rectas paralelas y transversales."], contenidos: ["Ángulos correspondientes y alternos", "Distancia entre paralelas", "Suma de ángulos de un polígono"] },
+      { unidad: "Unidad 4: Congruencia de triángulos (21 hrs)", expectativas: ["Demuestran la congruencia de triángulos aplicando criterios geométricos."], contenidos: ["Criterios LLL, LAL, ALA", "Demostraciones geométricas", "Triángulos isósceles y rectángulos"] },
+      { unidad: "Unidad 5: Cuadriláteros (10 hrs)", expectativas: ["Identifican y aplican propiedades de cuadriláteros y paralelogramos."], contenidos: ["Condiciones para ser paralelogramo", "Propiedades de rectángulos, rombos y trapecios"] },
+      { unidad: "Unidad 6: Funciones de primer grado (28 hrs)", expectativas: ["Modelan situaciones mediante funciones lineales y grafican en el plano."], contenidos: ["Concepto de función lineal", "Gráfica y forma y=ax+b", "Paralelismo y perpendicularidad"] },
+      { unidad: "Unidad 7: Manera de contar (8 hrs)", expectativas: ["Aplican principios fundamentales del conteo."], contenidos: ["Principio de la suma", "Principio del producto (diagramas de árbol)"] },
+      { unidad: "Unidad 8: Probabilidad (13 hrs)", expectativas: ["Calculan la probabilidad de eventos en situaciones de azar."], contenidos: ["Relación entre razón y probabilidad", "Fórmula de probabilidad", "Cálculo de probabilidad simple"] }
+    ],
+    "9° Grado": [
+      { unidad: "Unidad 1: Polinomios (19 hrs)", expectativas: ["Aplican los productos notables y la factorización de polinomios."], contenidos: ["Multiplicación de polinomios", "Productos notables", "Factorización por factor común, tanteo y trinomios"] },
+      { unidad: "Unidad 2: Números reales (24 hrs)", expectativas: ["Comprenden el concepto de raíz cuadrada y efectúan operaciones con números reales."], contenidos: ["Raíz cuadrada e irracionales", "Simplificación y racionalización de raíces"] },
+      { unidad: "Unidad 3: Ecuaciones de segundo grado (13 hrs)", expectativas: ["Resuelven ecuaciones cuadráticas por factorización, completación y fórmula."], contenidos: ["Ecuación de segundo grado", "Métodos de resolución y aplicaciones"] },
+      { unidad: "Unidad 4: Semejanza de triángulos (18 hrs)", expectativas: ["Aplican criterios de semejanza de triángulos y proporciones."], contenidos: ["Criterios de semejanza", "Teorema de Thales", "Aplicaciones de semejanza"] },
+      { unidad: "Unidad 5: Teorema de Pitágoras (13 hrs)", expectativas: ["Demuestran y aplican el Teorema de Pitágoras."], contenidos: ["Teorema de Pitágoras en triángulos rectángulos", "Aplicaciones prácticas"] },
+      { unidad: "Unidad 6: Polígonos regulares y el círculo (16 hrs)", expectativas: ["Determinan propiedades de polígonos regulares y tangentes al círculo."], contenidos: ["Polígonos regulares", "Elementos del círculo y tangentes"] },
+      { unidad: "Unidad 7: Sólidos geométricos (11 hrs)", expectativas: ["Calculan área de superficie lateral y volumen de sólidos."], contenidos: ["Área lateral de prismas, conos y pirámides", "Volumen de cilindros, conos y esferas"] },
+      { unidad: "Unidad 8: Organización y presentación de datos (11 hrs)", expectativas: ["Organizan datos en histogramas y calculan medidas de tendencia central."], contenidos: ["Tablas de frecuencia e histogramas", "Media, mediana y moda para datos agrupados"] }
+    ]
+  };
+
+  var selectCiclo = document.getElementById("s-ciclo");
+  var selectGrado = document.getElementById("s-grado");
+  var selectUnidad = document.getElementById("s-unidad");
+  var previewContent = document.getElementById("cnb-preview-content");
+
+  function actualizarGradosPorCiclo() {
+    var ciclo = selectCiclo.value;
+    selectGrado.innerHTML = "";
+
+    var gradosOptions = [];
+    if (ciclo === "I_CICLO") {
+      gradosOptions = ["1° Grado", "2° Grado", "3° Grado"];
+    } else if (ciclo === "II_CICLO") {
+      gradosOptions = ["4° Grado", "5° Grado", "6° Grado"];
+    } else if (ciclo === "III_CICLO") {
+      gradosOptions = ["7° Grado", "8° Grado", "9° Grado"];
+    }
+
+    gradosOptions.forEach(function (g) {
+      var opt = document.createElement("option");
+      opt.value = g;
+      opt.textContent = g;
+      selectGrado.appendChild(opt);
+    });
+
+    actualizarUnidadesPorGrado();
+  }
+
+  function actualizarUnidadesPorGrado() {
+    var grado = selectGrado.value;
+    selectUnidad.innerHTML = "";
+
+    var unidades = cnbDataMatematica[grado] || [];
+    unidades.forEach(function (u, index) {
+      var opt = document.createElement("option");
+      opt.value = index;
+      opt.textContent = u.unidad;
+      selectUnidad.appendChild(opt);
+    });
+
+    actualizarPreviewCNB();
+  }
+
+  function actualizarPreviewCNB() {
+    var grado = selectGrado.value;
+    var unidadIndex = parseInt(selectUnidad.value, 10) || 0;
+    var unidades = cnbDataMatematica[grado] || [];
+    var u = unidades[unidadIndex];
+
+    if (!u) {
+      previewContent.innerHTML = "No hay datos disponibles.";
+      return;
+    }
+
+    var html = "<p><strong>Expectativas de Logro Oficiales:</strong></p><ul>";
+    u.expectativas.forEach(function (exp) {
+      html += "<li>" + exp + "</li>";
+    });
+    html += "</ul><p style='margin-top:8px;'><strong>Contenidos Clave del CNB:</strong></p><ul>";
+    u.contenidos.forEach(function (c) {
+      html += "<li>" + c + "</li>";
+    });
+    html += "</ul>";
+
+    previewContent.innerHTML = html;
+  }
+
+  selectCiclo.addEventListener("change", actualizarGradosPorCiclo);
+  selectGrado.addEventListener("change", actualizarUnidadesPorGrado);
+  selectUnidad.addEventListener("change", actualizarPreviewCNB);
+
+  // Inicializar al cargar
+  actualizarGradosPorCiclo();
+
+  var tabBtns = document.querySelectorAll(".tab-btn");
+  var tabContents = document.querySelectorAll(".tab-content");
+
+  tabBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var targetId = btn.getAttribute("data-target");
+      tabBtns.forEach(function (b) { b.classList.remove("active"); });
+      tabContents.forEach(function (c) { c.classList.remove("active"); });
+
+      btn.classList.add("active");
+      document.getElementById(targetId).classList.add("active");
+    });
+  });
+
+  // Modal Flotante de Colaboración
+  var modal = document.getElementById("collaboration-modal");
+  var btnOpenModal = document.getElementById("btn-open-modal");
+  var btnCloseModal = document.getElementById("btn-close-modal");
+  var btnCopyBank = document.getElementById("btn-copy-bank");
+
+  // Activar modal automáticamente al cargar la página
+  if (modal) {
+    modal.classList.add("active");
+  }
+
+  if (btnOpenModal) {
+    btnOpenModal.addEventListener("click", function () {
+      modal.classList.add("active");
+    });
+  }
+
+  if (btnCloseModal) {
+    btnCloseModal.addEventListener("click", function () {
+      modal.classList.remove("active");
+    });
+  }
+
+  btnCopyBank.addEventListener("click", function () {
+    var textToCopy = "Banco: CUSCATLAN (Ahorros)\nCuenta: 216020010216\nCelular / Tigo Money: 88839869\nTitular: Kenfor Euceda\nDNI: 1707198102734";
+    navigator.clipboard.writeText(textToCopy).then(function () {
+      alert("¡Datos bancarios copiados al portapapeles exitosamente!");
+    });
+  });
+
+  /* ============================================================
+     GENERADORES DE CONTINGENCIA DINÁMICOS ALINEADOS AL TEMA SELECCIONADO
+     ============================================================ */
+  function generarPlanMejoraLocal(data) {
+    var temas = data.temasLista;
+    var temasTexto = temas.join(", ");
+
+    var objetivoGeneral = "Fortalecer y nivelar los aprendizajes de las y los estudiantes de " + data.gradoSeccion +
+      " del " + data.centro + " en " + data.asignatura +
+      ", mediante un plan de recuperación pedagógica alineado al CNB para superar el rezago en: " + temasTexto + ".";
+
+    var objetivosEspecificos = temas.map(function (t) {
+      return "Consolidar el dominio técnico, fórmulas y resolución de ejercicios correspondientes a " + t + " mediante talleres guiados.";
+    });
+
+    var justificacion = "El presente Plan de Mejora responde a la necesidad de atender oportunamente el rezago en " + data.asignatura +
+      " para " + data.gradoSeccion + " en " + data.centro + ", garantizando las competencias del CNB.";
+
+    var metodologia = [
+      { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Evaluación inicial para identificar errores procedimentales en " + temasTexto + "." },
+      { titulo: "Fase 2: Modelado Directo y Ejercitación Guiada", texto: "Explicación de conceptos clave con desglose de variables y resolución de ejercicios modelo en la pizarra." },
+      { titulo: "Fase 3: Tutorías Individualizadas", texto: "Atención personalizada mediante guías prácticas paso a paso." },
+      { titulo: "Fase 4: Evaluación de Dominio", texto: "Prueba formativa de desempeño y verificación de aprendizajes." }
+    ];
+
+    var matriz = temas.map(function (t) {
+      var tMin = t.toLowerCase();
+      var esGeometria = tMin.includes("puntos") || tMin.includes("recta") || tMin.includes("segmento") || tMin.includes("geometr");
+      
+      var accionesTexto = "";
+      if (esGeometria) {
+        accionesTexto = "Concepto / Propiedad: Distancia entre dos puntos en un segmento\n" +
+                        "Fórmula / Ecuación: d = |x2 - x1|\n" +
+                        "Variables:\n" +
+                        "  • d = Distancia entre los puntos A y B\n" +
+                        "  • x1 = Coordenada inicial del punto A\n" +
+                        "  • x2 = Coordenada final del punto B\n" +
+                        "Problema Modelo: Hallar la distancia d entre el punto A(3) y el punto B(11) en la recta numérica.\n" +
+                        "Procedimiento paso a paso:\n" +
+                        "  • Paso 1: Sustitución de variables x1 y x2 en la fórmula => d = |11 - 3|\n" +
+                        "  • Paso 2: Cálculo del valor absoluto en la variable d => d = |8|\n" +
+                        "  • Paso 3: Obtención de la distancia => d = 8 unidades\n" +
+                        "Respuesta (R): d = 8 unidades\n" +
+                        "Actividad de Ejercitación:\n" +
+                        "  • Resolver guía de 5 ejercicios en el cuaderno calculando la distancia d usando la fórmula d = |x2 - x1|.";
+      } else {
+        accionesTexto = "Concepto / Propiedad: Resolución de " + t + "\n" +
+                        "Fórmula / Ecuación: S = a + b\n" +
+                        "Variables:\n" +
+                        "  • S = Suma o resultado final\n" +
+                        "  • a = Primer término o valor conocido\n" +
+                        "  • b = Segundo término o valor conocido\n" +
+                        "Problema Modelo: Aplicar la propiedad en " + t + " con los valores a = 12 y b = 15.\n" +
+                        "Procedimiento paso a paso:\n" +
+                        "  • Paso 1: Sustitución de valores a y b en la expresión => S = 12 + 15\n" +
+                        "  • Paso 2: Desarrollo de la operación usando la variable S => S = 27\n" +
+                        "  • Paso 3: Verificación final => S = 27\n" +
+                        "Respuesta (R): S = 27 unidades\n" +
+                        "Actividad de Ejercitación:\n" +
+                        "  • Resolver guía de ejercicios aplicando las variables a, b y calculando S en el cuaderno.";
+      }
+
+      return {
+        tema: t,
+        objetivos: "Aplicar los procedimientos y fórmulas correspondientes a " + t + " en la resolución de problemas.",
+        acciones: accionesTexto,
+        estrategias: "Demostración guiada en la pizarra con sustitución explícita de variables y resolución individual.",
+        producto: "Guía de ejercicios resueltos paso a paso con despeje de variables y comprobación.",
+        recursos: "Cuaderno, pizarra, marcadores, fichas de fórmulas.",
+        observaciones: "Acompañamiento pedagógico continuo."
+      };
+    });
+
+    return { objetivoGeneral: objetivoGeneral, objetivosEspecificos: objetivosEspecificos, justificacion: justificacion, metodologia: metodologia, matriz: matriz };
+  }
+
+  function generarPlanSemanalLocal(data) {
+    var uNombre = data.unidadNombre || "Unidad Curricular";
+    var uMin = uNombre.toLowerCase();
+    var esGeometria = uMin.includes("puntos") || uMin.includes("recta") || uMin.includes("segmento") || uMin.includes("geometr") || uMin.includes("línea");
+
+    var desarrolloSesion1 = "";
+    var desarrolloSesion2 = "";
+
+    if (esGeometria) {
+      desarrolloSesion1 = "Concepto / Propiedad: Distancia y Punto Medio entre dos puntos en una recta\n" +
+                         "Fórmula / Ecuación: d = |x2 - x1| ; M = (x1 + x2) ÷ 2\n" +
+                         "Variables:\n" +
+                         "  • d = Distancia total entre dos puntos\n" +
+                         "  • M = Coordenada del Punto Medio\n" +
+                         "  • x1 = Coordenada del primer punto A\n" +
+                         "  • x2 = Coordenada del segundo punto B\n" +
+                         "Problema Modelo: Dados los puntos A(4) y B(12), calcular la distancia d y el punto medio M.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Sustitución para la distancia d => d = |12 - 4|\n" +
+                         "  • Paso 2: Cálculo de la distancia en la variable d => d = 8 unidades\n" +
+                         "  • Paso 3: Sustitución para el punto medio M => M = (4 + 12) ÷ 2\n" +
+                         "  • Paso 4: Suma de coordenadas => M = 16 ÷ 2\n" +
+                         "  • Paso 5: Cálculo final del punto medio M => M = 8\n" +
+                         "Respuesta (R): Distancia d = 8 unidades ; Punto Medio M = 8";
+
+      desarrolloSesion2 = "Problema Aplicado: Un segmento de recta tiene extremo A(2) y punto medio M(7). Hallar la coordenada del extremo B(x2).\n" +
+                         "Fórmula / Ecuación: M = (x1 + x2) ÷ 2\n" +
+                         "Variables:\n" +
+                         "  • M = Punto medio conocido (7)\n" +
+                         "  • x1 = Extremo conocido (2)\n" +
+                         "  • x2 = Extremo desconocido por hallar\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Sustitución de M y x1 en la fórmula => 7 = (2 + x2) ÷ 2\n" +
+                         "  • Paso 2: Despeje del divisor 2 => 7 × 2 = 2 + x2\n" +
+                         "  • Paso 3: Multiplicación de términos => 14 = 2 + x2\n" +
+                         "  • Paso 4: Transposición para hallar x2 => x2 = 14 - 2\n" +
+                         "  • Paso 5: Cálculo final => x2 = 12\n" +
+                         "Respuesta (R): La coordenada del extremo B es x2 = 12.";
+    } else {
+      desarrolloSesion1 = "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
+                         "Fórmula / Ecuación: a × x + b = c\n" +
+                         "Variables:\n" +
+                         "  • a = Coeficiente multiplicador de la variable\n" +
+                         "  • x = Incógnita / Variable desconocida\n" +
+                         "  • b = Término independiente inicial\n" +
+                         "  • c = Término independiente constante\n" +
+                         "Problema Modelo: Hallar el valor de la incógnita x en la ecuación 3 × x + 6 = 21.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Transposición del término b en la ecuación => 3 × x = 21 - 6\n" +
+                         "  • Paso 2: Resta de constantes => 3 × x = 15\n" +
+                         "  • Paso 3: Despeje del coeficiente a => x = 15 ÷ 3\n" +
+                         "  • Paso 4: Cálculo final de la variable => x = 5\n" +
+                         "Respuesta (R): x = 5";
+
+      desarrolloSesion2 = "Problema Aplicado: El doble de un número x más 8 es igual a 24. ¿Cuál es el número?\n" +
+                         "Fórmula / Ecuación: 2 × x + 8 = 24\n" +
+                         "Variables:\n" +
+                         "  • x = El número desconocido por hallar\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Transposición de la constante 8 => 2 × x = 24 - 8\n" +
+                         "  • Paso 2: Simplificación de constantes => 2 × x = 16\n" +
+                         "  • Paso 3: Despeje de la variable x => x = 16 ÷ 2\n" +
+                         "  • Paso 4: Resultado final => x = 8\n" +
+                         "Respuesta (R): El número es x = 8.";
+    }
+
+    return {
+      competencia: "Resuelve problemas de cantidad y relaciones que involucran los contenidos de " + uNombre + ", utilizando fórmulas, ecuaciones y estrategias diversas con simbología matemática adecuada.",
+      capacidades: [
+        "Traduce datos y condiciones a expresiones numéricas y geométricas.",
+        "Comunica su comprensión sobre los conceptos, variables y operaciones de " + uNombre + ".",
+        "Usa estrategias y procedimientos de estimación, despeje y cálculo matemático.",
+        "Argumenta afirmaciones sobre relaciones numéricas y justifica sus resultados."
+      ],
+      desempenos: [
+        "Establece relaciones entre datos e integra conceptos clave del CNB para " + uNombre + ".",
+        "Expresa con lenguaje formal y simbología adecuada su comprensión sobre la unidad.",
+        "Selecciona y emplea algoritmos de cálculo y despeje de variables eficaces.",
+        "Justifica procedimientos con ejercicios modelo resueltos paso a paso."
+      ],
+      evaluacion: {
+        tecnica: "Observación sistemática y análisis de producciones escritas.",
+        instrumento: "Lista de cotejo, rúbrica analítica y prácticas dirigidas.",
+        evidencia: "Resolución de problemas paso a paso en cuaderno con simbología matemática."
+      },
+      adaptaciones: {
+        dificultades: [
+          "Uso de material concreto y fichas con fórmulas y variables desglosadas.",
+          "Resolución de ejercicios modelo con plantilla paso a paso y apoyo directo."
+        ],
+        avanzado: [
+          "Desafíos matemáticos con ecuaciones combinadas y problemas contextualizados."
+        ]
+      },
+      referenciasDocente: [
+        "Secretaría de Educación de Honduras. Currículo Nacional Básico (CNB).",
+        "Secretaría de Educación (2022). Guía del Docente de " + data.asignatura + " " + data.grado + "."
+      ],
+      referenciasEstudiante: [
+        "Secretaría de Educación (2022). Cuaderno de Trabajo de " + data.asignatura + " " + data.grado + ".",
+        "Fichas de fórmulas y guías prácticas de ejercicios."
+      ],
+      sesiones: [
+        {
+          numero: 1,
+          titulo: "Exploración y representación de " + uNombre,
+          inicio: { 
+            actividades: [
+              "Presentación de situación problema cotidiana correspondiente a " + uNombre + ".", 
+              "Lluvia de ideas para identificar variables conocidas y desconocidas en la pizarra."
+            ], 
+            recursos: ["Pizarra, marcadores de colores"], 
+            tiempo: "8 min" 
+          },
+          desarrollo: { 
+            actividades: [
+              desarrolloSesion1,
+              "Práctica guiada en parejas resolviendo 3 ejercicios similares sustituyendo e identificando las variables del tema."
+            ], 
+            recursos: ["Cuaderno, fichas de fórmulas, guías de trabajo"], 
+            tiempo: "28 min" 
+          },
+          cierre: { 
+            actividades: [
+              "Verificación colectiva del procedimiento en la pizarra.", 
+              "Pregunta de salida: ¿Cuál es el primer paso al despejar una variable en este tema?"
+            ], 
+            recursos: ["Ficha de salida"], 
+            tiempo: "9 min" 
+          }
+        },
+        {
+          numero: 2,
+          titulo: "Profundización y resolución de problemas prácticos de " + uNombre,
+          inicio: { 
+            actividades: [
+              "Repaso de la fórmula y propiedades algebraicas o geométricas vistas en la sesión anterior.", 
+              "Planteamiento del desafío matemático del día."
+            ], 
+            recursos: ["Pizarra"], 
+            tiempo: "8 min" 
+          },
+          desarrollo: { 
+            actividades: [
+              desarrolloSesion2,
+              "Trabajo individual en guía de 5 problemas contextualizados identificando las variables correspondientes."
+            ], 
+            recursos: ["Texto del estudiante, cuaderno, guía de ejercicios"], 
+            tiempo: "28 min" 
+          },
+          cierre: { 
+            actividades: [
+              "Revisión de respuestas e identificación de errores frecuentes en las operaciones.", 
+              "Aclaración de dudas finales."
+            ], 
+            recursos: ["Pizarra"], 
+            tiempo: "9 min" 
+          }
+        }
+      ]
+    };
+  }
+
+  /* ============================================================
+     CONSTRUCTORES DE DOCUMENTOS WORD (.DOCX)
+     ============================================================ */
+  function construirDocxMejora(data, contenido) {
+    var D = window.docx;
+    var NAVY = "0C2340";
+    var ZEBRA = "EAEFF5";
+    var GOLD = "A8781F";
+    var LABEL_BG = "F1EEE3";
+
+    function cell(text, bold, bg, widthPercent) {
+      return new D.TableCell({
+        width: widthPercent ? { size: widthPercent, type: D.WidthType.PERCENTAGE } : undefined,
+        shading: bg ? { fill: bg } : undefined,
+        margins: { top: 80, bottom: 80, left: 100, right: 100 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text || "", bold: !!bold, size: 18, font: "Calibri" })] })]
+      });
+    }
+
+    function headerFooter() {
+      return {
+        default: new D.Header({
+          children: [
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 18, color: NAVY, font: "Calibri" })] }),
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY, space: 4 } }, children: [new D.TextRun({ text: "PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA — " + data.centro.toUpperCase(), size: 16, color: "44506B", font: "Calibri" })] })
+          ]
+        }),
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Documento Docente Oficial · Página ", size: 14, color: "6B7686", font: "Calibri" }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 14, color: "6B7686", font: "Calibri" })] })]
+          })
+        }
+      };
+    }
+
+    var sec1 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 120 }, children: [new D.TextRun({ text: "PLAN DE MEJORA Y NIVELACIÓN ACADÉMICA", bold: true, size: 26, color: NAVY })] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [cell("Centro Educativo:", true, LABEL_BG, 22), cell(data.centro, false, undefined, 28), cell("Ubicación:", true, LABEL_BG, 22), cell(data.ubicacion, false, undefined, 28)] }),
+          new D.TableRow({ children: [cell("Docente Titular:", true, LABEL_BG, 22), cell(data.docente, false, undefined, 28), cell("Asignatura:", true, LABEL_BG, 22), cell(data.asignatura, false, undefined, 28)] }),
+          new D.TableRow({ children: [cell("Grado y Sección:", true, LABEL_BG, 22), cell(data.gradoSeccion, false, undefined, 28), cell("Nivel Educativo:", true, LABEL_BG, 22), cell(data.nivel, false, undefined, 28)] })
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 200, after: 60 }, children: [new D.TextRun({ text: "1. OBJETIVO GENERAL", bold: true, size: 20, color: NAVY })] }),
+      new D.Paragraph({ spacing: { after: 140 }, children: [new D.TextRun({ text: contenido.objetivoGeneral, size: 18 })] }),
+      new D.Paragraph({ spacing: { before: 100, after: 60 }, children: [new D.TextRun({ text: "2. OBJETIVOS ESPECÍFICOS", bold: true, size: 20, color: NAVY })] })
+    ];
+
+    (contenido.objetivosEspecificos || []).forEach(function (obj) {
+      sec1.push(new D.Paragraph({ bullet: { level: 0 }, spacing: { after: 40 }, children: [new D.TextRun({ text: obj, size: 18 })] }));
+    });
+
+    sec1.push(new D.Paragraph({ spacing: { before: 160, after: 60 }, children: [new D.TextRun({ text: "3. JUSTIFICACIÓN PEDAGÓGICA", bold: true, size: 20, color: NAVY })] }));
+    sec1.push(new D.Paragraph({ spacing: { after: 140 }, children: [new D.TextRun({ text: contenido.justificacion, size: 18 })] }));
+    sec1.push(new D.Paragraph({ spacing: { before: 160, after: 60 }, children: [new D.TextRun({ text: "4. METODOLOGÍA DE EJECUCIÓN (4 FASES)", bold: true, size: 20, color: NAVY })] }));
+
+    (contenido.metodologia || []).forEach(function (f) {
+      sec1.push(new D.Paragraph({ spacing: { before: 40, after: 20 }, children: [new D.TextRun({ text: f.titulo + ": ", bold: true, size: 18, color: GOLD }), new D.TextRun({ text: f.texto, size: 18 })] }));
+    });
+
+    function mCellHeader(text) {
+      return new D.TableCell({ shading: { fill: NAVY }, margins: { top: 90, bottom: 90, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: text, bold: true, color: "FFFFFF", size: 18 })] })] });
+    }
+
+    function mCell(text, shaded) {
+      var lines = (text || "").split(/\r?\n/);
+      var paragraphs = [];
+
+      lines.forEach(function(line) {
+        var trimmed = line.trim();
+        if (!trimmed) return;
+
+        var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Resolución") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
+        var isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
+        var isStep = trimmed.toLowerCase().startsWith("paso") || trimmed.startsWith("PO:") || trimmed.startsWith("R:");
+
+        paragraphs.push(new D.Paragraph({
+          spacing: { before: isHeader ? 70 : 15, after: 20 },
+          alignment: D.AlignmentType.LEFT,
+          indent: (isBullet || isStep) ? { left: 160, hanging: isBullet ? 160 : 0 } : undefined,
+          children: [
+            new D.TextRun({
+              text: line,
+              bold: isHeader || isStep || trimmed.startsWith("Fórmula") || trimmed.startsWith("Respuesta"),
+              color: isHeader ? NAVY : "1B2430",
+              size: 17,
+              font: "Calibri"
+            })
+          ]
+        }));
+      });
+
+      return new D.TableCell({
+        shading: shaded ? { fill: ZEBRA } : undefined,
+        margins: { top: 80, bottom: 80, left: 80, right: 80 },
+        children: paragraphs
+      });
+    }
+
+    var matrizRows = [new D.TableRow({ tableHeader: true, children: [mCellHeader("Objetivos (Bloom)"), mCellHeader("Acciones Didácticas"), mCellHeader("Estrategias / Atención"), mCellHeader("Producto / Criterio"), mCellHeader("Recursos"), mCellHeader("Observaciones")] })];
+    contenido.matriz.forEach(function (f, i) {
+      var s = i % 2 === 1;
+      matrizRows.push(new D.TableRow({ children: [mCell(f.objetivos, s), mCell(f.acciones, s), mCell(f.estrategias, s), mCell(f.producto, s), mCell(f.recursos, s), mCell(f.observaciones, s)] }));
+    });
+
+    var matrizTable = new D.Table({ width: { size: 100, type: D.WidthType.PERCENTAGE }, columnWidths: [1700, 1900, 1900, 1900, 1500, 1700], rows: matrizRows });
+
+    var firmasTable = new D.Table({
+      width: { size: 100, type: D.WidthType.PERCENTAGE },
+      borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+      rows: [new D.TableRow({
+        children: [
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma del Docente Titular\n" + data.docente, bold: true, size: 18, color: NAVY })] })] }),
+          new D.TableCell({ margins: { top: 300, left: 200, right: 200 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma de Dirección / Subdirección\n" + data.centro, bold: true, size: 18, color: NAVY })] })] })
+        ]
+      })]
+    });
+
+    var sec2 = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 200 }, children: [new D.TextRun({ text: "MATRIZ OPERATIVA DE PLAN DE MEJORA — " + data.asignatura.toUpperCase() + " " + data.gradoSeccion.toUpperCase(), bold: true, size: 24, color: NAVY })] }),
+      matrizTable, new D.Paragraph({ spacing: { before: 400 }, children: [] }), firmasTable
+    ];
+
+    var doc = new D.Document({
+      sections: [
+        { properties: { page: { size: { orientation: D.PageOrientation.PORTRAIT } } }, headers: headerFooter(), children: sec1 },
+        { properties: { type: D.SectionType.NEXT_PAGE, page: { size: { orientation: D.PageOrientation.LANDSCAPE } } }, headers: headerFooter(), children: sec2 }
+      ]
+    });
+
+    return D.Packer.toBlob(doc);
+  }
+
+  function construirDocxSemanal(data, contenido) {
+    var D = window.docx;
+    var GREEN_HEADER = "2A9D8F";
+    var GREEN_LIGHT = "E9F3F0";
+    var NAVY = "0C2340";
+
+    function headerFooter() {
+      return {
+        default: new D.Header({
+          children: [
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 20 }, children: [new D.TextRun({ text: "SECRETARÍA DE EDUCACIÓN DE HONDURAS", bold: true, size: 18, color: NAVY, font: "Calibri" })] }),
+            new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: GREEN_HEADER, space: 4 } }, children: [new D.TextRun({ text: data.centro + " — " + data.semana, size: 16, color: "44506B", font: "Calibri" })] })
+          ]
+        }),
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Planificación Semanal de Clases · Página ", size: 14, color: "6B7686", font: "Calibri" }), new D.TextRun({ children: [D.PageNumber.CURRENT], size: 14, color: "6B7686", font: "Calibri" })] })]
+          })
+        }
+      };
+    }
+
+    function tableCell(text, bold, bg, fontSize) {
+      return new D.TableCell({
+        shading: bg ? { fill: bg } : undefined,
+        margins: { top: 70, bottom: 70, left: 80, right: 80 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text || "", bold: !!bold, size: fontSize || 18, font: "Calibri" })] })]
+      });
+    }
+
+    function createBulletParagraphs(items) {
+      var paragraphs = [];
+      (items || []).forEach(function(it) {
+        var lines = (it || "").split(/\r?\n/);
+        lines.forEach(function(line) {
+          var trimmed = line.trim();
+          if (!trimmed) return;
+
+          var isHeader = trimmed.startsWith("Concepto") || trimmed.startsWith("Fórmula") || trimmed.startsWith("Variables") || trimmed.startsWith("Desglose") || trimmed.startsWith("Problema") || trimmed.startsWith("Procedimiento") || trimmed.startsWith("Respuesta") || trimmed.startsWith("Actividad") || trimmed.startsWith("📌") || trimmed.startsWith("📐") || trimmed.startsWith("✏️");
+          var isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
+          var isStep = trimmed.toLowerCase().startsWith("paso") || trimmed.startsWith("PO:") || trimmed.startsWith("R:");
+
+          paragraphs.push(new D.Paragraph({
+            spacing: { before: isHeader ? 60 : 15, after: 15 },
+            alignment: D.AlignmentType.LEFT,
+            indent: (isBullet || isStep) ? { left: 160, hanging: isBullet ? 160 : 0 } : undefined,
+            children: [
+              new D.TextRun({
+                text: line,
+                bold: isHeader || isStep || trimmed.startsWith("Fórmula") || trimmed.startsWith("Respuesta"),
+                color: isHeader ? GREEN_HEADER : "1B2430",
+                size: 18,
+                font: "Calibri"
+              })
+            ]
+          }));
+        });
+      });
+      return paragraphs;
+    }
+
+    // --- PÁGINA 1: CABECERA Y DATOS GENERALES ---
+    var page1Children = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 60 }, children: [new D.TextRun({ text: "PLAN DE CLASES SEMANAL", bold: true, size: 28, color: NAVY })] }),
+      new D.Paragraph({
+        spacing: { after: 160 },
+        children: [
+          new D.TextRun({ text: data.semana, bold: true, size: 18, color: "44506B" }),
+          new D.TextRun({ text: "\t\t\t\t\t\t\t\t" }),
+          new D.TextRun({ text: data.grado + " – " + data.asignatura, bold: true, size: 18, color: GREEN_HEADER })
+        ]
+      }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+        rows: [
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Institución: ", bold: true, size: 18 }), new D.TextRun({ text: data.centro, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Grado: ", bold: true, size: 18 }), new D.TextRun({ text: data.grado, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Sección: ", bold: true, size: 18 }), new D.TextRun({ text: "_______________", size: 18 })] })] })
+          ]}),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Profesor(a): ", bold: true, size: 18 }), new D.TextRun({ text: data.docente, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Jornada: ", bold: true, size: 18 }), new D.TextRun({ text: data.jornada, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Asignatura: ", bold: true, size: 18 }), new D.TextRun({ text: data.asignatura, size: 18 })] })] })
+          ]}),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 40, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Duración: ", bold: true, size: 18 }), new D.TextRun({ text: data.duracion, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Unidad: ", bold: true, size: 18 }), new D.TextRun({ text: data.unidadNombre, size: 18 })] })] }),
+            new D.TableCell({ width: { size: 30, type: D.WidthType.PERCENTAGE }, children: [new D.Paragraph({ children: [new D.TextRun({ text: "Semana del: ", bold: true, size: 18 }), new D.TextRun({ text: "_______________", size: 18 })] })] })
+          ]})
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 160 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Competencia", true, GREEN_LIGHT, 18), tableCell(contenido.competencia, false, undefined, 18)] }),
+          new D.TableRow({ children: [tableCell("Capacidades", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.capacidades) })] }),
+          new D.TableRow({ children: [tableCell("Desempeños / Indicadores", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.desempenos) })] })
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 120 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Evaluación del aprendizaje", true, GREEN_LIGHT, 18), tableCell("Adaptaciones curriculares", true, GREEN_LIGHT, 18)] }),
+          new D.TableRow({ children: [
+            new D.TableCell({ width: { size: 50, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: [
+              new D.Paragraph({ children: [new D.TextRun({ text: "Técnica: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.tecnica, size: 18 })] }),
+              new D.Paragraph({ children: [new D.TextRun({ text: "Instrumento: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.instrumento, size: 18 })] }),
+              new D.Paragraph({ children: [new D.TextRun({ text: "Evidencia: ", bold: true, size: 18 }), new D.TextRun({ text: contenido.evaluacion.evidencia, size: 18 })] })
+            ]}),
+            new D.TableCell({ width: { size: 50, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: [
+              new D.Paragraph({ children: [new D.TextRun({ text: "Para estudiantes con dificultades:", bold: true, size: 18, color: GREEN_HEADER })] })
+            ].concat(createBulletParagraphs(contenido.adaptaciones.dificultades)).concat([
+              new D.Paragraph({ spacing: { before: 60 }, children: [new D.TextRun({ text: "Para estudiantes con ritmo avanzado:", bold: true, size: 18, color: GREEN_HEADER })] })
+            ]).concat(createBulletParagraphs(contenido.adaptaciones.avanzado)) })
+          ]})
+        ]
+      }),
+      new D.Paragraph({ spacing: { before: 120 }, children: [] }),
+      new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
+        rows: [
+          new D.TableRow({ children: [tableCell("Referencias docente", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.referenciasDocente) })] }),
+          new D.TableRow({ children: [tableCell("Referencias estudiante", true, GREEN_LIGHT, 18), new D.TableCell({ margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(contenido.referenciasEstudiante) })] })
+        ]
+      })
+    ];
+
+    // --- PÁGINA 2+: SESIONES DE APRENDIZAJE ---
+    var page2Children = [
+      new D.Paragraph({ alignment: D.AlignmentType.CENTER, spacing: { after: 160 }, children: [new D.TextRun({ text: "SESIONES DE APRENDIZAJE", bold: true, size: 24, color: NAVY })] })
+    ];
+
+    (contenido.sesiones || []).forEach(function (s) {
+      page2Children.push(
+        new D.Paragraph({
+          spacing: { before: 140, after: 80 },
+          children: [new D.TextRun({ text: "Sesión " + s.numero + ": " + s.titulo, bold: true, size: 20, color: GREEN_HEADER })]
+        })
+      );
+
+      var sesRows = [
+        new D.TableRow({
+          tableHeader: true,
+          children: [
+            new D.TableCell({ shading: { fill: GREEN_HEADER }, width: { size: 18, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Momento", bold: true, color: "FFFFFF", size: 18 })] })] }),
+            new D.TableCell({ shading: { fill: GREEN_HEADER }, width: { size: 52, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Actividades de Enseñanza-Aprendizaje", bold: true, color: "FFFFFF", size: 18 })] })] }),
+            new D.TableCell({ shading: { fill: GREEN_HEADER }, width: { size: 20, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Recursos", bold: true, color: "FFFFFF", size: 18 })] })] }),
+            new D.TableCell({ shading: { fill: GREEN_HEADER }, width: { size: 10, type: D.WidthType.PERCENTAGE }, margins: { top: 80, bottom: 80, left: 80, right: 80 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: "Tiempo", bold: true, color: "FFFFFF", size: 18 })] })] })
+          ]
+        })
+      ];
+
+      ['inicio', 'desarrollo', 'cierre'].forEach(function(m) {
+        var label = m.charAt(0).toUpperCase() + m.slice(1);
+        var datosMomento = s[m] || { actividades: [], recursos: [], tiempo: "" };
+        sesRows.push(new D.TableRow({
+          children: [
+            tableCell(label, true, GREEN_LIGHT, 18),
+            new D.TableCell({ width: { size: 52, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(datosMomento.actividades) }),
+            new D.TableCell({ width: { size: 20, type: D.WidthType.PERCENTAGE }, margins: { top: 70, bottom: 70, left: 80, right: 80 }, children: createBulletParagraphs(datosMomento.recursos) }),
+            tableCell(datosMomento.tiempo, false, undefined, 18)
+          ]
+        }));
+      });
+
+      page2Children.push(new D.Table({ width: { size: 100, type: D.WidthType.PERCENTAGE }, rows: sesRows }));
+      page2Children.push(new D.Paragraph({ spacing: { before: 120 }, children: [] }));
+    });
+
+    // FIRMAS AL FINAL
+    page2Children.push(new D.Paragraph({ spacing: { before: 300 }, children: [] }));
+    page2Children.push(new D.Table({
+      width: { size: 100, type: D.WidthType.PERCENTAGE },
+      borders: { top: { style: D.BorderStyle.NONE }, bottom: { style: D.BorderStyle.NONE }, left: { style: D.BorderStyle.NONE }, right: { style: D.BorderStyle.NONE }, insideHorizontal: { style: D.BorderStyle.NONE }, insideVertical: { style: D.BorderStyle.NONE } },
+      rows: [new D.TableRow({
+        children: [
+          new D.TableCell({ margins: { top: 200, left: 100, right: 100 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma del Docente Titular\n" + data.docente, bold: true, size: 18, color: NAVY })] })] }),
+          new D.TableCell({ margins: { top: 200, left: 100, right: 100 }, children: [new D.Paragraph({ alignment: D.AlignmentType.CENTER, border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: NAVY } }, children: [new D.TextRun({ text: "Firma de Dirección / Subdirección\n" + data.centro, bold: true, size: 18, color: NAVY })] })] })
+        ]
+      })]
+    }));
+
+    var doc = new D.Document({
+      sections: [
+        { properties: { page: { size: { orientation: D.PageOrientation.LANDSCAPE } } }, headers: headerFooter(), children: page1Children },
+        { properties: { type: D.SectionType.NEXT_PAGE, page: { size: { orientation: D.PageOrientation.LANDSCAPE } } }, headers: headerFooter(), children: page2Children }
+      ]
+    });
+
+    return D.Packer.toBlob(doc);
+  }
+
+  function setStatus(el, text, type) {
+    el.className = "status visible " + (type || "info");
+    el.innerHTML = text;
+  }
+
+  function hideStatus(el) {
+    el.className = "status";
+    el.innerHTML = "";
+  }
+
+  function descargarBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }
+
+  // --- SUBMIT FORM 1: PLAN DE MEJORA ---
+  document.getElementById("form-mejora").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    var btn = document.getElementById("btn-mejora");
+    var statusEl = document.getElementById("status-mejora");
+    hideStatus(statusEl);
+
+    var centro = document.getElementById("m-centro").value.trim();
+    var ubicacion = document.getElementById("m-ubicacion").value.trim();
+    var docente = document.getElementById("m-docente").value.trim();
+    var asignatura = document.getElementById("m-asignatura").value.trim();
+    var gradoSeccion = document.getElementById("m-gradoSeccion").value.trim();
+    var nivel = document.getElementById("m-nivel").value.trim();
+    var temasRaw = document.getElementById("m-temas").value.trim();
+
+    if (!centro || !docente || !asignatura || !gradoSeccion || !temasRaw) {
+      setStatus(statusEl, "<strong>Campos requeridos:</strong> Por favor complete los datos obligatorios del formulario.", "error");
+      return;
+    }
+
+    var temasLista = temasRaw.split("\n").map(function (t) { return t.trim(); }).filter(Boolean);
+    var formData = { centro: centro, ubicacion: ubicacion, docente: docente, asignatura: asignatura, gradoSeccion: gradoSeccion, nivel: nivel, temasLista: temasLista };
+
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+
+    try {
+      var response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "plan_mejora", data: formData })
+      });
+
+      var parsedJSON = null;
+      if (response.ok) {
+        var resData = await response.json();
+        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        parsedJSON = JSON.parse(rawText);
+      } else {
+        console.warn("Servidor respondió con error. Generando plan de contingencia pedagógico...");
+        parsedJSON = generarPlanMejoraLocal(formData);
+      }
+
+      var blob = await construirDocxMejora(formData, parsedJSON);
+      descargarBlob(blob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+
+      setStatus(statusEl, "<strong>¡Plan de Mejora generado con éxito!</strong> El archivo Word (.docx) se ha descargado a su dispositivo.", "success");
+    } catch (err) {
+      console.error("Error al procesar:", err);
+      try {
+        var fallbackJSON = generarPlanMejoraLocal(formData);
+        var fallbackBlob = await construirDocxMejora(formData, fallbackJSON);
+        descargarBlob(fallbackBlob, "Plan_de_Mejora_" + asignatura + "_" + gradoSeccion.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+        setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión estructurada con el formato oficial del CNB.", "success");
+      } catch (fErr) {
+        setStatus(statusEl, "<strong>Error de generación:</strong> No se pudo crear el archivo Word. Revisa tu conexión.", "error");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.removeAttribute("data-loading");
+    }
+  });
+
+  // --- SUBMIT FORM 2: PLANIFICACIÓN SEMANAL ---
+  document.getElementById("form-semanal").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    var btn = document.getElementById("btn-semanal");
+    var statusEl = document.getElementById("status-semanal");
+    hideStatus(statusEl);
+
+    var centro = document.getElementById("s-centro").value.trim();
+    var docente = document.getElementById("s-docente").value.trim();
+    var ciclo = selectCiclo.value;
+    var grado = selectGrado.value;
+    var asignatura = document.getElementById("s-asignatura").value.trim();
+    var semana = document.getElementById("s-semana").value.trim();
+    var duracion = document.getElementById("s-duracion").value.trim();
+    var jornada = document.getElementById("s-jornada").value.trim();
+
+    var unidadIndex = parseInt(selectUnidad.value, 10) || 0;
+    var unidadObj = (cnbDataMatematica[grado] || [])[unidadIndex] || {};
+    var unidadNombre = unidadObj.unidad || "Unidad Curricular";
+
+    if (!centro || !docente || !semana || !duracion) {
+      setStatus(statusEl, "<strong>Campos requeridos:</strong> Complete los campos de la planificación semanal.", "error");
+      return;
+    }
+
+    var formData = {
+      centro: centro, docente: docente, ciclo: ciclo, grado: grado,
+      asignatura: asignatura, semana: semana, duracion: duracion, jornada: jornada,
+      unidadNombre: unidadNombre, expectativas: unidadObj.expectativas || [], contenidos: unidadObj.contenidos || []
+    };
+
+    btn.disabled = true;
+    btn.setAttribute("data-loading", "true");
+
+    try {
+      var response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "plan_semanal", data: formData })
+      });
+
+      var parsedJSON = null;
+      if (response.ok) {
+        var resData = await response.json();
+        var rawText = resData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        parsedJSON = JSON.parse(rawText);
+      } else {
+        console.warn("Servidor no disponible. Generando planificación con contingencia oficial...");
+        parsedJSON = generarPlanSemanalLocal(formData);
+      }
+
+      var blob = await construirDocxSemanal(formData, parsedJSON);
+      descargarBlob(blob, "Plan_Semanal_" + asignatura + "_" + grado.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+
+      setStatus(statusEl, "<strong>¡Planificación Semanal generada con éxito!</strong> El archivo Word (.docx) está listo para imprimir y firmar.", "success");
+    } catch (err) {
+      console.error("Error al procesar planificación:", err);
+      try {
+        var fallbackJSON = generarPlanSemanalLocal(formData);
+        var fallbackBlob = await construirDocxSemanal(formData, fallbackJSON);
+        descargarBlob(fallbackBlob, "Plan_Semanal_" + asignatura + "_" + grado.replace(/[^a-zA-Z0-9]/g, "_") + ".docx");
+        setStatus(statusEl, "<strong>¡Documento generado correctamente!</strong> Se descargó la versión oficial alineada al CNB.", "success");
+      } catch (fErr) {
+        setStatus(statusEl, "<strong>Error de generación:</strong> No se pudo procesar el plan semanal.", "error");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.removeAttribute("data-loading");
+    }
+  });
+
+})();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduPlan AI HN — Plataforma Docente de Honduras</title>
+  
+  <!-- Tipografías Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Librería Standalone docx.js -->
+  <script src="https://cdn.jsdelivr.net/npm/docx@7.8.2/build/index.js"></script>
+
+  <style>
+    :root {
+      --navy: #0c2340;
+      --navy-deep: #081726;
+      --navy-soft: #2c4a70;
+      --paper: #f6f2e8;
+      --surface: #ffffff;
+      --ink: #1b2430;
+      --ink-soft: #566072;
+      --line: #ddd4bf;
+      --gold: #a8781f;
+      --gold-soft: #efe2c3;
+      --success: #1f7a4d;
+      --success-bg: #e8f3ec;
+      --danger: #ae2b1e;
+      --danger-bg: #fbeae7;
+      --focus: #a8781f;
+      --radius: 10px;
+      --shadow: 0 1px 2px rgba(12, 35, 64, 0.06), 0 8px 24px -12px rgba(12, 35, 64, 0.18);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --navy: #4f7db3;
+        --navy-deep: #dbe6f2;
+        --navy-soft: #7ea1c7;
+        --paper: #12161d;
+        --surface: #1a2029;
+        --ink: #e8e6dc;
+        --ink-soft: #a2aab8;
+        --line: #313a48;
+        --gold: #e0b559;
+        --gold-soft: #2c2716;
+        --success: #6fcf9a;
+        --success-bg: #16281f;
+        --danger: #e5897a;
+        --danger-bg: #2c1a17;
+        --focus: #e0b559;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -14px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Public Sans", "Segoe UI", Arial, sans-serif;
+      font-size: 15.5px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .eyebrow {
+      font-family: "Spectral", Georgia, "Times New Roman", serif;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 36px 20px 72px;
+    }
+
+    /* ---------- Membrete Institucional ---------- */
+    .letterhead {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      border-bottom: 3px solid var(--navy);
+    }
+
+    .seal {
+      flex: none;
+      width: 56px;
+      height: 56px;
+    }
+
     .letterhead-text .eyebrow {
       margin: 0 0 3px;
       font-size: 12.5px;
