@@ -147,9 +147,7 @@
       gap: 8px;
     }
 
-    .tab-btn:hover {
-      color: var(--navy);
-    }
+    .tab-btn:hover { color: var(--navy); }
 
     .tab-btn.active {
       color: var(--navy);
@@ -190,13 +188,8 @@
       font-size: 13.8px;
     }
 
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     /* ---------- Formulario y Campos ---------- */
     .grid-2 {
@@ -425,7 +418,6 @@
     }
 
     .modal-header h2 { margin: 0; font-size: 1.28rem; }
-
     .modal-body { font-size: 14.5px; line-height: 1.55; }
     .modal-body p { margin: 0 0 12px; }
 
@@ -937,6 +929,9 @@ Perímetro y área de figuras planas</textarea>
     });
   });
 
+  /* ============================================================
+     GENERADORES DE CONTINGENCIA DINÁMICOS ALINEADOS AL TEMA SELECCIONADO
+     ============================================================ */
   function generarPlanMejoraLocal(data) {
     var temas = data.temasLista;
     var temasTexto = temas.join(", ");
@@ -954,29 +949,52 @@ Perímetro y área de figuras planas</textarea>
 
     var metodologia = [
       { titulo: "Fase 1: Diagnóstico y Retroalimentación", texto: "Evaluación inicial para identificar errores procedimentales en " + temasTexto + "." },
-      { titulo: "Fase 2: Modelado Directo y Ejercitación Guiada", texto: "Explicación de ecuaciones clave con desglose de variables y resolución de ejercicios modelo en la pizarra." },
+      { titulo: "Fase 2: Modelado Directo y Ejercitación Guiada", texto: "Explicación de conceptos clave con desglose de variables y resolución de ejercicios modelo en la pizarra." },
       { titulo: "Fase 3: Tutorías Individualizadas", texto: "Atención personalizada mediante guías prácticas paso a paso." },
       { titulo: "Fase 4: Evaluación de Dominio", texto: "Prueba formativa de desempeño y verificación de aprendizajes." }
     ];
 
     var matriz = temas.map(function (t) {
+      var tMin = t.toLowerCase();
+      var esGeometria = tMin.includes("puntos") || tMin.includes("recta") || tMin.includes("segmento") || tMin.includes("geometr");
+      
+      var accionesTexto = "";
+      if (esGeometria) {
+        accionesTexto = "Concepto / Propiedad: Distancia entre dos puntos en un segmento\n" +
+                        "Fórmula / Ecuación: d = |x2 - x1|\n" +
+                        "Variables:\n" +
+                        "  • d = Distancia entre los puntos A y B\n" +
+                        "  • x1 = Coordenada inicial del punto A\n" +
+                        "  • x2 = Coordenada final del punto B\n" +
+                        "Problema Modelo: Hallar la distancia d entre el punto A(3) y el punto B(11) en la recta numérica.\n" +
+                        "Procedimiento paso a paso:\n" +
+                        "  • Paso 1: Sustitución de variables x1 y x2 en la fórmula => d = |11 - 3|\n" +
+                        "  • Paso 2: Cálculo del valor absoluto en la variable d => d = |8|\n" +
+                        "  • Paso 3: Obtención de la distancia => d = 8 unidades\n" +
+                        "Respuesta (R): d = 8 unidades\n" +
+                        "Actividad de Ejercitación:\n" +
+                        "  • Resolver guía de 5 ejercicios en el cuaderno calculando la distancia d usando la fórmula d = |x2 - x1|.";
+      } else {
+        accionesTexto = "Concepto / Propiedad: Resolución de " + t + "\n" +
+                        "Fórmula / Ecuación: S = a + b\n" +
+                        "Variables:\n" +
+                        "  • S = Suma o resultado final\n" +
+                        "  • a = Primer término o valor conocido\n" +
+                        "  • b = Segundo término o valor conocido\n" +
+                        "Problema Modelo: Aplicar la propiedad en " + t + " con los valores a = 12 y b = 15.\n" +
+                        "Procedimiento paso a paso:\n" +
+                        "  • Paso 1: Sustitución de valores a y b en la expresión => S = 12 + 15\n" +
+                        "  • Paso 2: Desarrollo de la operación usando la variable S => S = 27\n" +
+                        "  • Paso 3: Verificación final => S = 27\n" +
+                        "Respuesta (R): S = 27 unidades\n" +
+                        "Actividad de Ejercitación:\n" +
+                        "  • Resolver guía de ejercicios aplicando las variables a, b y calculando S en el cuaderno.";
+      }
+
       return {
         tema: t,
         objetivos: "Aplicar los procedimientos y fórmulas correspondientes a " + t + " en la resolución de problemas.",
-        acciones: "Concepto / Propiedad: Resolución de " + t + "\n" +
-                  "Fórmula / Ecuación: A = (b × h) ÷ 2\n" +
-                  "Variables:\n" +
-                  "  • A = Área de la figura (cm²)\n" +
-                  "  • b = Base de la figura (cm)\n" +
-                  "  • h = Altura correspondiente (cm)\n" +
-                  "Problema Modelo: Hallar el área A de un triángulo con base b = 10 cm y altura h = 8 cm.\n" +
-                  "Procedimiento paso a paso:\n" +
-                  "  • Paso 1: Sustitución de variables b y h en la fórmula => A = (10 cm × 8 cm) ÷ 2\n" +
-                  "  • Paso 2: Multiplicación de la base por la altura => A = 80 cm² ÷ 2\n" +
-                  "  • Paso 3: División final para obtener el área => A = 40 cm²\n" +
-                  "Respuesta (R): A = 40 cm²\n" +
-                  "Actividad de Ejercitación:\n" +
-                  "  • Resolver guía de 5 ejercicios sustituyendo las variables b, h y calculando A en el cuaderno.",
+        acciones: accionesTexto,
         estrategias: "Demostración guiada en la pizarra con sustitución explícita de variables y resolución individual.",
         producto: "Guía de ejercicios resueltos paso a paso con despeje de variables y comprobación.",
         recursos: "Cuaderno, pizarra, marcadores, fichas de fórmulas.",
@@ -988,16 +1006,81 @@ Perímetro y área de figuras planas</textarea>
   }
 
   function generarPlanSemanalLocal(data) {
+    var uNombre = data.unidadNombre || "Unidad Curricular";
+    var uMin = uNombre.toLowerCase();
+    var esGeometria = uMin.includes("puntos") || uMin.includes("recta") || uMin.includes("segmento") || uMin.includes("geometr") || uMin.includes("línea");
+
+    var desarrolloSesion1 = "";
+    var desarrolloSesion2 = "";
+
+    if (esGeometria) {
+      desarrolloSesion1 = "Concepto / Propiedad: Distancia y Punto Medio entre dos puntos en una recta\n" +
+                         "Fórmula / Ecuación: d = |x2 - x1| ; M = (x1 + x2) ÷ 2\n" +
+                         "Variables:\n" +
+                         "  • d = Distancia total entre dos puntos\n" +
+                         "  • M = Coordenada del Punto Medio\n" +
+                         "  • x1 = Coordenada del primer punto A\n" +
+                         "  • x2 = Coordenada del segundo punto B\n" +
+                         "Problema Modelo: Dados los puntos A(4) y B(12), calcular la distancia d y el punto medio M.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Sustitución para la distancia d => d = |12 - 4|\n" +
+                         "  • Paso 2: Cálculo de la distancia en la variable d => d = 8 unidades\n" +
+                         "  • Paso 3: Sustitución para el punto medio M => M = (4 + 12) ÷ 2\n" +
+                         "  • Paso 4: Suma de coordenadas => M = 16 ÷ 2\n" +
+                         "  • Paso 5: Cálculo final del punto medio M => M = 8\n" +
+                         "Respuesta (R): Distancia d = 8 unidades ; Punto Medio M = 8";
+
+      desarrolloSesion2 = "Problema Aplicado: Un segmento de recta tiene extremo A(2) y punto medio M(7). Hallar la coordenada del extremo B(x2).\n" +
+                         "Fórmula / Ecuación: M = (x1 + x2) ÷ 2\n" +
+                         "Variables:\n" +
+                         "  • M = Punto medio conocido (7)\n" +
+                         "  • x1 = Extremo conocido (2)\n" +
+                         "  • x2 = Extremo desconocido por hallar\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Sustitución de M y x1 en la fórmula => 7 = (2 + x2) ÷ 2\n" +
+                         "  • Paso 2: Despeje del divisor 2 => 7 × 2 = 2 + x2\n" +
+                         "  • Paso 3: Multiplicación de términos => 14 = 2 + x2\n" +
+                         "  • Paso 4: Transposición para hallar x2 => x2 = 14 - 2\n" +
+                         "  • Paso 5: Cálculo final => x2 = 12\n" +
+                         "Respuesta (R): La coordenada del extremo B es x2 = 12.";
+    } else {
+      desarrolloSesion1 = "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
+                         "Fórmula / Ecuación: a × x + b = c\n" +
+                         "Variables:\n" +
+                         "  • a = Coeficiente multiplicador de la variable\n" +
+                         "  • x = Incógnita / Variable desconocida\n" +
+                         "  • b = Término independiente inicial\n" +
+                         "  • c = Término independiente constante\n" +
+                         "Problema Modelo: Hallar el valor de la incógnita x en la ecuación 3 × x + 6 = 21.\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Transposición del término b en la ecuación => 3 × x = 21 - 6\n" +
+                         "  • Paso 2: Resta de constantes => 3 × x = 15\n" +
+                         "  • Paso 3: Despeje del coeficiente a => x = 15 ÷ 3\n" +
+                         "  • Paso 4: Cálculo final de la variable => x = 5\n" +
+                         "Respuesta (R): x = 5";
+
+      desarrolloSesion2 = "Problema Aplicado: El doble de un número x más 8 es igual a 24. ¿Cuál es el número?\n" +
+                         "Fórmula / Ecuación: 2 × x + 8 = 24\n" +
+                         "Variables:\n" +
+                         "  • x = El número desconocido por hallar\n" +
+                         "Procedimiento paso a paso:\n" +
+                         "  • Paso 1: Transposición de la constante 8 => 2 × x = 24 - 8\n" +
+                         "  • Paso 2: Simplificación de constantes => 2 × x = 16\n" +
+                         "  • Paso 3: Despeje de la variable x => x = 16 ÷ 2\n" +
+                         "  • Paso 4: Resultado final => x = 8\n" +
+                         "Respuesta (R): El número es x = 8.";
+    }
+
     return {
-      competencia: "Resuelve problemas de cantidad y relaciones que involucran los contenidos de " + data.unidadNombre + ", utilizando fórmulas, ecuaciones y estrategias diversas con simbología matemática adecuada.",
+      competencia: "Resuelve problemas de cantidad y relaciones que involucran los contenidos de " + uNombre + ", utilizando fórmulas, ecuaciones y estrategias diversas con simbología matemática adecuada.",
       capacidades: [
-        "Traduce datos y condiciones a expresiones numéricas y ecuaciones algebraicas.",
-        "Comunica su comprensión sobre los conceptos, variables y operaciones.",
+        "Traduce datos y condiciones a expresiones numéricas y geométricas.",
+        "Comunica su comprensión sobre los conceptos, variables y operaciones de " + uNombre + ".",
         "Usa estrategias y procedimientos de estimación, despeje y cálculo matemático.",
         "Argumenta afirmaciones sobre relaciones numéricas y justifica sus resultados."
       ],
       desempenos: [
-        "Establece relaciones entre datos e integra ecuaciones y conceptos del CNB.",
+        "Establece relaciones entre datos e integra conceptos clave del CNB para " + uNombre + ".",
         "Expresa con lenguaje formal y simbología adecuada su comprensión sobre la unidad.",
         "Selecciona y emplea algoritmos de cálculo y despeje de variables eficaces.",
         "Justifica procedimientos con ejercicios modelo resueltos paso a paso."
@@ -1027,10 +1110,10 @@ Perímetro y área de figuras planas</textarea>
       sesiones: [
         {
           numero: 1,
-          titulo: "Exploración y representación de " + data.unidadNombre,
+          titulo: "Exploración y representación de " + uNombre,
           inicio: { 
             actividades: [
-              "Presentación de situación problema cotidiana.", 
+              "Presentación de situación problema cotidiana correspondiente a " + uNombre + ".", 
               "Lluvia de ideas para identificar variables conocidas y desconocidas en la pizarra."
             ], 
             recursos: ["Pizarra, marcadores de colores"], 
@@ -1038,21 +1121,8 @@ Perímetro y área de figuras planas</textarea>
           },
           desarrollo: { 
             actividades: [
-              "Concepto / Propiedad: Ecuación Lineal de Primer Grado en una Variable\n" +
-              "Fórmula / Ecuación: a × x + b = c\n" +
-              "Variables:\n" +
-              "  • a = Coeficiente multiplicador de la variable\n" +
-              "  • x = Incógnita / Variable desconocida\n" +
-              "  • b = Término independiente inicial\n" +
-              "  • c = Término independiente constante\n" +
-              "Problema Modelo: Hallar el valor de la incógnita x en la ecuación 3 × x + 6 = 21.\n" +
-              "Procedimiento paso a paso:\n" +
-              "  • Paso 1: Transposición del término b => 3 × x = 21 - 6\n" +
-              "  • Paso 2: Resta de constantes => 3 × x = 15\n" +
-              "  • Paso 3: Despeje del coeficiente a => x = 15 ÷ 3\n" +
-              "  • Paso 4: Cálculo final de la variable => x = 5\n" +
-              "Respuesta (R): x = 5",
-              "Práctica guiada en parejas resolviendo 3 ejercicios similares sustituyendo e identificando las variables a, b, c y x."
+              desarrolloSesion1,
+              "Práctica guiada en parejas resolviendo 3 ejercicios similares sustituyendo e identificando las variables del tema."
             ], 
             recursos: ["Cuaderno, fichas de fórmulas, guías de trabajo"], 
             tiempo: "28 min" 
@@ -1060,7 +1130,7 @@ Perímetro y área de figuras planas</textarea>
           cierre: { 
             actividades: [
               "Verificación colectiva del procedimiento en la pizarra.", 
-              "Pregunta de salida: ¿Cuál es el primer paso al despejar una variable?"
+              "Pregunta de salida: ¿Cuál es el primer paso al despejar una variable en este tema?"
             ], 
             recursos: ["Ficha de salida"], 
             tiempo: "9 min" 
@@ -1068,10 +1138,10 @@ Perímetro y área de figuras planas</textarea>
         },
         {
           numero: 2,
-          titulo: "Profundización y resolución de problemas prácticos",
+          titulo: "Profundización y resolución de problemas prácticos de " + uNombre,
           inicio: { 
             actividades: [
-              "Repaso de la fórmula y propiedades algebraicas vistas en la sesión anterior.", 
+              "Repaso de la fórmula y propiedades algebraicas o geométricas vistas en la sesión anterior.", 
               "Planteamiento del desafío matemático del día."
             ], 
             recursos: ["Pizarra"], 
@@ -1079,16 +1149,7 @@ Perímetro y área de figuras planas</textarea>
           },
           desarrollo: { 
             actividades: [
-              "Problema Aplicado: El doble de un número x más 8 es igual a 24. ¿Cuál es el número?\n" +
-              "Fórmula / Ecuación: 2 × x + 8 = 24\n" +
-              "Variables:\n" +
-              "  • x = El número desconocido\n" +
-              "Procedimiento paso a paso:\n" +
-              "  • Paso 1: Transposición de 8 => 2 × x = 24 - 8\n" +
-              "  • Paso 2: Simplificación de constantes => 2 × x = 16\n" +
-              "  • Paso 3: Despeje de x => x = 16 ÷ 2\n" +
-              "  • Paso 4: Resultado final => x = 8\n" +
-              "Respuesta (R): El número es x = 8.",
+              desarrolloSesion2,
               "Trabajo individual en guía de 5 problemas contextualizados identificando las variables correspondientes."
             ], 
             recursos: ["Texto del estudiante, cuaderno, guía de ejercicios"], 
@@ -1096,7 +1157,7 @@ Perímetro y área de figuras planas</textarea>
           },
           cierre: { 
             actividades: [
-              "Revisión de respuestas e identificación de errores frecuentes en los signos.", 
+              "Revisión de respuestas e identificación de errores frecuentes en las operaciones.", 
               "Aclaración de dudas finales."
             ], 
             recursos: ["Pizarra"], 
@@ -1107,6 +1168,9 @@ Perímetro y área de figuras planas</textarea>
     };
   }
 
+  /* ============================================================
+     CONSTRUCTORES DE DOCUMENTOS WORD (.DOCX)
+     ============================================================ */
   function construirDocxMejora(data, contenido) {
     var D = window.docx;
     var NAVY = "0C2340";
@@ -1287,7 +1351,7 @@ Perímetro y área de figuras planas</textarea>
             indent: (isBullet || isStep) ? { left: 160, hanging: isBullet ? 160 : 0 } : undefined,
             children: [
               new D.TextRun({
-                text: isBullet ? line : (isBullet ? "" : line),
+                text: line,
                 bold: isHeader || isStep || trimmed.startsWith("Fórmula") || trimmed.startsWith("Respuesta"),
                 color: isHeader ? GREEN_HEADER : "1B2430",
                 size: 18,
